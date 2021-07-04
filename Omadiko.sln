@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omadiko.Database", "Omadiko.Database\Omadiko.Database.csproj", "{F3720A03-2FDD-49F9-8389-37463BC2373C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omadiko.Entities", "Omadiko.Entities\Omadiko.Entities.csproj", "{731763E0-45B5-4969-872F-670C51E7BDAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omadiko.RepositoryServices", "Omadiko.RepositoryServices\Omadiko.RepositoryServices.csproj", "{775DDCDB-196A-41F9-8702-41D506D1626A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omadiko.Console", "Omadiko.Console\Omadiko.Console.csproj", "{7CEF2874-DCA5-44D2-9A83-3C89168FE58F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omadiko.WebApp", "Omadiko.WebApp\Omadiko.WebApp.csproj", "{7684DA50-2466-4FE0-978C-67E5BED0DE32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Omadiko.WebApi", "Omadiko.WebApi\Omadiko.WebApi.csproj", "{ACB4E878-FE14-4413-AA4C-7BEA252E491E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3720A03-2FDD-49F9-8389-37463BC2373C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3720A03-2FDD-49F9-8389-37463BC2373C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3720A03-2FDD-49F9-8389-37463BC2373C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3720A03-2FDD-49F9-8389-37463BC2373C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{731763E0-45B5-4969-872F-670C51E7BDAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{731763E0-45B5-4969-872F-670C51E7BDAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{731763E0-45B5-4969-872F-670C51E7BDAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{731763E0-45B5-4969-872F-670C51E7BDAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{775DDCDB-196A-41F9-8702-41D506D1626A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{775DDCDB-196A-41F9-8702-41D506D1626A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{775DDCDB-196A-41F9-8702-41D506D1626A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{775DDCDB-196A-41F9-8702-41D506D1626A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CEF2874-DCA5-44D2-9A83-3C89168FE58F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CEF2874-DCA5-44D2-9A83-3C89168FE58F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CEF2874-DCA5-44D2-9A83-3C89168FE58F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CEF2874-DCA5-44D2-9A83-3C89168FE58F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7684DA50-2466-4FE0-978C-67E5BED0DE32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7684DA50-2466-4FE0-978C-67E5BED0DE32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7684DA50-2466-4FE0-978C-67E5BED0DE32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7684DA50-2466-4FE0-978C-67E5BED0DE32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACB4E878-FE14-4413-AA4C-7BEA252E491E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACB4E878-FE14-4413-AA4C-7BEA252E491E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACB4E878-FE14-4413-AA4C-7BEA252E491E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACB4E878-FE14-4413-AA4C-7BEA252E491E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B3759D70-CE09-469E-815F-73505395BA84}
+	EndGlobalSection
+EndGlobal

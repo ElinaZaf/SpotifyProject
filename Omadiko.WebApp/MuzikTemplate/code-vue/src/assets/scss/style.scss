@@ -1,0 +1,62 @@
+// Bootstrap Css
+//@import "~bootstrap/scss/bootstrap";
+//@import "~bootstrap/scss/bootstrap-grid";
+
+
+// Animate css
+@import "~animate.css/animate.min.css";
+
+@import '~node-snackbar/src/sass/snackbar.sass';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500&display=swap');
+
+// On changes css check iq-song-slide class remove ul. from prefix
+[dir="ltr"] {
+  &[mode="light"] {
+    @import "../css/bootstrap";
+    @import "../css/light/typography";
+    @import "../css/light/style";
+    @import "../css/light/responsive";
+    .right-sidebar-mini { top: 0; z-index: 100; position: fixed; width: 300px; right: 0; transform: translateX(calc(111% + -2em)); transition: all 0.5s ease; }
+    .right-sidebar-mini .side-right-icon { display: none; }
+    .right-sidebar-panel { background: var(--iq-white); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); height: 100vh; padding: 15px; overflow-y: scroll; }
+    .right-sidebar-toggle { position: absolute; margin-left: -44px; background:var(--iq-white); padding: 8px; width:45px; height: 42px; display: inline; top: 200px; z-index: 99; cursor: pointer; left:0px;right:auto;-webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);-moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.1);} 
+    .right-sidebar { transform: translateX(calc(10% + -1em)); }
+    .right-sidebar .side-left-icon { display: none; }
+    .right-sidebar .side-right-icon { display: block; }
+    .right-sidebar-mini p {font-size: 16px;line-height: 24px;margin-top: 0;margin-bottom: 1rem; color: #222222;}
+    .right-sidebar-mini .right-sidebar-toggle i {color: var(--iq-primary); text-align: center;}
+    .sub-color {color: var(--iq-title-text);font-size: 20px;margin-top: 0px;font-weight: 600;}
+    .right-sidebar-mini  div .iq-colormark:before {
+      position: absolute;
+      content: "\f00c";
+      left: 50%;
+      top: 5%;
+      color: var(--iq-white);
+      font-size: 20px;
+      font-weight: 900;
+      display: inline-block;
+      text-align: center;
+      font-family: "Font Awesome 5 Free";
+      transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+    }
+  }
+}
+
+.iq-global-search>ul>li a, .slick-arrow, .breadcrumb-item>a{
+  color: var(--iq-primary);
+  &:hover{
+    color: var(--iq-primary);
+  }
+}
+
+// Font awesome icon Css
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
