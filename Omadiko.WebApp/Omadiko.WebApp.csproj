@@ -1583,6 +1583,7 @@
     <Content Include="MuzikTemplate\html-dark\images\dashboard\realease-song\08.png" />
     <Content Include="MuzikTemplate\html-dark\images\dashboard\realease-song\09.png" />
     <Content Include="MuzikTemplate\html-dark\images\dashboard\realease-song\9.png" />
+    <Content Include="MuzikTemplate\html-dark\images\dashboard\realease-song\img.jpg" />
     <Content Include="MuzikTemplate\html-dark\images\dashboard\realease-song\realease-back-1.png" />
     <Content Include="MuzikTemplate\html-dark\images\dashboard\realease-song\realease-back.jpg" />
     <Content Include="MuzikTemplate\html-dark\images\dashboard\song-video\video-1.mp4" />
