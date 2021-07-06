@@ -17,12 +17,9 @@ namespace Omadiko.Database.Migrations
 
         protected override void Seed(Omadiko.Database.ApplicationDbContext context)
         {
-            Product p1 = new Product() { Name = "TurboX", Price = 550 };
-            Product p2 = new Product() { Name = "HP", Price = 200 };
-            Product p3 = new Product() { Name = "Samsung", Price = 300 };
+           
 
-            context.Products.AddOrUpdate(x => new { x.Name }, p1, p2, p3);
-            context.SaveChanges();
+
 
 
             if (!context.Roles.Any(x => x.Name == "Admin"))

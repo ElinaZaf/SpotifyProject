@@ -55,10 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="Migrations\202106241742502_Create Product.cs" />
-    <Compile Include="Migrations\202106241742502_Create Product.Designer.cs">
-      <DependentUpon>202106241742502_Create Product.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -71,11 +67,6 @@
       <Project>{731763e0-45b5-4969-872f-670c51e7bdad}</Project>
       <Name>Omadiko.Entities</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202106241742502_Create Product.resx">
-      <DependentUpon>202106241742502_Create Product.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

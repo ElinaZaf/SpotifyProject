@@ -57,7 +57,6 @@
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Custom Validations\Methods.cs" />
     <Compile Include="Custom Validations\ValidationMethods.cs" />
-    <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
