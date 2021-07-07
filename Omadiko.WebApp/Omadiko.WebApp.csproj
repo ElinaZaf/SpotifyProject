@@ -2072,6 +2072,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Content\images\testimage1600x900.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2083,8 +2084,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -2128,6 +2127,14 @@
     <Content Include="Views\Main\SignIn.cshtml" />
     <Content Include="Views\Main\SignUp.cshtml" />
     <Content Include="Views\Main\Support.cshtml" />
+    <Content Include="Views\Home\Latest.cshtml" />
+    <Content Include="Views\Home\FeaturedArtists.cshtml" />
+    <Content Include="Views\Home\FeaturedAlbums.cshtml" />
+    <Content Include="Views\Home\FeaturedSongs.cshtml" />
+    <Content Include="Views\Home\CreatePlaylist.cshtml" />
+    <Content Include="Views\Home\FavouriteArtists.cshtml" />
+    <Content Include="Views\Home\FavouriteAlbums.cshtml" />
+    <Content Include="Views\Home\FavouriteSongs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
