@@ -185,9 +185,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RecordLabelController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2106,11 +2106,9 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\UserComponents\_UserNavigationBar.cshtml" />
-    <Content Include="Views\Shared\UserComponents\_UserSideBar.cshtml" />
-    <Content Include="Views\Shared\UserComponents\_UserFooter.cshtml" />
-    <Content Include="Views\Shared\_UserLayoutPage.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Shared\Components\_NavigationBar.cshtml" />
+    <Content Include="Views\Shared\Components\_SideBar.cshtml" />
+    <Content Include="Views\Shared\Components\_Footer.cshtml" />
     <Content Include="Views\Shared\MainComponents\_MainNavigationBar.cshtml" />
     <Content Include="Views\Shared\AdminComponents\_AdminNavigationBar.cshtml" />
     <Content Include="Views\Shared\AdminComponents\_AdminSideBar.cshtml" />
@@ -2123,6 +2121,13 @@
     <Content Include="Views\Admin\Album.cshtml" />
     <Content Include="Views\Admin\Artist.cshtml" />
     <Content Include="Views\Admin\Song.cshtml" />
+    <Content Include="Views\Shared\_MainLayoutPage.cshtml" />
+    <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="Views\Main\Premium.cshtml" />
+    <Content Include="Views\Main\Faq.cshtml" />
+    <Content Include="Views\Main\SignIn.cshtml" />
+    <Content Include="Views\Main\SignUp.cshtml" />
+    <Content Include="Views\Main\Support.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

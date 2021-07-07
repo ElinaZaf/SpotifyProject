@@ -298,6 +298,7 @@ body.sidebar-main .iq-sidebar .iq-sidebar-menu .iq-menu li ul.iq-submenu-data li
                              Top Menu
 -----------------------------------------------------------------------*/
 .iq-top-navbar { padding: 0 15px 0 30px; min-height: 73px; position: fixed; top: 0; left: auto; right: 0; width: calc(100% - 260px); display: inline-block; z-index: 9; background: var(--iq-dark-body-header); margin: 0; transition: all 0.45s ease 0s; }
+.iq-top-navbar-main { padding: 0 15px 0 30px; min-height: 73px; position: fixed; top: 0; left: 0; right: 0; width: calc(100%); display: inline-block; z-index: 9; background: var(--iq-dark-body-header); margin: 0; transition: all 0.45s ease 0s; }
 body.sidebar-main .iq-top-navbar { width: calc(100% - 80px); }
 .iq-top-navbar.fixed-header { margin: 0; right: 0; width: calc(100% - 330px); border-radius: 0; transition: all 0.45s ease 0s; }
 .iq-top-navbar .breadcrumb .breadcrumb-item.active { color: var(--iq-dark-body-text); }
