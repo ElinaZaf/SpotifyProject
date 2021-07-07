@@ -13,18 +13,39 @@ namespace Omadiko.WebApp.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Latest()
         {
-            ViewBag.Message = "Your application description page.";
-
+            return View();
+        }
+        public ActionResult FeaturedArtists()
+        {
+            return View();
+        }
+        public ActionResult FeaturedAlbums()
+        {
+            return View();
+        }
+        public ActionResult FeaturedSongs()
+        {
+            return View();
+        }
+        public ActionResult CreatePlaylis()
+        {
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult FavouriteArtists()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
+        public ActionResult FavouriteAlbums()
+        {
+            return View();
+        }
+        public ActionResult FavouriteSongs()
+        {
+            return View();
+        }
+
     }
 }
