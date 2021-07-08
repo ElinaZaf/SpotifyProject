@@ -57,6 +57,11 @@
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Custom Validations\Methods.cs" />
     <Compile Include="Custom Validations\ValidationMethods.cs" />
+    <Compile Include="Models\Album.cs" />
+    <Compile Include="Models\Artist.cs" />
+    <Compile Include="Models\Genre.cs" />
+    <Compile Include="Models\Photo.cs" />
+    <Compile Include="Models\Song.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
