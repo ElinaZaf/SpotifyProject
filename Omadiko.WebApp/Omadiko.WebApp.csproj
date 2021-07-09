@@ -187,10 +187,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AlbumController.cs" />
+    <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RecordLabelController.cs" />
+    <Compile Include="Controllers\SongController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -204,6 +207,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\testimage.jpg" />
+    <Content Include="Content\images\testImage400x410.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2130,14 +2135,26 @@
     <Content Include="Views\Main\SignIn.cshtml" />
     <Content Include="Views\Main\SignUp.cshtml" />
     <Content Include="Views\Main\Support.cshtml" />
-    <Content Include="Views\Home\Latest.cshtml" />
-    <Content Include="Views\Home\FeaturedArtists.cshtml" />
-    <Content Include="Views\Home\FeaturedAlbums.cshtml" />
-    <Content Include="Views\Home\FeaturedSongs.cshtml" />
-    <Content Include="Views\Home\CreatePlaylist.cshtml" />
-    <Content Include="Views\Home\FavouriteArtists.cshtml" />
-    <Content Include="Views\Home\FavouriteAlbums.cshtml" />
-    <Content Include="Views\Home\FavouriteSongs.cshtml" />
+    <Content Include="Views\Artist\Create.cshtml" />
+    <Content Include="Views\Artist\Delete.cshtml" />
+    <Content Include="Views\Artist\Details.cshtml" />
+    <Content Include="Views\Artist\Edit.cshtml" />
+    <Content Include="Views\Artist\Index.cshtml" />
+    <Content Include="Views\Album\Create.cshtml" />
+    <Content Include="Views\Album\Delete.cshtml" />
+    <Content Include="Views\Album\Details.cshtml" />
+    <Content Include="Views\Album\Edit.cshtml" />
+    <Content Include="Views\Album\Index.cshtml" />
+    <Content Include="Views\Song\Create.cshtml" />
+    <Content Include="Views\Song\Delete.cshtml" />
+    <Content Include="Views\Song\Details.cshtml" />
+    <Content Include="Views\Song\Edit.cshtml" />
+    <Content Include="Views\Song\Index.cshtml" />
+    <Content Include="Views\Artist\ShowArtists.cshtml" />
+    <Content Include="Views\Artist\ShowArtistDetails.cshtml" />
+    <Content Include="Views\Album\ShowAlbums.cshtml" />
+    <Content Include="Views\Song\ShowSongs.cshtml" />
+    <Content Include="Views\Album\ShowAlbumDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
