@@ -189,6 +189,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\ArtistController.cs" />
+    <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MainController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -2124,10 +2125,6 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\UserList.cshtml" />
     <Content Include="Views\Admin\UserAdd.cshtml" />
-    <Content Include="Views\Admin\Category.cshtml" />
-    <Content Include="Views\Admin\Album.cshtml" />
-    <Content Include="Views\Admin\Artist.cshtml" />
-    <Content Include="Views\Admin\Song.cshtml" />
     <Content Include="Views\Shared\_MainLayoutPage.cshtml" />
     <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Views\Main\Premium.cshtml" />
@@ -2139,23 +2136,28 @@
     <Content Include="Views\Artist\Delete.cshtml" />
     <Content Include="Views\Artist\Details.cshtml" />
     <Content Include="Views\Artist\Edit.cshtml" />
-    <Content Include="Views\Artist\Index.cshtml" />
     <Content Include="Views\Album\Create.cshtml" />
     <Content Include="Views\Album\Delete.cshtml" />
     <Content Include="Views\Album\Details.cshtml" />
     <Content Include="Views\Album\Edit.cshtml" />
-    <Content Include="Views\Album\Index.cshtml" />
     <Content Include="Views\Song\Create.cshtml" />
     <Content Include="Views\Song\Delete.cshtml" />
     <Content Include="Views\Song\Details.cshtml" />
     <Content Include="Views\Song\Edit.cshtml" />
-    <Content Include="Views\Song\Index.cshtml" />
     <Content Include="Views\Artist\ShowArtists.cshtml" />
     <Content Include="Views\Artist\ShowArtistDetails.cshtml" />
     <Content Include="Views\Album\ShowAlbums.cshtml" />
     <Content Include="Views\Song\ShowSongs.cshtml" />
     <Content Include="Views\Album\ShowAlbumDetails.cshtml" />
     <Content Include="Views\Album\ShowLatest.cshtml" />
+    <Content Include="Views\Album\Index.cshtml" />
+    <Content Include="Views\Artist\Index.cshtml" />
+    <Content Include="Views\Song\Index.cshtml" />
+    <Content Include="Views\Genres\Create.cshtml" />
+    <Content Include="Views\Genres\Delete.cshtml" />
+    <Content Include="Views\Genres\Details.cshtml" />
+    <Content Include="Views\Genres\Edit.cshtml" />
+    <Content Include="Views\Genres\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,27 @@
+﻿@model Omadiko.Entities.Genre
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Genre</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GenreKind)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenreKind)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GenreId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

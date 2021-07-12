@@ -22,25 +22,5 @@ namespace Omadiko.WebApp.Controllers
         {
             return View();
         }
-
-        public ActionResult Category()
-        {
-            return View();
-        }
-
-        public ActionResult Album()
-        {
-            return View();
-        }
-
-        public ActionResult Artist()
-        {
-            return View();
-        }
-
-        public ActionResult Song()
-        {
-            return View();
-        }
     }
 }
