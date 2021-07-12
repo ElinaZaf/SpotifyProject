@@ -2155,6 +2155,7 @@
     <Content Include="Views\Album\ShowAlbums.cshtml" />
     <Content Include="Views\Song\ShowSongs.cshtml" />
     <Content Include="Views\Album\ShowAlbumDetails.cshtml" />
+    <Content Include="Views\Album\ShowLatest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

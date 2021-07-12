@@ -23,6 +23,12 @@ namespace Omadiko.WebApp.Controllers
             return View(albums.ToList());
         }
 
+        public ActionResult ShowLatest()
+        {
+            var albums = db.Albums.Include(a => a.Artist);
+            return View(albums.ToList());
+        }
+
         public ActionResult ShowAlbumDetails(int? id)
         {
             if (id == null)
