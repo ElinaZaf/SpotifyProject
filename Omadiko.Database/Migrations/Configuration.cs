@@ -17,7 +17,18 @@ namespace Omadiko.Database.Migrations
 
         protected override void Seed(Omadiko.Database.ApplicationDbContext context)
         {
-           
+            //=================Seeding Genres====================
+            Genre g1 = new Genre() { GenreKind = "Rock" };
+            Genre g2 = new Genre() { GenreKind = "POP" };
+            Genre g3 = new Genre() { GenreKind = "Classical Music" };
+            Genre g4 = new Genre() { GenreKind = "Country" };
+            Genre g5 = new Genre() { GenreKind = "Jazz" };
+            Genre g6 = new Genre() { GenreKind = "Electronic" };
+            Genre g7 = new Genre() { GenreKind = "Disco" };
+            Genre g8 = new Genre() { GenreKind = "Instrumental" };
+            Genre g9 = new Genre() { GenreKind = "Ambient" };
+            Genre g10 = new Genre() { GenreKind = "Soundtrack" };
+            //Genre g = new Genre() { GenreKind = "" };
 
 
 
