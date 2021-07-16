@@ -10,8 +10,8 @@ namespace Omadiko.Entities
         public int PhotoId { get; set; }
         public string Url { get; set; }
 
-        //Navigation Properties
 
+        //Navigation Properties
         public virtual Artist Artist { get; set; }
     }
 }

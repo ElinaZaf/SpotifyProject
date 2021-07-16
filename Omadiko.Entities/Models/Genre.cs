@@ -8,10 +8,10 @@ namespace Omadiko.Entities
     public class Genre
     {
         public int GenreId { get; set; }
-        public string GenreKind { get; set; }
+        public string Kind { get; set; }
+
 
         //Navigation Properties
-
         public virtual ICollection<Album> Albums { get; set; }
     }
 }

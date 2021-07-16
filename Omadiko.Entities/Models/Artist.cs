@@ -12,16 +12,17 @@ namespace Omadiko.Entities
     public class Artist
     {
         public int ArtistId { get; set; }
+
         [Required]
         public string Name { get; set; }
         public string LastName { get; set; }
-        public string PhotoId { get; set; }
         public string Country { get; set; }
         public DateTime DateOfBirth { get; set; }
         public DateTime? DateOfDeath { get; set; }
+        public string PhotoUrl { get; set; }
+
 
         //Navigation Properties
-
         public virtual ICollection<Album> Albums { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
     }
