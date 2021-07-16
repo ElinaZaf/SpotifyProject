@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<Omadiko.Entities.Genre>  
+
 
 @{
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
@@ -23,41 +24,39 @@
                             <table class="data-tables table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th width="5%">No</th>
-                                        <th width="20%">Song Category</th>
-                                        <th width="65%">Category Description</th>
+                                        <th width="5%">
+                                            @Html.DisplayNameFor(model => model.GenreId)
+                                        </th>
+                                        <th width="20%">
+                                            @Html.DisplayNameFor(model => model.Kind)
+                                        </th>
+                                        <th width="65%">Genre Description</th>
                                         <th width="10%">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>                                   
+                                <tbody>
 
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Rock songs</td>
-                                        <td>
-                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet</p>
-                                        </td>
-                                        <td>
-                                            <div class="flex align-items-center list-user-action">
-                                                <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="admin-add-category.html"><i class="ri-pencil-line"></i></a>
-                                                <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Carnival song</td>
-                                        <td>
-                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet</p>
-                                        </td>
-                                        <td>
-                                            <div class="flex align-items-center list-user-action">
-                                                <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="admin-add-category.html"><i class="ri-pencil-line"></i></a>
-                                                <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    
+                                    @foreach (var genre in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @genre.GenreId
+                                            </td>
+                                            <td>
+                                                @genre.Kind
+                                            </td>
+                                            <td>
+                                                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque. Etiam feugiat luctus est, vel commodo odio rhoncus sit amet</p>
+                                            </td>
+                                            <td>
+                                                <div class="flex align-items-center list-user-action">
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="admin-add-category.html"><i class="ri-pencil-line"></i></a>
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+
                                 </tbody>
                             </table>
                         </div>

@@ -1,4 +1,6 @@
-﻿
+﻿@model IEnumerable<Omadiko.Entities.Artist>
+
+
 @{
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
@@ -25,65 +27,41 @@
                                     <tr>
                                         <th style="width: 5%;">No</th>
                                         <th style="width: 5%;">Profile</th>
-                                        <th style="width: 15%;">Singer Name</th>
-                                        <th style="width: 15%;">Email</th>
-                                        <th style="width: 50%;">Singer Description</th>
+                                        <th style="width: 15%;">
+                                            @Html.DisplayNameFor(x => x.Name) @Html.DisplayNameFor(x => x.LastName)
+                                        </th>
+                                        <th style="width: 15%;">Country</th>
+                                        <th style="width: 50%;">Date of birth/date of death</th>
                                         <th style="width: 10%;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>
-                                            <img src="images/user/11.jpg" class="img-fluid avatar-50 rounded" alt="author-profile">
-                                        </td>
-                                        <td>Paul Molive</td>
-                                        <td>paul@demo.com</td>
-                                        <td>
-                                            <p class="mb-0">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration slightly believable.</p>
-                                        </td>
-                                        <td>
-                                            <div class="flex align-items-center list-user-action">
-                                                <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="admin-add-category.html"><i class="ri-pencil-line"></i></a>
-                                                <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>
-                                            <img src="images/user/04.jpg" class="img-fluid avatar-50 rounded" alt="author-profile">
-                                        </td>
-                                        <td>Anna Mull</td>
-                                        <td>anna@demo.com</td>
-                                        <td>
-                                            <p class="mb-0">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration slightly believable.</p>
-                                        </td>
-                                        <td>
-                                            <div class="flex align-items-center list-user-action">
-                                                <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="admin-add-category.html"><i class="ri-pencil-line"></i></a>
-                                                <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>
-                                            <img src="images/user/05.jpg" class="img-fluid avatar-50 rounded" alt="author-profile">
-                                        </td>
-                                        <td>Paige Turner</td>
-                                        <td>paige@demo.com</td>
-                                        <td>
-                                            <p class="mb-0">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration slightly believable.</p>
-                                        </td>
-                                        <td>
-                                            <div class="flex align-items-center list-user-action">
-                                                <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="admin-add-category.html"><i class="ri-pencil-line"></i></a>
-                                                <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    
+
+                                    @foreach (var artist in Model)
+                                    {
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                <img src="images/user/11.jpg" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                            </td>
+                                            <td>
+                                                @artist.Name @artist.LastName
+                                            </td>
+                                            <td>
+                                                @artist.Country
+                                            </td>
+                                            <td>
+                                                @artist.DateOfBirth @artist.DateOfDeath
+                                            </td>
+                                            <td>
+                                                <div class="flex align-items-center list-user-action">
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="admin-add-category.html"><i class="ri-pencil-line"></i></a>
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+
                                 </tbody>
                             </table>
                         </div>
