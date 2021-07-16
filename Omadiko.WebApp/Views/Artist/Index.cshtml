@@ -28,10 +28,12 @@
                                         <th style="width: 5%;">No</th>
                                         <th style="width: 5%;">Profile</th>
                                         <th style="width: 15%;">
-                                            @Html.DisplayNameFor(x => x.Name) @Html.DisplayNameFor(x => x.LastName)
+                                            @Html.DisplayNameFor(model => model.Name) @Html.DisplayNameFor(model => model.LastName)
                                         </th>
-                                        <th style="width: 15%;">Country</th>
-                                        <th style="width: 50%;">Date of birth/date of death</th>
+                                        <th style="width: 15%;">
+                                            @Html.DisplayNameFor(model => model.Country)
+                                        </th>
+                                        <th style="width: 50%;">@Html.DisplayNameFor(model => model.DateOfBirth) @Html.DisplayNameFor(model => model.DateOfDeath)</th>
                                         <th style="width: 10%;">Action</th>
                                     </tr>
                                 </thead>
