@@ -1,4 +1,8 @@
-﻿<div id="content-page" class="content-page">
+﻿@model IEnumerable<Omadiko.Entities.Artist>
+
+
+
+<div id="content-page" class="content-page">
     <div class="container-fluid">
         <div class="row">
             @*Featured Artists*@
@@ -11,26 +15,29 @@
                     </div>
                     <div class="iq-card-body">
                         <ul class="list-unstyled row iq-box-hover mb-0">
-                            <li class="col-lg-2  iq-music-box">
-                                <div class="iq-card">
-                                    <div class="iq-card-body p-0">
-                                        <div class="iq-thumb-artist">
-                                            <div class="iq-music-overlay"></div>
-                                            <a href="~/Artist/ShowArtistDetails">
-                                                <img src="~/Content/images/testImage400x410.jpg" class="w-100 img-fluid" alt="">
-                                            </a>
-                                            <div class="overlay-music-icon">
+                            @foreach (var artist in Model)
+                            {
+                                <li class="col-lg-2  iq-music-box">
+                                    <div class="iq-card">
+                                        <div class="iq-card-body p-0">
+                                            <div class="iq-thumb-artist">
+                                                <div class="iq-music-overlay"></div>
                                                 <a href="~/Artist/ShowArtistDetails">
-                                                    <i class="las la-play-circle"></i>
+                                                    <img src='@artist.PhotoUrl' class="w-100 img-fluid" alt="">
                                                 </a>
+                                                <div class="overlay-music-icon">
+                                                    <a href="~/Artist/ShowArtistDetails">
+                                                        <i class="las la-play-circle"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="feature-list text-center">
+                                                <h5 class="font-weight-600  mb-0">@artist.Name @artist.LastName</h5>
                                             </div>
                                         </div>
-                                        <div class="feature-list text-center">
-                                            <h5 class="font-weight-600  mb-0">Pixie Lott</h5>
-                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>
