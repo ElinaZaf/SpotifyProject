@@ -219,7 +219,7 @@
     <Content Include="Content\images\ArtistImages\dolly_parton400x410.jpg" />
     <Content Include="Content\images\ArtistImages\donna_summer400x410.jpg" />
     <Content Include="Content\images\ArtistImages\edvard_grieg400x410.jpg" />
-    <Content Include="Content\images\ArtistImages\ella_fitzgerald.jpg" />
+    <Content Include="Content\images\ArtistImages\ella_fitzgerald400x410.jpg" />
     <Content Include="Content\images\ArtistImages\eric_clapton400x410.jpg" />
     <Content Include="Content\images\ArtistImages\erik_satie400x410.jpg" />
     <Content Include="Content\images\ArtistImages\eros_ramazzotti400x410.jpg" />
@@ -239,7 +239,7 @@
     <Content Include="Content\images\ArtistImages\jimmy_hendrix400x410.jpg" />
     <Content Include="Content\images\ArtistImages\joe_cocker400x410.jpg" />
     <Content Include="Content\images\ArtistImages\johnny_cash400x410.jpg" />
-    <Content Include="Content\images\ArtistImages\john_coltrane.jpg" />
+    <Content Include="Content\images\ArtistImages\john_coltrane400x410.jpg" />
     <Content Include="Content\images\ArtistImages\lewis_armstrong400x410.jpg" />
     <Content Include="Content\images\ArtistImages\matthieu_chedid400x410.jpg" />
     <Content Include="Content\images\ArtistImages\michael_jackson400x410.jpg" />
@@ -248,7 +248,7 @@
     <Content Include="Content\images\ArtistImages\morrissey400x410.jpg" />
     <Content Include="Content\images\ArtistImages\mulatu_astatke400x410.jpg" />
     <Content Include="Content\images\ArtistImages\nina_simone400x410.jpg" />
-    <Content Include="Content\images\ArtistImages\ozzy_osbourne400x410.png" />
+    <Content Include="Content\images\ArtistImages\ozzy_osbourne400x410.jpg" />
     <Content Include="Content\images\ArtistImages\patsy_cline400x410.jpg" />
     <Content Include="Content\images\ArtistImages\paul_oakenfold400x410.jpg" />
     <Content Include="Content\images\ArtistImages\paul_weller400x410.jpg" />
@@ -265,7 +265,6 @@
     <Content Include="Content\images\ArtistImages\willie_nelson400x410.jpg" />
     <Content Include="Content\images\testimage.jpg" />
     <Content Include="Content\images\testimage1600x900.jpg" />
-    <Content Include="Content\images\testImage400x410.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

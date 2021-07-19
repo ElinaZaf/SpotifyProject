@@ -22,9 +22,7 @@
             /* Seeding Albums:
              *                 - add PhotoUrl links
              *                
-             * Seeding Artists:
-             *                 - add PhotoUrl links
-             * 
+             
              * Seeding Songs:
              *                 - add AudioUrl links
              *                 - add VideoUrl links (just a few)
@@ -281,7 +279,7 @@
             a7.Albums = new List<Album>() { al7 };
             Artist a8 = new Artist() { Name = "Matthieu", LastName = "Chedid", PhotoUrl = "~/Content/images/ArtistImages/matthieu_chedid400x410.jpg", Country = "France", DateOfBirth = new DateTime(1971, 12, 21) };
             a8.Albums = new List<Album>() { al8 };
-            Artist a9 = new Artist() { Name = "Eros", LastName = "Ramazzotti", PhotoUrl = "~/Content/images/ArtistImages/eros_ramazzoti400x410.jpg", Country = "Italy", DateOfBirth = new DateTime(1963, 10, 28) };
+            Artist a9 = new Artist() { Name = "Eros", LastName = "Ramazzotti", PhotoUrl = "~/Content/images/ArtistImages/eros_ramazzotti400x410.jpg", Country = "Italy", DateOfBirth = new DateTime(1963, 10, 28) };
             a9.Albums = new List<Album>() { al9 };
             Artist a10 = new Artist() { Name = "Ricky", LastName = "Martin", PhotoUrl = "~/Content/images/ArtistImages/ricky_martin400x410.jpg", Country = "Puerto Rico", DateOfBirth = new DateTime(1971, 12, 24) };
             a10.Albums = new List<Album>() { al10 };
@@ -361,7 +359,7 @@
             a47.Albums = new List<Album>() { al47 };
             Artist a48 = new Artist() { Name = "Dolly", LastName = "Parton", PhotoUrl = "~/Content/images/ArtistImages/dolly_parton400x410.jpg", Country = "USA", DateOfBirth = new DateTime(1946, 1, 19) };
             a48.Albums = new List<Album>() { al48 };
-            Artist a49 = new Artist() { Name = "Patsy", LastName = "Cline", PhotoUrl = "~/Content/images/ArtistImages/patsyx_cline400x410.jpg", Country = "USA", DateOfBirth = new DateTime(1932, 9, 8), DateOfDeath = new DateTime(1963, 3, 5) };
+            Artist a49 = new Artist() { Name = "Patsy", LastName = "Cline", PhotoUrl = "~/Content/images/ArtistImages/patsy_cline400x410.jpg", Country = "USA", DateOfBirth = new DateTime(1932, 9, 8), DateOfDeath = new DateTime(1963, 3, 5) };
             a49.Albums = new List<Album>() { al49 };
             Artist a50 = new Artist() { Name = "Reba", LastName = "McEntire", PhotoUrl = "~/Content/images/ArtistImages/reba_mcentire400x410.jpg", Country = "USA", DateOfBirth = new DateTime(1955, 3, 28) };
             a50.Albums = new List<Album>() { al50 };
