@@ -157,6 +157,9 @@
             Song s125 = new Song() { Title = "Tango", Duration = 158, ReleaseDate = new DateTime(2002, 9, 1), PhotoUrl = "~/Content/images/ArtistImages/francisco_tarrega400x410.jpg" };
             Song s126 = new Song() { Title = "Capricho Arabe", Duration = 158, ReleaseDate = new DateTime(2002, 9, 1), PhotoUrl = "~/Content/images/ArtistImages/francisco_tarrega400x410.jpg" };
             Song s127 = new Song() { Title = "Recuerdos de la Alhambra", Duration = 158, ReleaseDate = new DateTime(2002, 9, 1), PhotoUrl = "~/Content/images/ArtistImages/francisco_tarrega400x410.jpg" };
+            Song s128 = new Song() { Title = "I Walk the Line", Duration = 158, ReleaseDate = new DateTime(1964, 6,22), PhotoUrl = "~/Content/images/ArtistImages/johnny_cash400x410.jpg" };
+            Song s129 = new Song() { Title = "Falsom Prison Blues", Duration = 158, ReleaseDate = new DateTime(1964, 6, 22), PhotoUrl = "~/Content/images/ArtistImages/johnny_cash400x410.jpg" };
+            Song s130 = new Song() { Title = "Give my Love to Rose", Duration = 158, ReleaseDate = new DateTime(1964, 6, 22), PhotoUrl = "~/Content/images/ArtistImages/johnny_cash400x410.jpg" };
             #endregion
 
             #region SEEDING ALBUMS
@@ -251,6 +254,7 @@
             Album al45 = new Album() { Title = "Obras para guitarra", PhotoUrl = "~/Content/images/AlbumImages/obrasparaguitarra400x410.jpg", ReleaseDate = new DateTime(2002, 9, 1) };
             al45.Songs = new List<Song> { s125, s126, s127 };
             Album al46 = new Album() { Title = "I Walk the Line", PhotoUrl = "~/Content/images/AlbumImages/iwalktheline400x410.jpg", ReleaseDate = new DateTime(1964, 6, 22) };
+            al46.Songs = new List<Song>() {s128,s129,s130 };
             Album al47 = new Album() { Title = "Always on my Mind", PhotoUrl = "~/Content/images/AlbumImages/alwaysonmymind400x410.jpg", ReleaseDate = new DateTime(1982, 2, 1) };
             Album al48 = new Album() { Title = "Jolene", PhotoUrl = "~/Content/images/AlbumImages/jolene400x410.jpg", ReleaseDate = new DateTime(1974, 2, 4) };
             Album al49 = new Album() { Title = "Sentimentally Yours", PhotoUrl = "~/Content/images/AlbumImages/sentimentallyyours400x410.jpg", ReleaseDate = new DateTime(1962, 8, 6) };
