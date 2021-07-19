@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Omadiko.Entities.Album>
+﻿@model IEnumerable<Omadiko.Entities.Album> 
+
 
 
 @{
@@ -47,35 +48,40 @@
 
                                     @foreach (var album in Model)
                                     {
-                                    <tr>
-                                        <td>1</td>
-                                        <td>
-                                            <img src="images/user/01.jpg" class="img-fluid avatar-50 rounded" alt="author-profile">
-                                        </td>
-                                        <td>
-                                            @album.Title
-                                        </td>
-                                        <td>
-                                            @album.Genres
-                                        </td>
-                                        <td>
-                                            @album.Duration
-                                        </td>
-                                        <td>
-                                            @album.ReleaseDate
-                                        </td>
-                                        <td>
-                                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque.</p>
-                                        </td>
-                                        <td>
-                                            <div class="flex align-items-center list-user-action">
-                                                <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="admin-add-category.html"><i class="ri-pencil-line"></i></a>
-                                                <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                <img src="@Url.Content(album.Artist.PhotoUrl)" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                            </td>
+                                            <td>
+                                                @album.Title
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    @foreach (var genre in album.Genres)
+                                                    {
+                                                        <li>@genre.Kind</li>
+                                                    }
+                                                </ul>
+                                            </td>
+                                            <td>
+                                                @album.Duration
+                                            </td>
+                                            <td>
+                                                @album.ReleaseDate
+                                            </td>
+                                            <td>
+                                                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque.</p>
+                                            </td>
+                                            <td>
+                                                <div class="flex align-items-center list-user-action">
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="admin-add-category.html"><i class="ri-pencil-line"></i></a>
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     }
-                                </tbody>                                  
+                                </tbody>
                             </table>
                         </div>
                     </div>
