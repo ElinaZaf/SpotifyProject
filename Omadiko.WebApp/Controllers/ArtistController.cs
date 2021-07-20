@@ -8,16 +8,18 @@ using System.Web;
 using System.Web.Mvc;
 using Omadiko.Database;
 using Omadiko.Entities;
+using Omadiko.RepositoryServices;
 
 namespace Omadiko.WebApp.Controllers
 {
     public class ArtistController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ArtistRepository artistRepository = new ArtistRepository();
 
         public ActionResult ShowArtists()
         {
-            return View(db.Artists.ToList());
+            return View(artistRepository.GetAll());
         }
 
         public ActionResult ShowArtistDetails(int? id)
@@ -26,7 +28,7 @@ namespace Omadiko.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Artist artist = db.Artists.Find(id);
+            Artist artist = artistRepository.GetById(id);
             if (artist == null)
             {
                 return HttpNotFound();

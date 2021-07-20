@@ -160,6 +160,8 @@
             Song s128 = new Song() { Title = "I Walk the Line", Duration = 158, ReleaseDate = new DateTime(1964, 6,22), PhotoUrl = "~/Content/images/ArtistImages/johnny_cash400x410.jpg" };
             Song s129 = new Song() { Title = "Falsom Prison Blues", Duration = 158, ReleaseDate = new DateTime(1964, 6, 22), PhotoUrl = "~/Content/images/ArtistImages/johnny_cash400x410.jpg" };
             Song s130 = new Song() { Title = "Give my Love to Rose", Duration = 158, ReleaseDate = new DateTime(1964, 6, 22), PhotoUrl = "~/Content/images/ArtistImages/johnny_cash400x410.jpg" };
+            Song s131 = new Song() { Title = "Black or White", Duration = 249, ReleaseDate = new DateTime(1991, 11, 11), PhotoUrl = "" };
+            Song s132 = new Song() { Title = "In the Closet", Duration = 379, ReleaseDate = new DateTime(1991, 04, 09), PhotoUrl = "" };
             #endregion
 
             #region SEEDING ALBUMS
@@ -264,11 +266,13 @@
             Album al53 = new Album() { Title = "I've Got You", PhotoUrl = "~/Content/images/AlbumImages/ivegotyou400x410.jpg", ReleaseDate = new DateTime(1976, 7, 20) };
             Album al54 = new Album() { Title = "Let the Music Play", PhotoUrl = "~/Content/images/AlbumImages/letthemusicplay400x410.jpg", ReleaseDate = new DateTime(1976, 1, 2) };
             Album al55 = new Album() { Title = "Nightclubbing", PhotoUrl = "~/Content/images/AlbumImages/nightclubbing400x410.jpg", ReleaseDate = new DateTime(1981, 4, 29) };
+            Album al56 = new Album() { Title = "Dangerous", PhotoUrl = "~/Content/images/AlbumImages/dangerous400x410.jpg", ReleaseDate = new DateTime(1991, 11, 26) };
+            al56.Songs = new List<Song>() { s131, s132 };
             #endregion
 
             #region SEEDING ARTISTS
             Artist a1 = new Artist() { Name = "Michael", LastName = "Jackson", PhotoUrl = "~/Content/images/ArtistImages/michael_jackson400x410.jpg", Country = "USA", DateOfBirth = new DateTime(1958, 8, 29), DateOfDeath = new DateTime(2009, 7, 25) };
-            a1.Albums = new List<Album>() { al1 };
+            a1.Albums = new List<Album>() { al1, al56 };
             Artist a2 = new Artist() { Name = "Gloria", LastName = "Estefan", PhotoUrl = "~/Content/images/ArtistImages/gloria_estefan400x410.jpg", Country = "Cuba", DateOfBirth = new DateTime(1957, 9, 1) };
             a2.Albums = new List<Album>() { al2 };
             Artist a3 = new Artist() { Name = "Shakira", LastName = "", PhotoUrl = "~/Content/images/ArtistImages/shakira400x410.jpg", Country = "Colombia", DateOfBirth = new DateTime(1977, 2, 2) };
@@ -399,7 +403,7 @@
          
             context.Artists.AddOrUpdate(x => new { x.Name, x.LastName }, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40, a41, a42, a43, a44, a45, a46, a47, a48, a49, a50, a51, a52, a53, a54, a55);
             context.Genres.AddOrUpdate(x => x.Kind, g1, g2, g3, g4, g5, g6, g7);
-            context.Songs.AddOrUpdate(x => new { x.Title, x.Duration, x.ReleaseDate }, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30, s31, s32, s33, s34, s35, s36, s37, s38, s39, s40, s41, s42, s43, s44, s45, s46, s47, s48, s49, s50, s51, s52, s53, s54, s55, s56, s57, s58, s59, s60, s61, s62, s63, s64, s65, s66, s67, s68, s69, s70, s71, s72, s73, s74, s75, s76, s77, s78, s79, s80, s81, s82, s83, s84, s85, s86, s87, s88, s89, s90, s91, s92, s93, s94, s95, s96, s97, s98, s99, s100, s101, s102, s103, s104, s105, s106, s107, s108, s109, s110, s111, s112, s113, s114, s115, s116, s117, s118, s119, s120, s121);
+            context.Songs.AddOrUpdate(x => new { x.Title, x.Duration, x.ReleaseDate }, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30, s31, s32, s33, s34, s35, s36, s37, s38, s39, s40, s41, s42, s43, s44, s45, s46, s47, s48, s49, s50, s51, s52, s53, s54, s55, s56, s57, s58, s59, s60, s61, s62, s63, s64, s65, s66, s67, s68, s69, s70, s71, s72, s73, s74, s75, s76, s77, s78, s79, s80, s81, s82, s83, s84, s85, s86, s87, s88, s89, s90, s91, s92, s93, s94, s95, s96, s97, s98, s99, s100, s101, s102, s103, s104, s105, s106, s107, s108, s109, s110, s111, s112, s113, s114, s115, s116, s117, s118, s119, s120, s121, s122, s123, s124, s125, s126, s127, s128, s129, s130, s131, s132);
             
             context.SaveChanges();
 

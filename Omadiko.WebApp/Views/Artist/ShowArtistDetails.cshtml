@@ -14,10 +14,10 @@
                             <div class="col-lg-8">
                                 <div class="d-flex align-items-top justify-content-between iq-music-play-detail">
                                     <div class="music-detail">
-                                        <h3>Edyta Gorniak</h3>
-                                        <p>Date of Birth: .....</p>
+                                        <h3>@Model.Name @Model.LastName</h3>
+                                        <p>Date of Birth: @Model.DateOfBirth</p>
                                         <p>Age: .....</p>
-                                        <p>Country: .....</p>
+                                        <p>Country: @Model.Country</p>
 
 
                                         <p class="mb-0">389382k Likes</p>
@@ -48,28 +48,30 @@
                 </div>
                 <div class="iq-card-body">
                     <ul class="list-unstyled row iq-box-hover mb-0">
-                        <li class="col-lg-2  iq-music-box">
-                            <div class="iq-card mb-0">
-                                <div class="iq-card-body p-0">
-                                    <div class="iq-thumb">
-                                        <div class="iq-music-overlay"></div>
-                                        <a href="~/Album/ShowAlbumDetails">
-
-                                            <img src="~/MuzikTemplate/html-dark/images/dashboard/realease-song/11.png" class="img-border-radius img-fluid w-100" alt="">
-                                        </a>
-                                        <div class="overlay-music-icon">
+                        @foreach (var album in Model.Albums)
+                        {
+                            <li class="col-lg-2  iq-music-box">
+                                <div class="iq-card mb-0">
+                                    <div class="iq-card-body p-0">
+                                        <div class="iq-thumb">
+                                            <div class="iq-music-overlay"></div>
                                             <a href="~/Album/ShowAlbumDetails">
-                                                <i class="las la-play-circle"></i>
+
+                                                <img src=@Url.Content(album.PhotoUrl) class="img-border-radius img-fluid w-100" alt="">
                                             </a>
+                                            <div class="overlay-music-icon">
+                                                <a href="~/Album/ShowAlbumDetails">
+                                                    <i class="las la-play-circle"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="feature-list text-center">
+                                            <h5 class="font-weight-600 mb-0">@album.Title</h5>
                                         </div>
                                     </div>
-                                    <div class="feature-list text-center">
-                                        <h5 class="font-weight-600 mb-0">Doja Cat</h5>
-                                        <p class="mb-0">Annie Lennox</p>
-                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

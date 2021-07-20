@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Omadiko.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace Omadiko.WebApp.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
             return View();
