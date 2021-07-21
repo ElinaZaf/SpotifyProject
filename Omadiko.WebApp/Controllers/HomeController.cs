@@ -1,4 +1,5 @@
 ﻿using Omadiko.Database;
+using Omadiko.WebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,14 @@ namespace Omadiko.WebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            return View();
+            IndexHomeViewModel vm = new IndexHomeViewModel()
+            {
+                NewReleases = db.Albums.Where(x => x.ReleaseDate.Year >= 2018).Take(12).ToList(),
+                FeaturedArtists = db.Artists.Take(12).ToList(),
+                FeaturedAlbums = db.Albums.Take(12).ToList(),
+                FeaturedSongs = db.Songs.Take(2).ToList(),
+            };
+            return View(vm);
         }
 
         public ActionResult Latest()
