@@ -23,6 +23,6 @@ namespace Omadiko.RepositoryServices
             return db.Artists.Find(id);
         }
 
-
+       
     }
 }

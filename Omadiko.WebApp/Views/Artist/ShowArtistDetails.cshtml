@@ -1,5 +1,5 @@
 ﻿@model Omadiko.Entities.Artist
-
+@using Omadiko.WebApp.Utilities
 
 <div id="content-page" class="content-page">
     <div class="container-fluid">
@@ -15,13 +15,19 @@
                                 <div class="d-flex align-items-top justify-content-between iq-music-play-detail">
                                     <div class="music-detail">
                                         <h3>@Model.Name @Model.LastName</h3>
-                                        <p>Date of Birth: @Model.DateOfBirth</p>
-                                        <p>Age: .....</p>
+                                        <br />
+                                        <p>Born: @Model.DateOfBirth.ToString("d")</p>
+                                        @if (Model.DateOfDeath.HasValue)
+                                        {
+                                            <p>Died: @Model.DateOfDeath.Value.ToString("d")  (Age: @Utilities.CalculateAge(Model.DateOfBirth, Model.DateOfDeath)) </p>
+                                        }
+                                        else
+                                        {
+                                            <p>Age: @Utilities.CalculateAge(Model.DateOfBirth, Model.DateOfDeath)</p>
+                                        }
                                         <p>Country: @Model.Country</p>
-
-
+                                        <br />
                                         <p class="mb-0">389382k Likes</p>
-
                                     </div>
                                     <div class="music-right">
                                         <div class="d-flex align-items-center">
@@ -53,18 +59,12 @@
                             <li class="col-lg-2  iq-music-box">
                                 <div class="iq-card mb-0">
                                     <div class="iq-card-body p-0">
-                                        <div class="iq-thumb">
-                                            <div class="iq-music-overlay"></div>
-                                            <a href="~/Album/ShowAlbumDetails">
-
+                                        <a href="~/Album/ShowAlbumDetails">
+                                            <div class="iq-thumb">
+                                                <div class="iq-music-overlay"></div>
                                                 <img src=@Url.Content(album.PhotoUrl) class="img-border-radius img-fluid w-100" alt="">
-                                            </a>
-                                            <div class="overlay-music-icon">
-                                                <a href="~/Album/ShowAlbumDetails">
-                                                    <i class="las la-play-circle"></i>
-                                                </a>
                                             </div>
-                                        </div>
+                                        </a>
                                         <div class="feature-list text-center">
                                             <h5 class="font-weight-600 mb-0">@album.Title</h5>
                                         </div>

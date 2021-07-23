@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Omadiko.Entities.Artist>
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Omadiko.Entities.Artist>
 
 
 
@@ -20,15 +23,12 @@
                                 <li class="col-lg-2  iq-music-box">
                                     <div class="iq-card">
                                         <div class="iq-card-body p-0">
-                                            <div class="iq-thumb-artist">
-                                                <div class="iq-music-overlay"></div>
-                                                <a href="~/Artist/ShowArtistDetails">
+                                            <a href="~/Artist/ShowArtistDetails/@artist.ArtistId">
+                                                <div class="iq-thumb-artist">
+                                                    <div class="iq-music-overlay"></div>
                                                     <img src="@Url.Content(artist.PhotoUrl)" class="w-100 img-fluid" alt="">
-                                                </a>
-                                                <div class="overlay-music-icon">
-                                                    <a href="~/Artist/ShowArtistDetails/@artist.ArtistId"></a>
                                                 </div>
-                                            </div>
+                                            </a>
                                             <div class="feature-list text-center">
                                                 <h5 class="font-weight-600 mb-0" style="font-size:small">@artist.Name @artist.LastName</h5>
                                             </div>
@@ -38,8 +38,15 @@
                             }
                         </ul>
                     </div>
+                    <div><div class="pagination" style="justify-content:center">
+                        <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+                    </div>
+                    <div class="pagination" style="justify-content:center">
+                        @Html.PagedListPager(Model, page => Url.Action("ShowArtists", new { page }))
+                    </div></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+

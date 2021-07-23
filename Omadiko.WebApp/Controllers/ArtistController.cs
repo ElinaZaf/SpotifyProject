@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Omadiko.Database;
 using Omadiko.Entities;
 using Omadiko.RepositoryServices;
+using PagedList;
 
 namespace Omadiko.WebApp.Controllers
 {
@@ -17,9 +18,11 @@ namespace Omadiko.WebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         private ArtistRepository artistRepository = new ArtistRepository();
 
-        public ActionResult ShowArtists()
+        public ActionResult ShowArtists(int? page)
         {
-            return View(artistRepository.GetAll());
+            int pageSize = 18;
+            int pageNumber = page ?? 1;
+            return View(artistRepository.GetAll().ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult ShowArtistDetails(int? id)
