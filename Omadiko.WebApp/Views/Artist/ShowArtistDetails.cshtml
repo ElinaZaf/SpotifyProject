@@ -53,26 +53,33 @@
                     </div>
                 </div>
                 <div class="iq-card-body">
-                    <ul class="list-unstyled row iq-box-hover mb-0">
-                        @foreach (var album in Model.Albums)
-                        {
-                            <li class="col-lg-2  iq-music-box">
-                                <div class="iq-card mb-0">
-                                    <div class="iq-card-body p-0">
-                                        <a href="~/Album/ShowAlbumDetails">
-                                            <div class="iq-thumb">
-                                                <div class="iq-music-overlay"></div>
-                                                <img src=@Url.Content(album.PhotoUrl) class="img-border-radius img-fluid w-100" alt="">
-                                            </div>
-                                        </a>
-                                        <div class="feature-list text-center">
-                                            <h5 class="font-weight-600 mb-0">@album.Title</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        }
-                    </ul>
+                    @if (Model.Albums.Count == 0)
+                    {
+                        <h3>There are no albums available.</h3>
+                    }
+                    else
+                    { 
+                        <ul class="list-unstyled row iq-box-hover mb-0">
+                            @foreach (var album in Model.Albums)
+                            {
+                                 <li class="col-lg-2  iq-music-box">
+                                     <div class="iq-card mb-0">
+                                         <div class="iq-card-body p-0">
+                                             <a href="~/Album/ShowAlbumDetails">
+                                                 <div class="iq-thumb">
+                                                     <div class="iq-music-overlay"></div>
+                                                     <img src=@Url.Content(album.PhotoUrl) class="img-border-radius img-fluid w-100" alt="">
+                                                 </div>
+                                             </a>
+                                             <div class="feature-list text-center">
+                                                 <h5 class="font-weight-600 mb-0">@album.Title</h5>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </li>
+                             }
+                         </ul>
+                    }
                 </div>
             </div>
         </div>

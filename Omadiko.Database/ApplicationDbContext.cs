@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using Omadiko.Entities;
+using Omadiko.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -28,6 +29,8 @@ namespace Omadiko.Database
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Song> Songs { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Membership> Memberships { get; set; }
 
 
     }
