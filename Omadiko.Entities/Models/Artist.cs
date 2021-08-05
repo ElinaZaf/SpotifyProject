@@ -17,7 +17,7 @@ namespace Omadiko.Entities
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Country { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public DateTime? DateOfDeath { get; set; }
         public string PhotoUrl { get; set; }
 

@@ -11,13 +11,7 @@ namespace Omadiko.Console2
     {
         static void Main(string[] args)
         {
-            
 
-
-            //foreach (var item in repo.FilterByName("a"))
-            //{
-            //    Console.WriteLine(item.Name);
-            //}
 
 
 

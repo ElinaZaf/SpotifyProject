@@ -15,15 +15,23 @@
                                 <div class="d-flex align-items-top justify-content-between iq-music-play-detail">
                                     <div class="music-detail">
                                         <h3>@Model.Name @Model.LastName</h3>
-                                        <br />
-                                        <p>Born: @Model.DateOfBirth.ToString("d")</p>
-                                        @if (Model.DateOfDeath.HasValue)
+                                        @if (Model.DateOfBirth.HasValue)
                                         {
-                                            <p>Died: @Model.DateOfDeath.Value.ToString("d")  (Age: @Utilities.CalculateAge(Model.DateOfBirth, Model.DateOfDeath)) </p>
+                                            <br />
+                                            <p>Born: @Model.DateOfBirth.Value.ToString("d")</p>
+                                            if (Model.DateOfDeath.HasValue)
+                                            {
+                                                <p>Died: @Model.DateOfDeath.Value.ToString("d")  (Age: @Utilities.CalculateAge(Model.DateOfBirth.Value, Model.DateOfDeath.Value))</p>
+                                            }
+                                            else
+                                            {
+                                                <p>Age: @Utilities.CalculateAge(Model.DateOfBirth.Value, DateTime.Now)</p>
+                                            }
                                         }
                                         else
                                         {
-                                            <p>Age: @Utilities.CalculateAge(Model.DateOfBirth, Model.DateOfDeath)</p>
+                                            <h6>(Band)</h6>
+                                            <br />
                                         }
                                         <p>Country: @Model.Country</p>
                                         <br />

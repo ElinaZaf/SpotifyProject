@@ -10,7 +10,6 @@ namespace Omadiko.Entities
         public int SongId { get; set; }
         public string Title { get; set; }
         public int Duration { get; set; }  //in sec
-        public DateTime ReleaseDate { get; set; }
         public string PhotoUrl { get; set; }
         public string AudioUrl { get; set; }
         public string VideoUrl { get; set; }

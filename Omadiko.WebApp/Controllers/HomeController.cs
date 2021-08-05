@@ -15,10 +15,10 @@ namespace Omadiko.WebApp.Controllers
         {
             IndexHomeViewModel vm = new IndexHomeViewModel()
             {
-                NewReleases = db.Albums.Where(x => x.ReleaseDate.Year >= 2018).Take(12).ToList(),
-                FeaturedArtists = db.Artists.Take(12).ToList(),
-                FeaturedAlbums = db.Albums.Take(12).ToList(),
-                FeaturedSongs = db.Songs.Take(2).ToList(),
+                //NewReleases = db.Albums.Where(x => x.ReleaseDate.Year > 2019).Take(12).ToList(),
+                FeaturedArtists = db.Artists.OrderBy(x => Guid.NewGuid()).Take(12).ToList(),
+                FeaturedAlbums = db.Albums.OrderBy(x => Guid.NewGuid()).Take(12).ToList(),
+                FeaturedSongs = db.Songs.OrderBy(x => Guid.NewGuid()).Take(12).ToList(),
             };
             return View(vm);
         }

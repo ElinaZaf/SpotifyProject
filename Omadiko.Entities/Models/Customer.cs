@@ -11,9 +11,12 @@ namespace Omadiko.Entities.Models
         public int CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public DateTime BirthDate { get; set; }
 
         //Navigation Properties
         public byte MembershipId { get; set; }
         public Membership Membership { get; set; }
     }
+
+   
 }

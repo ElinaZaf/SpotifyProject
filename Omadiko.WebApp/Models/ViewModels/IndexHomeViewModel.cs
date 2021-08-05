@@ -12,5 +12,7 @@ namespace Omadiko.WebApp.Models
         public List<Artist> FeaturedArtists { get; set; }
         public List<Album> FeaturedAlbums { get; set; }
         public List<Song> FeaturedSongs { get; set; }
+        public List<Artist> FavouriteArtists { get; set; }
+        public List<Album> FavouriteAlbums { get; set; }
     }
 }

@@ -9,7 +9,6 @@ namespace Omadiko.Entities
     {
         public int AlbumId { get; set; }
         public string Title { get; set; }
-        public int Duration { get; set; }  //in sec
         public DateTime ReleaseDate { get; set; }
         public string PhotoUrl { get; set; }
 

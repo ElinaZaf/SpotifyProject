@@ -521,8 +521,8 @@ a.text-white.bg-dark {color: var(--iq-dark) !important;}
 
 /*--------------------------------------
 ----------dashboard-1-------------------*/
-.iq-card.iq-realease {border-radius: 0px 30px;}.iq-realeses-back { border-radius: 0px 30px; background: url(../images/dashboard/realease-song/realease-back.jpg) center center no-repeat; position: relative; background-size: cover; }
-.iq-realeses-back:after { border-radius: 0px 30px; position: absolute; content: ""; top: 0; left: auto; bottom: 0; right: 0; z-index: 0; width: 50%; background: linear-gradient(to right, rgba(83, 100, 141, 0) 0%, rgb(22 12 23) 44%); }
+.iq-card.iq-realease {border-radius: 0px 30px;}.iq-realeses-back { border-radius: 0px 30px; background: url(../../../Content/images/newreleases5.jpg) center center no-repeat; position: relative; background-size: cover; }
+.iq-realeses-back:after { border-radius: 0px 30px; position: absolute; content: ""; top: 0; left: auto; bottom: 0; right: 0; z-index: 0; width: 100%; background: linear-gradient(to left, rgba(83, 100, 141, 0) 0%, rgb(22 12 23) 84%); }
 ul.iq-song-slide li p { color: var(--iq-white); line-height: normal; }
 p.iq-music-title, .feature-list h6  { overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
 ul.iq-song-slide li span { color: var(--iq-white) }

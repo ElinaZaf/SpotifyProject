@@ -216,6 +216,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\AlbumImages\afterhours400x410.jpg" />
     <Content Include="Content\images\AlbumImages\alwaysonmymind400x410.jpg" />
     <Content Include="Content\images\AlbumImages\areyouexperienced400x410.jpg" />
     <Content Include="Content\images\AlbumImages\badgirls400x410.jpg" />
@@ -230,7 +231,9 @@
     <Content Include="Content\images\AlbumImages\faith400x410.jpg" />
     <Content Include="Content\images\AlbumImages\falco3400x410.jpg" />
     <Content Include="Content\images\AlbumImages\florestadoamazonas400x410.jpg" />
+    <Content Include="Content\images\AlbumImages\fromthastreets2thasuites400x410.jpg" />
     <Content Include="Content\images\AlbumImages\gnossiennesgymnopidies400x410.jpg" />
+    <Content Include="Content\images\AlbumImages\happierthanever400x410.jpg" />
     <Content Include="Content\images\AlbumImages\hellodolly400x410.jpg" />
     <Content Include="Content\images\AlbumImages\ivegotyou400x410.jpg" />
     <Content Include="Content\images\AlbumImages\iwalktheline400x410.jpg" />
@@ -243,6 +246,7 @@
     <Content Include="Content\images\AlbumImages\letssticktogether400x410.jpg" />
     <Content Include="Content\images\AlbumImages\letthemusicplay400x410.jpg" />
     <Content Include="Content\images\AlbumImages\letthesunshinein400x410.jpg" />
+    <Content Include="Content\images\AlbumImages\medicineatmidnight400x410.jpg" />
     <Content Include="Content\images\AlbumImages\milestones400x410.jpg" />
     <Content Include="Content\images\AlbumImages\mitierra400x410.jpg" />
     <Content Include="Content\images\AlbumImages\monksmusic400x410.jpg" />
@@ -256,6 +260,7 @@
     <Content Include="Content\images\AlbumImages\perfectofluoro400x410.jpg" />
     <Content Include="Content\images\AlbumImages\phuture2000400x410.jpg" />
     <Content Include="Content\images\AlbumImages\play400x410.jpg" />
+    <Content Include="Content\images\AlbumImages\scorpion400x410.jpg" />
     <Content Include="Content\images\AlbumImages\sentimentallyyours400x410.jpg" />
     <Content Include="Content\images\AlbumImages\shivers400x410.jpg" />
     <Content Include="Content\images\AlbumImages\slowhand400x410.jpg" />
@@ -264,6 +269,7 @@
     <Content Include="Content\images\AlbumImages\supernatural400x410.jpg" />
     <Content Include="Content\images\AlbumImages\tattoo400x410.jpg" />
     <Content Include="Content\images\AlbumImages\thedreamoftheblueturtles400x410.jpg" />
+    <Content Include="Content\images\AlbumImages\thefuturebites400x410.jpg" />
     <Content Include="Content\images\AlbumImages\thesecondtimearound400x410.jpg" />
     <Content Include="Content\images\AlbumImages\thriller400x410.jpg" />
     <Content Include="Content\images\AlbumImages\tuttestorie400x410.jpg" />
@@ -275,6 +281,7 @@
     <Content Include="Content\images\ArtistImages\aretha_franklin400x410.jpg" />
     <Content Include="Content\images\ArtistImages\armin_vanbuuren400x410.jpg" />
     <Content Include="Content\images\ArtistImages\barry_white400x410.jpg" />
+    <Content Include="Content\images\ArtistImages\billie_eilish400x410.jpg" />
     <Content Include="Content\images\ArtistImages\bruce_springsteen400x410.jpg" />
     <Content Include="Content\images\ArtistImages\bryan_ferry400x410.jpg" />
     <Content Include="Content\images\ArtistImages\carlos_santana400x410.jpg" />
@@ -282,6 +289,7 @@
     <Content Include="Content\images\ArtistImages\diana_ross400x410.jpg" />
     <Content Include="Content\images\ArtistImages\dolly_parton400x410.jpg" />
     <Content Include="Content\images\ArtistImages\donna_summer400x410.jpg" />
+    <Content Include="Content\images\ArtistImages\drake400x410.jpg" />
     <Content Include="Content\images\ArtistImages\edvard_grieg400x410.jpg" />
     <Content Include="Content\images\ArtistImages\ella_fitzgerald400x410.jpg" />
     <Content Include="Content\images\ArtistImages\eric_clapton400x410.jpg" />
@@ -290,6 +298,7 @@
     <Content Include="Content\images\ArtistImages\etta_james400x410.jpg" />
     <Content Include="Content\images\ArtistImages\falco400x410.jpg" />
     <Content Include="Content\images\ArtistImages\fatboyslim400x410.jpg" />
+    <Content Include="Content\images\ArtistImages\foofighters400x410.jpg" />
     <Content Include="Content\images\ArtistImages\francisco_tarrega400x410.jpg" />
     <Content Include="Content\images\ArtistImages\george_michael400x410.jpg" />
     <Content Include="Content\images\ArtistImages\gerry_mulligan400x410.jpg" />
@@ -322,11 +331,19 @@
     <Content Include="Content\images\ArtistImages\robert_miles400x410.jpg" />
     <Content Include="Content\images\ArtistImages\rory_gallagher400x410.jpg" />
     <Content Include="Content\images\ArtistImages\shakira400x410.jpg" />
+    <Content Include="Content\images\ArtistImages\snoop_dogg400x410.jpg" />
+    <Content Include="Content\images\ArtistImages\steven_wilson400x410.jpg" />
     <Content Include="Content\images\ArtistImages\sting400x410.jpg" />
     <Content Include="Content\images\ArtistImages\thelonious_monk400x410.jpg" />
+    <Content Include="Content\images\ArtistImages\theweeknd400x410.jpg" />
     <Content Include="Content\images\ArtistImages\tiesto400x410.jpg" />
     <Content Include="Content\images\ArtistImages\whitney_houston400x410.jpg" />
     <Content Include="Content\images\ArtistImages\willie_nelson400x410.jpg" />
+    <Content Include="Content\images\newreleases.jpg" />
+    <Content Include="Content\images\newreleases1.jpg" />
+    <Content Include="Content\images\newreleases3.jpg" />
+    <Content Include="Content\images\newreleases4.jpg" />
+    <Content Include="Content\images\newreleases5.jpg" />
     <Content Include="Content\images\testimage.jpg" />
     <Content Include="Content\images\testimage1600x900.jpg" />
     <Content Include="Content\PagedList.css" />
