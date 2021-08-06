@@ -2285,7 +2285,6 @@
     <Content Include="Views\Album\ShowAlbums.cshtml" />
     <Content Include="Views\Song\ShowSongs.cshtml" />
     <Content Include="Views\Album\ShowAlbumDetails.cshtml" />
-    <Content Include="Views\Album\ShowLatest.cshtml" />
     <Content Include="Views\Album\Index.cshtml" />
     <Content Include="Views\Artist\Index.cshtml" />
     <Content Include="Views\Song\Index.cshtml" />

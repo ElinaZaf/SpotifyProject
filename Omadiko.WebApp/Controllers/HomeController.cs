@@ -15,7 +15,7 @@ namespace Omadiko.WebApp.Controllers
         {
             IndexHomeViewModel vm = new IndexHomeViewModel()
             {
-                //NewReleases = db.Albums.Where(x => x.ReleaseDate.Year > 2019).Take(12).ToList(),
+                LatestReleases = db.Albums.OrderByDescending(x => x.ReleaseDate).Take(5).ToList(),
                 FeaturedArtists = db.Artists.OrderBy(x => Guid.NewGuid()).Take(12).ToList(),
                 FeaturedAlbums = db.Albums.OrderBy(x => Guid.NewGuid()).Take(12).ToList(),
                 FeaturedSongs = db.Songs.OrderBy(x => Guid.NewGuid()).Take(12).ToList(),
@@ -23,39 +23,6 @@ namespace Omadiko.WebApp.Controllers
             return View(vm);
         }
 
-        public ActionResult Latest()
-        {
-            return View();
-        }
-        public ActionResult FeaturedArtists()
-        {
-            return View();
-        }
-        public ActionResult FeaturedAlbums()
-        {
-            return View();
-        }
-        public ActionResult FeaturedSongs()
-        {
-            return View();
-        }
-        public ActionResult CreatePlaylis()
-        {
-            return View();
-        }
-
-        public ActionResult FavouriteArtists()
-        {
-            return View();
-        }
-        public ActionResult FavouriteAlbums()
-        {
-            return View();
-        }
-        public ActionResult FavouriteSongs()
-        {
-            return View();
-        }
 
     }
 }
