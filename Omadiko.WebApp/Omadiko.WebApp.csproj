@@ -344,6 +344,7 @@
     <Content Include="Content\images\newreleases3.jpg" />
     <Content Include="Content\images\newreleases4.jpg" />
     <Content Include="Content\images\newreleases5.jpg" />
+    <Content Include="Content\images\notavailable400x410.jpg" />
     <Content Include="Content\images\testimage.jpg" />
     <Content Include="Content\images\testimage1600x900.jpg" />
     <Content Include="Content\PagedList.css" />
@@ -2293,6 +2294,7 @@
     <Content Include="Views\Genres\Details.cshtml" />
     <Content Include="Views\Genres\Edit.cshtml" />
     <Content Include="Views\Genres\Index.cshtml" />
+    <Content Include="Views\Song\ShowSongDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,26 +8,26 @@ using System.Threading.Tasks;
 
 namespace Omadiko.RepositoryServices
 {
-    public class ArtistRepository
+    public class AlbumRepository
     {
         ApplicationDbContext db = new ApplicationDbContext();
 
 
-        public List<Artist> GetAll()
+        public List<Album> GetAll()
         {
-            return db.Artists.ToList();
+            return db.Albums.ToList();
         }
 
-        public List<Artist> GetAllOrderedByName()
+        public List<Album> GetAllOrderedByTitle()
         {
-            return db.Artists.OrderBy(artist => artist.Name).ToList();
+            return db.Albums.OrderBy(album => album.Title).ToList();
         }
 
-        public Artist GetById(int? id)
+        public Album GetById(int? id)
         {
-            return db.Artists.Find(id);
+            return db.Albums.Find(id);
         }
 
-       
+
     }
 }

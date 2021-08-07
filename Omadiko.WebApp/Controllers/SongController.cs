@@ -8,20 +8,35 @@ using System.Web;
 using System.Web.Mvc;
 using Omadiko.Database;
 using Omadiko.Entities;
+using Omadiko.RepositoryServices;
 
 namespace Omadiko.WebApp.Controllers
 {
     public class SongController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private SongRepository songRepository = new SongRepository();
 
         public ActionResult ShowSongs()
         {
-            return View(db.Songs.ToList());
+            return View(songRepository.GetAllOrderedByTitle());
         }
 
 
+        public ActionResult ShowSongDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Song song = songRepository.GetById(id);
+            if (song == null)
+            {
+                return HttpNotFound();
+            }
 
+            return View(song);
+        }
 
 
 

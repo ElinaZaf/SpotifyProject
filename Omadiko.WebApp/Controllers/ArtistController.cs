@@ -22,7 +22,7 @@ namespace Omadiko.WebApp.Controllers
         {
             int pageSize = 18;
             int pageNumber = page ?? 1;
-            return View(artistRepository.GetAll().ToPagedList(pageNumber, pageSize));
+            return View(artistRepository.GetAllOrderedByName().ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult ShowArtistDetails(int? id)
@@ -36,6 +36,7 @@ namespace Omadiko.WebApp.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(artist);
         }
 

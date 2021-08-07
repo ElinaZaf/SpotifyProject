@@ -8,19 +8,20 @@ using System.Web;
 using System.Web.Mvc;
 using Omadiko.Database;
 using Omadiko.Entities;
+using Omadiko.RepositoryServices;
 
 namespace Omadiko.WebApp.Controllers
 {
     public class AlbumController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private AlbumRepository albumRepository = new AlbumRepository();
 
 
 
         public ActionResult ShowAlbums()
         {
-            var albums = db.Albums.Include(a => a.Artist);
-            return View(albums.ToList());
+            return View(albumRepository.GetAllOrderedByTitle());
         }
 
         public ActionResult ShowAlbumDetails(int? id)
@@ -29,7 +30,7 @@ namespace Omadiko.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Album album = db.Albums.Find(id);
+            Album album = albumRepository.GetById(id);
             if (album == null)
             {
                 return HttpNotFound();
