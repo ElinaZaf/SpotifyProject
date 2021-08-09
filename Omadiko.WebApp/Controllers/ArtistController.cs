@@ -18,11 +18,29 @@ namespace Omadiko.WebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         private ArtistRepository artistRepository = new ArtistRepository();
 
-        public ActionResult ShowArtists(int? page)
+        public ActionResult ShowArtists(string searchBy, string search, int? page)
         {
+            var artists = artistRepository.GetAllOrderedByName();
+
+            try
+            {
+                if (searchBy == "Name")
+                {
+                    artists = artists.Where(x => x.Name.ToUpper().Contains(search.ToUpper()) || x.LastName.ToUpper().Contains(search.ToUpper()) || search == null).ToList();
+                }
+                else
+                {
+                    artists = artists.Where(x => x.Country.ToUpper().Contains(search.ToUpper()) || search == null).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Something went wrong!");
+            }
+
             int pageSize = 18;
             int pageNumber = page ?? 1;
-            return View(artistRepository.GetAllOrderedByName().ToPagedList(pageNumber, pageSize));
+            return View(artists.ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult ShowArtistDetails(int? id)

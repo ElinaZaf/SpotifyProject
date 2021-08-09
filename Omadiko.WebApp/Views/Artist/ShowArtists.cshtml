@@ -15,46 +15,70 @@
                         <div class="iq-header-title">
                             <h4 class="card-title">Artists</h4>
                         </div>
-                        <div class="nav-item nav-icon">
-                            <div class="iq-search-bar">
-                                <form action="#" class="searchbox">
-                                    <input type="text" class="text search-input" placeholder="Search Here...">
-                                    <a class="search-link" href="#"><i class="ri-search-line text-black"></i></a>
-                                </form>
-                            </div>
+                        <div class="iq-search-bar">
+                            @using (Html.BeginForm("ShowArtists", "Artist", FormMethod.Get, new { @class = "searchbox" }))
+                            {
+                                <div style="padding-left: 10px">
+                                    <b>Search by:</b>
+                                    <span style="margin: 0px 10px">
+                                        @Html.RadioButton("searchBy", "Name", true) <text>  Name</text>
+                                        @Html.RadioButton("searchBy", "Country") <text>  Country</text>
+                                    </span>
+                                </div>
+                                @Html.TextBox("search", null, new { @class = "text search-input", style = "width:80%; padding-left:10px; margin-right: 0px; border-top-right-radius: 0px", placeholder = "Search Here...", type = "search" })
+                                <button type="submit" style="background-color:royalblue"><i class="ri-search-line"></i></button>
+                                <button id="ResetButton" style="background-color:forestgreen"><i class="las la-undo-alt"></i></button>
+                            }
                         </div>
                     </div>
                     <div class="iq-card-body">
-                        <ul class="list-unstyled row iq-box-hover mb-0">
-                            @foreach (var artist in Model)
-                            {
-                                <li class="col-lg-2  iq-music-box">
-                                    <div class="iq-card">
-                                        <div class="iq-card-body p-0">
-                                            <a href="~/Artist/ShowArtistDetails/@artist.ArtistId">
-                                                <div class="iq-thumb-artist">
-                                                    <div class="iq-music-overlay"></div>
-                                                    <img src="@Url.Content(artist.PhotoUrl)" class="w-100 img-fluid" alt="">
+                        @if (Model.Count == 0)
+                        {
+                            <h3 style="text-align:center">No rows match search criteria</h3>
+                        }
+                        else
+                        {
+                            <ul class="list-unstyled row iq-box-hover mb-0">
+                                @foreach (var artist in Model)
+                                {
+                                    <li class="col-lg-2  iq-music-box">
+                                        <div class="iq-card">
+                                            <div class="iq-card-body p-0">
+                                                <a href="~/Artist/ShowArtistDetails/@artist.ArtistId">
+                                                    <div class="iq-thumb-artist">
+                                                        <div class="iq-music-overlay"></div>
+                                                        <img src="@Url.Content(artist.PhotoUrl)" class="w-100 img-fluid" alt="">
+                                                    </div>
+                                                </a>
+                                                <div class="feature-list text-center">
+                                                    <h5 class="font-weight-600 mb-0" style="font-size:small">@artist.Name @artist.LastName</h5>
                                                 </div>
-                                            </a>
-                                            <div class="feature-list text-center">
-                                                <h5 class="font-weight-600 mb-0" style="font-size:small">@artist.Name @artist.LastName</h5>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                            }
-                        </ul>
+                                    </li>
+                                }
+                            </ul>
+                        }
+
                     </div>
-                    <div><div class="pagination" style="justify-content:center">
-                        <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+                    <div>
+                        <div class="pagination" style="justify-content:center">
+                            <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+                        </div>
+                        <div class="pagination" style="justify-content:center">
+                            @Html.PagedListPager(Model, page => Url.Action("ShowArtists", new { page }))
+                        </div>
                     </div>
-                    <div class="pagination" style="justify-content:center">
-                        @Html.PagedListPager(Model, page => Url.Action("ShowArtists", new { page }))
-                    </div></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+@section MyCustomJavascript{
+    <script>
+        $("#ResetButton").click(function (e) {
+            $("#search").val("");
+        });
+    </script>
+}
