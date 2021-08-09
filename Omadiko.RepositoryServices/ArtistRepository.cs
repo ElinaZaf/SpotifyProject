@@ -28,6 +28,14 @@ namespace Omadiko.RepositoryServices
             return db.Artists.Find(id);
         }
 
-       
+        public List<Artist> GetArtistsFilteredByName(string search, List<Artist> artists)
+        {
+            return artists.Where(x => x.Name.ToUpper().Contains(search.ToUpper()) || x.LastName.ToUpper().Contains(search.ToUpper()) || search == null).ToList();
+        }
+
+        public List<Artist> GetArtistsFilteredByCountry(string search, List<Artist> artists)
+        {
+            return artists.Where(x => x.Country.ToUpper().Contains(search.ToUpper()) || search == null).ToList();
+        }
     }
 }

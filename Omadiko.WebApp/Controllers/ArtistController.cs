@@ -20,22 +20,15 @@ namespace Omadiko.WebApp.Controllers
 
         public ActionResult ShowArtists(string searchBy, string search, int? page)
         {
-            var artists = artistRepository.GetAllOrderedByName();
+            List<Artist> artists = artistRepository.GetAllOrderedByName();
 
-            try
+            if (searchBy == "Name")
             {
-                if (searchBy == "Name")
-                {
-                    artists = artists.Where(x => x.Name.ToUpper().Contains(search.ToUpper()) || x.LastName.ToUpper().Contains(search.ToUpper()) || search == null).ToList();
-                }
-                else
-                {
-                    artists = artists.Where(x => x.Country.ToUpper().Contains(search.ToUpper()) || search == null).ToList();
-                }
+                artists = artistRepository.GetArtistsFilteredByName(search, artists);
             }
-            catch (Exception)
+            else
             {
-                Console.WriteLine("Something went wrong!");
+                artists = artistRepository.GetArtistsFilteredByCountry(search, artists);
             }
 
             int pageSize = 18;
