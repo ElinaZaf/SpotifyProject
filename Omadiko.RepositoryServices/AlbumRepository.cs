@@ -38,5 +38,15 @@ namespace Omadiko.RepositoryServices
             return albums.Where(x => x.ReleaseDate.Year.ToString() == search || search == null).ToList();
         }
 
+        public List<Album> GetAlbumsFilteredByArtistName(string search, List<Album> albums)
+        {
+            return albums.Where(x => x.Artist.Name.ToUpper().Contains(search.ToUpper()) || x.Artist.LastName.ToUpper().Contains(search.ToUpper()) || search == null).ToList();
+        }
+
+        public List<Album> GetAlbumsFilteredByGenre(string search, List<Album> albums)
+        {
+            return albums.Where(x => x.Genres.Count !=0 && x.Genres.All(y => y.Kind.ToUpper().Contains(search.ToUpper())) || search == null).ToList();
+        }
+
     }
 }

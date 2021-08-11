@@ -28,6 +28,13 @@ namespace Omadiko.RepositoryServices
             return db.Songs.Find(id);
         }
 
-
+        public List<Song> GetSongsFilteredByTitle(string search, List<Song> songs)
+        {
+            return songs.Where(x => x.Title.ToUpper().Contains(search.ToUpper()) || search == null).ToList();
+        }
+        public List<Song> GetSongsFilteredByArtistName(string search, List<Song> songs)
+        {
+            return songs.Where(x => x.Albums.Count != 0 && x.Albums.All(y => y.Artist.Name.ToUpper().Contains(search.ToUpper()) || y.Artist.LastName.ToUpper().Contains(search.ToUpper())) || search == null).ToList();
+        }
     }
 }

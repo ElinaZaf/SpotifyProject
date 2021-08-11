@@ -10,12 +10,17 @@ namespace Omadiko.Entities
         public int SongId { get; set; }
         public string Title { get; set; }
         public int Duration { get; set; }  //in sec
-        public string PhotoUrl { get; set; }
         public string AudioUrl { get; set; }
         public string VideoUrl { get; set; }
        
 
         //Navigation Properties
         public virtual ICollection<Album> Albums { get; set; }
+
+        public string ConvertTime()
+        {
+            TimeSpan result = TimeSpan.FromMinutes(Duration);
+            return String.Format($"{result.Minutes} minutes {result.Seconds} seconds");
+        }
     }
 }

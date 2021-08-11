@@ -27,9 +27,17 @@ namespace Omadiko.WebApp.Controllers
             {
                 albums = albumRepository.GetAlbumsFilteredByTitle(search, albums);
             }
-            else
+            if (searchBy == "Artist")
+            {
+                albums = albumRepository.GetAlbumsFilteredByArtistName(search, albums);
+            }
+            if (searchBy == "Release Year")
             {
                 albums = albumRepository.GetAlbumsFilteredByReleaseYear(search, albums);
+            }
+            if (searchBy == "Genre")
+            {
+                albums = albumRepository.GetAlbumsFilteredByGenre(search, albums);
             }
 
             int pageSize = 18;

@@ -35,7 +35,7 @@ namespace Omadiko.RepositoryServices
 
         public List<Artist> GetArtistsFilteredByCountry(string search, List<Artist> artists)
         {
-            return artists.Where(x => x.Country.ToUpper().Contains(search.ToUpper()) || search == null).ToList();
+            return artists.Where(x => x.Country.ToUpper() == search.ToUpper() || search == null).ToList();
         }
     }
 }

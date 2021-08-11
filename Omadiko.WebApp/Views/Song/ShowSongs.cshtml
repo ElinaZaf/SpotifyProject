@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Omadiko.Entities.Song>
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Omadiko.Entities.Song>
 
 <div id="content-page" class="content-page">
     <div class="container-fluid">
@@ -10,63 +13,86 @@
                         <div class="iq-header-title">
                             <h4 class="card-title">Featured Songs</h4>
                         </div>
-                        <div class="nav-item nav-icon">
-                            <div class="iq-search-bar">
-                                <form action="#" class="searchbox">
-                                    <input type="text" class="text search-input" placeholder="Search Here...">
-                                    <a class="search-link" href="#"><i class="ri-search-line text-black"></i></a>
-                                </form>
-                            </div>
+                        <div class="iq-search-bar">
+                            @using (Html.BeginForm("ShowSongs", "Song", FormMethod.Get, new { @class = "searchbox" }))
+                            {
+                                <div style="padding-left: 10px">
+                                    <b>Search by:</b>
+                                    <span style="margin: 0px 10px">
+                                        @Html.RadioButton("searchBy", "Title", true) <text>Title</text>
+                                        @Html.RadioButton("searchBy", "Artist") <text>Artist</text>
+                                    </span>
+                                </div>
+                                @Html.TextBox("search", null, new { @class = "text search-input", style = "width:80%; padding-left:10px; margin-right: 0px; border-top-right-radius: 0px", placeholder = "Search Here...", type = "search" })
+                                <button type="submit" title="Search" style="background-color:royalblue"><i class="ri-search-line"></i></button>
+                                <button id="ResetButton" title="Reset" style="background-color:forestgreen"><i class="las la-undo-alt"></i></button>
+                            }
                         </div>
                     </div>
                     <div class="iq-card-body">
-                        <ul class="list-unstyled row iq-box-hover mb-0">
-                            @foreach (var song in Model)
-                            {
-                                <li class="col-xl-2 col-lg-3 col-md-4 iq-music-box">
-                                    <div class="iq-card ">
-                                        <div class="iq-card-body p-0">
-                                            <div class="iq-thumb">
-                                                <div class="iq-music-overlay"></div>
-                                                <a href="~/Song/ShowSongDetails/@song.SongId">
+                        @if (Model.Count == 0)
+                        {
+                            <h3 style="text-align:center">No rows match search criteria</h3>
+                        }
+                        else
+                        {
+                            <ul class="list-unstyled row iq-box-hover mb-0">
+                                @foreach (var song in Model)
+                                {
+                                    <li class="col-xl-2 col-lg-3 col-md-4 iq-music-box">
+                                        <div class="iq-card">
+                                            <div class="iq-card-body p-0">
+                                                <div class="iq-thumb">
+                                                    <div class="iq-music-overlay"></div>
+                                                    <a href="~/Song/ShowSongDetails/@song.SongId">
+                                                        @if (song.Albums.Count == 0)
+                                                        {
+                                                            <img src="~/Content/images/notavailable400x410.jpg" class="img-border-radius img-fluid w-100" alt="">
+                                                        }
+                                                        else
+                                                        {
+                                                            foreach (var album in song.Albums)
+                                                            {
+                                                                <img src="@Url.Content(album.PhotoUrl)" class="img-border-radius img-fluid w-100" alt="">
+
+                                                            }
+                                                        }
+                                                    </a>
+                                                    <div class="overlay-music-icon">
+                                                        <a href="~/Song/ShowSongDetails/@song.SongId">
+                                                            <i class="las la-play-circle"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="feature-list text-center">
+                                                    <h6 class="font-weight-600  mb-0">@song.Title</h6>
                                                     @if (song.Albums.Count == 0)
                                                     {
-                                                        <img src="~/Content/images/notavailable400x410.jpg" class="img-border-radius img-fluid w-100" alt="">
+                                                        <small>Not available</small>
                                                     }
                                                     else
                                                     {
                                                         foreach (var album in song.Albums)
                                                         {
-                                                            <img src="@Url.Content(album.PhotoUrl)" class="img-border-radius img-fluid w-100" alt="">
-
+                                                            <small class="mb-0">@album.Artist.Name @album.Artist.LastName</small>
                                                         }
                                                     }
-                                                </a>
-                                                <div class="overlay-music-icon">
-                                                    <a href="~/Song/ShowSongDetails/@song.SongId">
-                                                        <i class="las la-play-circle"></i>
-                                                    </a>
                                                 </div>
                                             </div>
-                                            <div class="feature-list text-center">
-                                                <h6 class="font-weight-600  mb-0">@song.Title</h6>
-                                                @if (song.Albums.Count == 0)
-                                                {
-                                                    <small>Not available</small>
-                                                }
-                                                else
-                                                {
-                                                    foreach (var album in song.Albums)
-                                                    {
-                                                        <small class="mb-0">@album.Artist.Name @album.Artist.LastName</small>
-                                                    }
-                                                }
-                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            }
-                        </ul>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                    <div>
+                        <div class="pagination" style="justify-content:center">
+                            <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+                        </div>
+                        <div class="pagination" style="justify-content:center">
+                            @Html.PagedListPager(Model, page => Url.Action("ShowSongs", new { page, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] }),
+                                             new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+                        </div>
                     </div>
                 </div>
             </div>
@@ -74,3 +100,10 @@
     </div>
 </div>
 
+@section MyCustomJavascript{
+    <script>
+        $("#ResetButton").click(function (e) {
+            $("#search").val("");
+        });
+    </script>
+}

@@ -14,11 +14,22 @@
                                 <div class="d-flex align-items-top justify-content-between iq-music-play-detail">
                                     <div class="music-detail">
                                         <h3>@Model.Title</h3>
-                                        <span>@Model.Artist.Name @Model.Artist.LastName</span>
-                                        <p class="mb-0">389382k Likes</p>
-                                        <div class="d-flex align-items-center">
-                                            <a href="javascript:void(0);" class="btn btn-primary iq-play mr-2">Play Music</a>
+                                        <div style="margin-top: 5px; margin-bottom: 10px;">
+                                            <text>Artist: @Model.Artist.Name @Model.Artist.LastName</text>
+                                            <br />
+                                            <text>Genre: </text>
+                                            @foreach (var genre in Model.Genres)
+                                            {
+                                                <text>@genre.Kind </text>
+                                            }
                                         </div>
+                                        @if (!(Model.Songs.Count == 0 || Model.Songs == null))
+                                            {
+                                                <div class="d-flex align-items-center" style="margin-bottom: 10px">
+                                                    <a href="javascript:void(0);" class="btn btn-primary iq-play mr-2">Play Music</a>
+                                                </div>
+                                            }
+                                        <p class="mb-0">389382k Likes</p>
                                     </div>
                                     <div class="music-right">
                                         <div class="d-flex align-items-center">
@@ -48,7 +59,7 @@
                                     <div class="d-flex justify-content-between align-items-center row">
                                         <div class="media align-items-center col-10 col-md-5">
                                             <div class="iq-realese-song ">
-                                                <a href="javascript:void(0);"><img src=@Url.Content(song.PhotoUrl) class="img-border-radius avatar-60 img-fluid" alt=""></a>
+                                                <a href="javascript:void(0);"><img src=@Url.Content(Model.PhotoUrl) class="img-border-radius avatar-60 img-fluid" alt=""></a>
                                             </div>
                                             <div class="media-body ml-3">
                                                 <p class="mb-0">@song.Title</p>
@@ -74,7 +85,13 @@
                         </ul>
                     </div>
                 }
-
+                else
+                {
+                    <div class="iq-card-body">
+                        <h4 style="text-align: center">Coming Soon!</h4>
+                        <h6 style="text-align: center">Sorry, there are no songs available at the moment!</h6>
+                    </div>
+                }
             </div>
         </div>
     </div>

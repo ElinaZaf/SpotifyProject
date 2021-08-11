@@ -1,4 +1,5 @@
-﻿
+﻿@model Omadiko.Entities.Song
+
 <div id="content-page" class="content-page">
     <div class="container-fluid">
         <div class="row">
@@ -6,43 +7,77 @@
                 <div class="iq-card">
                     <div class="iq-card-body">
                         <div class="row">
-                            <div class="col-lg-4">
-                                <img src="~/Content/images/notavailable400x410.jpg" class="img-fluid w-100" alt="">
-                            </div>
-                            <div class="col-lg-8">
-                                <div class="d-flex align-items-top justify-content-between iq-music-play-detail">
-                                    <div class="music-detail">
-                                        <h3>AAAAAAA</h3>
-                                        <span>AAAAAAAAAAAAAAAAAAA</span>
-                                        <p class="mb-0">389382k Likes</p>
-                                        <div class="d-flex align-items-center">
-                                            <a href="javascript:void(0);" class="btn btn-primary iq-play mr-2">Play Music</a>
+                            @if (Model.Albums.Count == 0)
+                            {
+                                <div class="col-lg-4">
+                                    <img src="~/Content/images/notavailable400x410.jpg" class="img-border-radius img-fluid w-100" alt="">
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="d-flex align-items-top justify-content-between iq-music-play-detail">
+                                        <div class="music-detail">
+                                            <h3>@Model.Title</h3>
+                                            <div style="margin-top: 5px; margin-bottom: 10px;">
+                                                <text>Artist: Not available</text>
+                                                <br />
+                                                <text>Album: Not available </text>
+                                                <br />
+                                                <text>Duration: @Model.ConvertTime()</text>
+                                            </div>
+                                            <div class="d-flex align-items-center" style="margin-bottom: 10px">
+                                                <a href="javascript:void(0);" class="btn btn-primary iq-play mr-2">Play Music</a>
+                                            </div>
+                                            <p class="mb-0">389382k Likes</p>
                                         </div>
-                                    </div>
-                                    <div class="music-right">
-                                        <div class="d-flex align-items-center">
-                                            <div class="iq-circle mr-2 share"><a href="javascript:void();"><i class="las la-share-alt-square text-primary"></i></a></div>
-                                            <div class="iq-circle mr-2"><a href="javascript:void();"><i class="ri-heart-fill  text-primary"></i></a></div>
-                                            <div class="iq-circle">
-                                                <a href="javascript:void();"><i class="las la-download text-primary"></i></a>
+                                        <div class="music-right">
+                                            <div class="d-flex align-items-center">
+                                                <div class="iq-circle mr-2 share"><a href="javascript:void();"><i class="las la-share-alt-square text-primary"></i></a></div>
+                                                <div class="iq-circle mr-2"><a href="javascript:void();"><i class="ri-heart-fill  text-primary"></i></a></div>
+                                                <div class="iq-circle">
+                                                    <a href="javascript:void();"><i class="las la-download text-primary"></i></a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </div> }
+                            else
+                            {
+                                foreach (var album in Model.Albums)
+                                {
+                                    <div class="col-lg-4">
+                                        <img src="@Url.Content(album.PhotoUrl)" class="img-fluid w-100" alt="">
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="d-flex align-items-top justify-content-between iq-music-play-detail">
+                                            <div class="music-detail">
+                                                <h3>@Model.Title</h3>
+                                                <div style="margin-top: 5px; margin-bottom: 10px;">
+                                                    <text>Artist: @album.Artist.Name @album.Artist.LastName</text>
+                                                    <br />
+                                                    <text>Album: @album.Title</text>
+                                                    <br />
+                                                    <text>Duration: @Model.Duration</text>
+                                                </div>
+                                                <div class="d-flex align-items-center" style="margin-bottom: 10px">
+                                                    <a href="javascript:void(0);" class="btn btn-primary iq-play mr-2">Play Music</a>
+                                                </div>
+                                                <p class="mb-0">389382k Likes</p>
+                                            </div>
+                                            <div class="music-right">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="iq-circle mr-2 share"><a href="javascript:void();"><i class="las la-share-alt-square text-primary"></i></a></div>
+                                                    <div class="iq-circle mr-2"><a href="javascript:void();"><i class="ri-heart-fill  text-primary"></i></a></div>
+                                                    <div class="iq-circle">
+                                                        <a href="javascript:void();"><i class="las la-download text-primary"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="iq-card">
-                <div class="iq-card-body">
-                    <ul class="list-unstyled iq-music-slide mb-0">
-                        <li>AAAAAAAAAAAAAAA</li>
-                    </ul>
-                </div>
-
             </div>
         </div>
     </div>

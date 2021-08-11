@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Omadiko.Database;
 using Omadiko.Entities;
 using Omadiko.RepositoryServices;
+using PagedList;
 
 namespace Omadiko.WebApp.Controllers
 {
@@ -17,9 +18,21 @@ namespace Omadiko.WebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         private SongRepository songRepository = new SongRepository();
 
-        public ActionResult ShowSongs()
+        public ActionResult ShowSongs(string searchBy, string search, int? page)
         {
-            return View(songRepository.GetAllOrderedByTitle());
+            List<Song> songs = songRepository.GetAllOrderedByTitle();
+
+            if (searchBy == "Title")
+            {
+                songs = songRepository.GetSongsFilteredByTitle(search, songs);
+            }
+            if (searchBy == "Artist")
+            {
+                songs = songRepository.GetSongsFilteredByArtistName(search, songs);
+            }
+            int pageSize = 18;
+            int pageNumber = page ?? 1;
+            return View(songs.ToPagedList(pageNumber, pageSize));
         }
 
 

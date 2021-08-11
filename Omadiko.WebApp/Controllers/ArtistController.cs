@@ -26,7 +26,7 @@ namespace Omadiko.WebApp.Controllers
             {
                 artists = artistRepository.GetArtistsFilteredByName(search, artists);
             }
-            else
+            if (searchBy == "Country")
             {
                 artists = artistRepository.GetArtistsFilteredByCountry(search, artists);
             }

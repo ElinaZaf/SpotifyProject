@@ -13,7 +13,7 @@
                 <div class="iq-card">
                     <div class="iq-card-header d-flex justify-content-between align-items-center">
                         <div class="iq-header-title">
-                            <h4 class="card-title">Artists</h4>
+                            <h4 class="card-title">Featured Artists</h4>
                         </div>
                         <div class="iq-search-bar">
                             @using (Html.BeginForm("ShowArtists", "Artist", FormMethod.Get, new { @class = "searchbox" }))
@@ -66,7 +66,8 @@
                             <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
                         </div>
                         <div class="pagination" style="justify-content:center">
-                            @Html.PagedListPager(Model, page => Url.Action("ShowArtists", new { page }))
+                            @Html.PagedListPager(Model, page => Url.Action("ShowArtists", new { page, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] }),
+                                             new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
                         </div>
                     </div>
                 </div>
