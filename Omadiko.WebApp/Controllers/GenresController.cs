@@ -47,7 +47,7 @@ namespace Omadiko.WebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "GenreId,GenreKind")] Genre genre)
+        public ActionResult Create([Bind(Include = "GenreId,Kind")] Genre genre)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace Omadiko.WebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "GenreId,GenreKind")] Genre genre)
+        public ActionResult Edit([Bind(Include = "GenreId,Kind")] Genre genre)
         {
             if (ModelState.IsValid)
             {
