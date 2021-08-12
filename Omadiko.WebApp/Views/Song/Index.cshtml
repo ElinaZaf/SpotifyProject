@@ -17,7 +17,7 @@
                             <h4 class="card-title">Song Lists</h4>
                         </div>
                         <div class="iq-card-header-toolbar d-flex align-items-center">
-                            <a href="admin-add-song.html" class="btn btn-primary">Add New Song</a>
+                            <a href="~/Song/Create" class="btn btn-primary">Add New Song</a>
                         </div>
                     </div>
                     <div class="iq-card-body">
@@ -26,15 +26,11 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 5%;">No</th>
-                                        <th style="width: 5%;">Image</th>
                                         <th style="width: 15%;">
                                             @Html.DisplayNameFor(model => model.Title)
                                         </th>
                                         <th style="width: 15%;">
                                             @Html.DisplayNameFor(model => model.Duration)
-                                        </th>
-                                        <th style="width: 10%;">
-                                            @Html.DisplayNameFor(model => model.ReleaseDate)
                                         </th>
                                         <th style="width: 10%;">Action</th>
                                     </tr>
@@ -46,21 +42,15 @@
                                         <tr>
                                             <td>1</td>
                                             <td>
-                                                <img src="@Url.Content(song.PhotoUrl)" class="img-fluid avatar-50 rounded" alt="author-profile">
-                                            </td>
-                                            <td>
                                                 @song.Title
                                             </td>
                                             <td>
-                                                @song.Duration
-                                            </td>
-                                            <td>
-                                                @song.ReleaseDate
+                                                @song.ConvertTime()
                                             </td>
                                             <td>
                                                 <div class="flex align-items-center list-user-action">
-                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="admin-add-category.html"><i class="ri-pencil-line"></i></a>
-                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="~/Song/Edit/@song.SongId"><i class="ri-pencil-line"></i></a>
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="~/Song/Delete/@song.SongId"><i class="ri-delete-bin-line"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
