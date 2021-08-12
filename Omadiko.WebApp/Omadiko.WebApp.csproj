@@ -2266,8 +2266,6 @@
     <Content Include="Views\Main\Index.cshtml" />
     <Content Include="Views\Main\Premium.cshtml" />
     <Content Include="Views\Main\Faq.cshtml" />
-    <Content Include="Views\Main\SignIn.cshtml" />
-    <Content Include="Views\Main\SignUp.cshtml" />
     <Content Include="Views\Main\Support.cshtml" />
     <Content Include="Views\Artist\Create.cshtml" />
     <Content Include="Views\Artist\Delete.cshtml" />

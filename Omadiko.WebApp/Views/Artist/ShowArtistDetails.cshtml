@@ -15,28 +15,34 @@
                                 <div class="d-flex align-items-top justify-content-between iq-music-play-detail">
                                     <div class="music-detail">
                                         <h3>@Model.Name @Model.LastName</h3>
-                                        @if (Model.DateOfBirth.HasValue)
-                                        {
-                                            <br />
-                                            <p>Born: @Model.DateOfBirth.Value.ToString("d")</p>
-                                            if (Model.DateOfDeath.HasValue)
+                                        <div style="margin-top: 5px; margin-bottom: 10px;">
+                                            @if (Model.DateOfBirth.HasValue)
                                             {
-                                                <p>Died: @Model.DateOfDeath.Value.ToString("d")  (Age: @Utilities.CalculateAge(Model.DateOfBirth.Value, Model.DateOfDeath.Value))</p>
+                                                <text>Born: @Model.DateOfBirth.Value.ToString("d")</text>
+                                                <br />
+                                                if (Model.DateOfDeath.HasValue)
+                                                {
+                                                    <text>Died: @Model.DateOfDeath.Value.ToString("d")  (Age: @Utilities.CalculateAge(Model.DateOfBirth.Value, Model.DateOfDeath.Value))</text>
+                                                }
+                                                else
+                                                {
+                                                    <text>Age: @Utilities.CalculateAge(Model.DateOfBirth.Value, DateTime.Now)</text>
+                                                }
+                                                <br />
                                             }
                                             else
                                             {
-                                                <p>Age: @Utilities.CalculateAge(Model.DateOfBirth.Value, DateTime.Now)</p>
+                                                <h6>(Band)</h6>
+                                                <br />
                                             }
-                                        }
-                                        else
-                                        {
-                                            <h6>(Band)</h6>
-                                            <br />
-                                        }
-                                        <p>Country: @Model.Country</p>
-                                        <br />
+                                            <text>Country: @Model.Country</text>
+                                        </div>
                                         <p class="mb-0">389382k Likes</p>
                                     </div>
+
+
+
+
                                     <div class="music-right">
                                         <div class="d-flex align-items-center">
                                             <div class="iq-circle mr-2 share"><a href="javascript:void();"><i class="las la-share-alt-square text-primary"></i></a></div>

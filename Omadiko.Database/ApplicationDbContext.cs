@@ -13,7 +13,7 @@ namespace Omadiko.Database
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext() :base("Sindesmos")
+        public ApplicationDbContext() : base("Sindesmos")
         {
 
         }

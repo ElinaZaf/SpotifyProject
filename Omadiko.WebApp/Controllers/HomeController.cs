@@ -8,9 +8,12 @@ using System.Web.Mvc;
 
 namespace Omadiko.WebApp.Controllers
 {
+
     public class HomeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+      
         public ActionResult Index()
         {
             IndexHomeViewModel vm = new IndexHomeViewModel()

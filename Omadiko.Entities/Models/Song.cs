@@ -19,8 +19,8 @@ namespace Omadiko.Entities
 
         public string ConvertTime()
         {
-            TimeSpan result = TimeSpan.FromMinutes(Duration);
-            return String.Format($"{result.Minutes} minutes {result.Seconds} seconds");
+            TimeSpan result = TimeSpan.FromSeconds(Duration);
+            return String.Format($"{result.Minutes} min {result.Seconds} sec");
         }
     }
 }
