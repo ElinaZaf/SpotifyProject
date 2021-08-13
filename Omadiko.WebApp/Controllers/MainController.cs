@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Omadiko.WebApp.Controllers
 {
+    [AllowAnonymous]
     public class MainController : Controller
     {
         // GET: Main

@@ -1,10 +1,5 @@
 ﻿@using Omadiko.WebApp.Models
 @model LoginViewModel
-@{
-    ViewBag.Title = "Log in";
-}
-
-
 
 @{
     Layout = "~/Views/Shared/_MainLayoutPage.cshtml";
@@ -17,8 +12,8 @@
                 <div class="sign-user_card ">
                     <div class="sign-in-page-data">
                         <div class="sign-in-from w-100 pt-5 m-auto">
-                            <h1 class="mb-3 text-center">Sign in</h1>
-                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            <h1 class="mb-3 text-center">Log in</h1>
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal mt-4", role = "form" }))
                             {
                                 @Html.AntiForgeryToken()
                                 <h4>Use a local account to log in.</h4>
@@ -46,26 +41,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group sign-info">
                                     <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Log in" class="btn btn-default" />
+                                        <button type="submit" class="btn btn-primary mb-2">Log In</button>
                                     </div>
                                 </div>
-                                <p>
-                                    @Html.ActionLink("Register as a new user", "Register")
-                                </p>
-                                
                             }
-
-
                         </div>
                     </div>
                     <div class="mt-2">
                         <div class="d-flex justify-content-center links">
-                            Don't have an account? <a href="sign-up.html" class="ml-2">Sign Up</a>
+                            <span>Don't have an account? @Html.ActionLink("Register as a new user", "Register")</span>
                         </div>
                         <div class="d-flex justify-content-center links">
-                            <a href="pages-recoverpw.html">Forgot your password?</a>
+                            <span>Forgot your password? @Html.ActionLink("Reset Password", "ForgotPassword")</span>
                         </div>
                     </div>
                 </div>
@@ -73,74 +62,6 @@
         </div>
     </div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@*<section class="sign-in-page">
-        <div class="container">
-            <div class="row justify-content-center align-items-center height-self-center">
-                <div class="col-md-6 col-sm-12 col-12 align-self-center">
-                    <div class="sign-user_card ">
-                        <div class="sign-in-page-data">
-                            <div class="sign-in-from w-100 pt-5 m-auto">
-                                <h1 class="mb-3 text-center">Sign in</h1>
-                                <form class="mt-4">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail2">Email address</label>
-                                        <input type="email" class="form-control mb-0" id="exampleInputEmail2" placeholder="Enter email">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword2">Password</label>
-                                        <input type="password" class="form-control mb-0" id="exampleInputPassword2" placeholder="Password">
-                                    </div>
-                                    <div class="sign-info">
-                                        <button type="submit" class="btn btn-primary mb-2">Sign in</button>
-                                        <span class="dark-color d-block line-height-2">Don't have an account? <a href="sign-up.html">Sign up</a></span>
-                                    </div>
-                                    <div class="d-inline-block w-100">
-                                        <div class="custom-control custom-checkbox d-inline-block mt-2 pt-1">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                            <label class="custom-control-label" for="customCheck1">Remember Me</label>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="mt-2">
-                            <div class="d-flex justify-content-center links">
-                                Don't have an account? <a href="sign-up.html" class="ml-2">Sign Up</a>
-                            </div>
-                            <div class="d-flex justify-content-center links">
-                                <a href="pages-recoverpw.html">Forgot your password?</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>*@
-
-
-
-
 
 
 
