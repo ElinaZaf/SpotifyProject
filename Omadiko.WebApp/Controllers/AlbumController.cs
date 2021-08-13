@@ -62,6 +62,26 @@ namespace Omadiko.WebApp.Controllers
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        //ViewBags
+        public void CreateArtistViewBag()
+        {
+            var artist = db.Artists.ToList().Select
+                (x => new { ArtistId = x.ArtistId, FullName = String.Format($"{x.Name} {x.LastName}") });
+            ViewBag.ArtistId = new SelectList(artist, "ArtistId", "FullName");
+        }
+
+        public void CreateGenreViewBag()
+        {
+            ViewBag.SelectedGenreIds = db.Genres.ToList().Select(x =>
+            new SelectListItem()
+            {
+                Value = x.GenreId.ToString(),
+                Text = String.Format($"{x.Kind}")
+            });
+        }
+
+
+
         // GET: Album
         public ActionResult Index()
         {
@@ -87,7 +107,9 @@ namespace Omadiko.WebApp.Controllers
         // GET: Album/Create
         public ActionResult Create()
         {
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name");
+            CreateArtistViewBag();
+            CreateGenreViewBag();
+
             return View();
         }
 
@@ -96,19 +118,20 @@ namespace Omadiko.WebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AlbumId,Title,PhotoId,TotalDuration,AlbumRealeaseYear,ArtistId")] Album album)
+        public ActionResult Create([Bind(Include = "AlbumId,Title,ReleaseDate,PhotoUrl,ArtistId")] Album album, IEnumerable<int> SelectedGenreIds)
         {
             if (ModelState.IsValid)
             {
-                db.Albums.Add(album);
+                db.Entry(album).State = EntityState.Added;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
+            CreateArtistViewBag();
+            CreateGenreViewBag();
             return View(album);
         }
-
+       
         // GET: Album/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -121,7 +144,11 @@ namespace Omadiko.WebApp.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
+
+            CreateArtistViewBag();
+            
+            var genreIds = album.Genres.Select(x => x.GenreId);
+            CreateGenreViewBag();
             return View(album);
         }
 
@@ -130,15 +157,38 @@ namespace Omadiko.WebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AlbumId,Title,PhotoId,TotalDuration,AlbumRealeaseYear,ArtistId")] Album album)
+        public ActionResult Edit([Bind(Include = "AlbumId,Title,ReleaseDate,PhotoUrl,ArtistId")] Album album, IEnumerable<int> SelectedGenreIds)
         {
             if (ModelState.IsValid)
             {
+                db.Albums.Attach(album);
+                db.Entry(album).Collection("Genres").Load();
+                album.Genres.Clear();
+                db.SaveChanges();
+                if (!(SelectedGenreIds is null))
+                {
+                    foreach (var id in SelectedGenreIds)
+                    {
+                        Genre genre = db.Genres.Find(id);
+                        if (genre != null)
+                        {
+                            album.Genres.Add(genre);
+                        }
+                    }
+                    db.SaveChanges();
+                }
                 db.Entry(album).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
+
+            db.Albums.Attach(album);
+            db.Entry(album).Collection("Genres").Load();
+            var genreIds = album.Genres.Select(x => x.GenreId);
+            CreateGenreViewBag();
+
+            CreateArtistViewBag();
+
             return View(album);
         }
 

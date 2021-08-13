@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<Omadiko.Entities.Album> 
 
-
-
 @{
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
@@ -18,7 +16,7 @@
                             <h4 class="card-title">Albums List</h4>
                         </div>
                         <div class="iq-card-header-toolbar d-flex align-items-center">
-                            <a href="admin-add-writer.html" class="btn btn-primary">Add New Writer</a>
+                            <a href="~/Album/Create" class="btn btn-primary">Add New Album</a>
                         </div>
                     </div>
                     <div class="iq-card-body">
@@ -32,15 +30,14 @@
                                             @Html.DisplayNameFor(model => model.Title)
                                         </th>
                                         <th style="width: 15%;">
-                                            @Html.DisplayNameFor(model => model.Genres)
+                                            @Html.DisplayNameFor(model => model.Artist)
                                         </th>
                                         <th style="width: 15%;">
-                                            @Html.DisplayNameFor(model => model.Duration)
+                                            @Html.DisplayNameFor(model => model.Genres)
                                         </th>
                                         <th style="width: 15%;">
                                             @Html.DisplayNameFor(model => model.ReleaseDate)
                                         </th>
-                                        <th style="width: 35%;">Album Description</th>
                                         <th style="width: 10%;">Action</th>
                                     </tr>
                                 </thead>
@@ -51,10 +48,20 @@
                                         <tr>
                                             <td>1</td>
                                             <td>
-                                                <img src="@Url.Content(album.Artist.PhotoUrl)" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                                @if (!(album.PhotoUrl is null))
+                                                {
+                                                    <img src="@Url.Content(album.PhotoUrl)" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/Content/images/notavailable400x410.jpg" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                                }
                                             </td>
                                             <td>
                                                 @album.Title
+                                            </td>
+                                            <td>
+                                                @String.Format($"{album.Artist.Name} {album.Artist.LastName}")
                                             </td>
                                             <td>
                                                 <ul>
@@ -65,18 +72,12 @@
                                                 </ul>
                                             </td>
                                             <td>
-                                                @album.Duration
-                                            </td>
-                                            <td>
-                                                @album.ReleaseDate
-                                            </td>
-                                            <td>
-                                                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque.</p>
+                                                @album.ReleaseDate.Year
                                             </td>
                                             <td>
                                                 <div class="flex align-items-center list-user-action">
-                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="admin-add-category.html"><i class="ri-pencil-line"></i></a>
-                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="~/Album/Edit/@album.AlbumId"><i class="ri-pencil-line"></i></a>
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="~/Album/Delete/@album.AlbumId"><i class="ri-delete-bin-line"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
