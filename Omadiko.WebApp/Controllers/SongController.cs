@@ -65,9 +65,21 @@ namespace Omadiko.WebApp.Controllers
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // GET: Song
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string search)
         {
-            return View(db.Songs.ToList());
+            if (searchBy == "Title")
+            {
+                return View(db.Songs.Where(x => x.Title.Contains(search)).ToList());
+                       
+            }
+            //else if (searchBy == "Duration")
+            //{
+            //    return View(db.Songs.Where(x => x.Duration == searchDuration).ToList());
+            //}
+            else
+            {
+                return View(db.Songs.ToList());
+            }
         }
 
         // GET: Song/Details/5
