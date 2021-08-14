@@ -1,4 +1,6 @@
-﻿<div class="iq-top-navbar">
+﻿@using Microsoft.AspNet.Identity
+
+<div class="iq-top-navbar">
     <div class="iq-navbar-custom">
         <nav class="navbar navbar-expand-lg navbar-light p-0">
             <div class="iq-menu-bt d-flex align-items-center">
@@ -27,10 +29,9 @@
                             <div class="iq-card shadow-none m-0">
                                 <div class="iq-card-body p-0 ">
                                     <div class="bg-primary p-3">
-                                        <h5 class="mb-0 text-white line-height">Hello Barry Tech</h5>
-                                        <span class="text-white font-size-12">Available</span>
+                                        <h5 class="mb-0 text-white line-height">Hello @User.Identity.GetUserName()!</h5>
                                     </div>
-                                    <a href="~/MuzikTemplate/html-dark/profile.html" class="iq-sub-card iq-bg-primary-hover">
+                                    <a href="~/ApplicationUser/ShowProfile/@User.Identity.GetUserId()" class="iq-sub-card iq-bg-primary-hover">
                                         <div class="media align-items-center">
                                             <div class="rounded iq-card-icon iq-bg-primary">
                                                 <i class="ri-file-user-line"></i>
@@ -75,7 +76,7 @@
                                         </div>
                                     </a>
                                     <div class="d-inline-block w-100 text-center p-3">
-                                        <a class="bg-primary iq-sign-btn" href="~/MuzikTemplate/html-dark/sign-in.html" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                                        <a class="bg-primary iq-sign-btn" href="javascript:document.getElementById('logoutForm').submit()" role="button">Log off<i class="ri-login-box-line ml-2"></i></a>
                                     </div>
                                 </div>
                             </div>

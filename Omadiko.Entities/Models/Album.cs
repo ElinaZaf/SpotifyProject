@@ -18,7 +18,8 @@ namespace Omadiko.Entities
         public virtual Artist Artist { get; set; }
         public virtual ICollection<Genre> Genres { get; set; }
         public virtual ICollection<Song> Songs { get; set; }
-        
+        public virtual ICollection<ApplicationUser> Users { get; set; }
+
 
     }
 }

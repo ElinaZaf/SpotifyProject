@@ -16,6 +16,7 @@ namespace Omadiko.Entities
 
         //Navigation Properties
         public virtual ICollection<Album> Albums { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
 
         public string ConvertTime()
         {

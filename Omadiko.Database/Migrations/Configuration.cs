@@ -458,34 +458,78 @@
             context.SaveChanges();
 
 
+            #region CREATE DEFAULT USER ROLES AND ADMIN USER
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
+            //if (!roleManager.RoleExists("Admin"))
+            //{
+            //    var role = new IdentityRole { Name = "Admin" };
+            //    roleManager.Create(role);
+            //}
 
-            if (!context.Roles.Any(x => x.Name == "Admin"))
+            if (!roleManager.RoleExists("Subscriber"))
             {
-                var store = new RoleStore<IdentityRole>(context);
-                var manager = new RoleManager<IdentityRole>(store);
-                var role = new IdentityRole { Name = "Admin" };
-
-                manager.Create(role);
+                var role = new IdentityRole { Name = "Subscriber" };
+                roleManager.Create(role);
             }
 
 
-            var PasswordHash = new PasswordHasher();
-            if (!context.Users.Any(x => x.UserName == "admin@admin.net"))
-            {
-                var store = new UserStore<ApplicationUser>(context);
-                var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser
-                {
-                    UserName = "admin@admin.net",
-                    Email = "admin@admin.net",
-                    PasswordHash = PasswordHash.HashPassword("Admin1!")
-                };
 
-                manager.Create(user);
-                manager.AddToRole(user.Id, "Admin");
+            //var PasswordHash = new PasswordHasher();
+            //if (!context.Users.Any(x => x.UserName == "admin@admin.net"))
+            //{
+            //    var user = new ApplicationUser
+            //    {
+            //        UserName = "admin@admin.net",
+            //        Email = "admin@admin.net",
+            //        PasswordHash = PasswordHash.HashPassword("Admin1!")
+            //    };
 
-            }
+            //    userManager.Create(user);
+            //    userManager.AddToRole(user.Id, "Admin");
+            //}
+
+            //if (!context.Users.Any(x => x.UserName == "elina_subscribed@gmail.com"))
+            //{
+            //    var user = new ApplicationUser
+            //    {
+            //        UserName = "Elina",
+            //        Email = "elina_subscribed@gmail.com",
+            //        FirstName = "Elina",
+            //        PasswordHash = PasswordHash.HashPassword("ElinaSubscribed*1")
+            //    };
+
+            //    userManager.Create(user);
+            //    userManager.AddToRole(user.Id, "Subscriber");
+            //}
+
+            #endregion
+
+            //if (!context.Roles.Any(x => x.Name == "Admin"))
+            //{
+            //    var store = new RoleStore<IdentityRole>(context);
+            //    var manager = new RoleManager<IdentityRole>(store);
+            //    var role = new IdentityRole { Name = "Admin" };
+            //    manager.Create(role);
+            //}
+
+
+            //var PasswordHash = new PasswordHasher();
+            //if (!context.Users.Any(x => x.UserName == "admin@admin.net"))
+            //{
+            //    var store = new UserStore<ApplicationUser>(context);
+            //    var manager = new UserManager<ApplicationUser>(store);
+            //    var user = new ApplicationUser
+            //    {
+            //        UserName = "admin@admin.net",
+            //        Email = "admin@admin.net",
+            //        PasswordHash = PasswordHash.HashPassword("Admin1!")
+            //    };
+
+            //    manager.Create(user);
+            //    manager.AddToRole(user.Id, "Admin");
+            //}
         }
     }
 }

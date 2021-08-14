@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Omadiko.Entities.Models;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Omadiko.WebApp.Models
@@ -64,6 +65,13 @@ namespace Omadiko.WebApp.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        public Gender Gender { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

@@ -25,5 +25,7 @@ namespace Omadiko.Entities
         //Navigation Properties
         public virtual ICollection<Album> Albums { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
+
     }
 }
