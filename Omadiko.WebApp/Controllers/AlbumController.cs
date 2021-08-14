@@ -83,10 +83,22 @@ namespace Omadiko.WebApp.Controllers
 
 
         // GET: Album
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string search)
         {
             var albums = db.Albums.Include(a => a.Artist);
-            return View(albums.ToList());
+            if (searchBy == "Title")
+            {
+                return View(albums.Where(x => x.Title.Contains(search)).ToList());
+
+            }
+            else if (searchBy == "Artist")
+            {
+                return View(albums.Where(x => x.Artist.Name.Contains(search) || x.Artist.LastName.Contains(search)).ToList());
+            }
+            else
+            {
+                return View(albums.ToList());
+            }
         }
 
         // GET: Album/Details/5

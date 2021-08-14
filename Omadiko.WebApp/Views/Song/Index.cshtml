@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
 
-
-
 <!-- Page Content  -->
 <div id="content-page" class="content-page">
     <div class="container-fluid">
@@ -23,9 +21,9 @@
                     <div class="iq-card-header d-flex justify-content-start">
                         @using (Html.BeginForm("Index","Song",FormMethod.Get))
                         {
-                            <b>Search By:</b> @Html.RadioButton("searchBy", "Title") <text>Title</text>
-                                              @*@Html.RadioButton("searchBy", "Duration") <text>Duration</text>*@
-                                              @Html.TextBox("search") <input class="btn btn-outline-primary" type="submit" name="name" value="Search" />
+                            <b>Search By Title: </b> @Html.TextBox("searchBy")
+                                              @*@Html.RadioButton("searchBy", "Title") <text>Title</text>*@
+                                              <input class="btn btn-outline-primary" type="submit" name="name" value="Search" />
                         }
                     </div>   
                     
