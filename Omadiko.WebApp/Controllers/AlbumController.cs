@@ -122,6 +122,24 @@ namespace Omadiko.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                db.Albums.Attach(album);
+                db.Entry(album).Collection("Genres").Load();
+                album.Genres.Clear();
+                db.SaveChanges();
+                if (!(SelectedGenreIds is null))
+                {
+                    foreach (var id in SelectedGenreIds)
+                    {
+                        Genre genre = db.Genres.Find(id);
+                        if (genre != null)
+                        {
+                            album.Genres.Add(genre);
+                        }
+                    }
+                    //db.SaveChanges();
+                }
+
+
                 db.Entry(album).State = EntityState.Added;
                 db.SaveChanges();
                 return RedirectToAction("Index");
