@@ -17,7 +17,7 @@
                             <h4 class="card-title">Artists Lists</h4>
                         </div>
                         <div class="iq-card-header-toolbar d-flex align-items-center">
-                            <a href="admin-add-singer.html" class="btn btn-primary">Add New Singer</a>
+                            <a href="~/Artist/Create" class="btn btn-primary">Add New Artist</a>
                         </div>
                     </div>
                     <div class="iq-card-body">
@@ -27,13 +27,17 @@
                                     <tr>
                                         <th style="width: 5%;">No</th>
                                         <th style="width: 5%;">Profile</th>
-                                        <th style="width: 15%;">
-                                            @Html.DisplayNameFor(model => model.Name) @Html.DisplayNameFor(model => model.LastName)
+                                        <th style="width: 10%;">
+                                            First Name
                                         </th>
-                                        <th style="width: 15%;">
+                                        <th style="width: 10%;">
+                                            @Html.DisplayNameFor(model => model.LastName)
+                                        </th>
+                                        <th style="width: 10%;">
                                             @Html.DisplayNameFor(model => model.Country)
                                         </th>
-                                        <th style="width: 50%;">@Html.DisplayNameFor(model => model.DateOfBirth) @Html.DisplayNameFor(model => model.DateOfDeath)</th>
+                                        <th style="width: 25%;">@Html.DisplayNameFor(model => model.DateOfBirth)</th>
+                                        <th style="width: 25%;">@Html.DisplayNameFor(model => model.DateOfDeath)</th>
                                         <th style="width: 10%;">Action</th>
                                     </tr>
                                 </thead>
@@ -44,21 +48,34 @@
                                         <tr>
                                             <td>1</td>
                                             <td>
-                                                <img src="@Url.Content(artist.PhotoUrl)" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                                @if (!(artist.PhotoUrl is null))
+                                                {
+                                                    <img src="@Url.Content(artist.PhotoUrl)" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/Content/images/notavailable400x410.jpg" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                                }
                                             </td>
                                             <td>
-                                                @artist.Name @artist.LastName
+                                                @artist.Name 
+                                            </td>
+                                            <td>
+                                                @artist.LastName
                                             </td>
                                             <td>
                                                 @artist.Country
                                             </td>
                                             <td>
-                                                @artist.DateOfBirth @artist.DateOfDeath
+                                                @artist.DateOfBirth
+                                            </td>
+                                            <td>
+                                                @artist.DateOfDeath
                                             </td>
                                             <td>
                                                 <div class="flex align-items-center list-user-action">
-                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="admin-add-category.html"><i class="ri-pencil-line"></i></a>
-                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="~/Artist/Edit/@artist.ArtistId"><i class="ri-pencil-line"></i></a>
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="~/Artist/Delete/@artist.ArtistId"><i class="ri-delete-bin-line"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
