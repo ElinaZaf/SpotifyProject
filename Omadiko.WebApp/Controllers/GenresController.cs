@@ -16,9 +16,17 @@ namespace Omadiko.WebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Genres
-        public ActionResult Index()
+        public ActionResult Index(string searchBy)
         {
-            return View(db.Genres.ToList());
+            if (!(searchBy is null))
+            {
+                return View(db.Genres.Where(x => x.Kind.Contains(searchBy)).ToList());
+
+            }
+            else
+            {
+                return View(db.Genres.ToList());
+            }
         }
 
         // GET: Genres/Details/5
