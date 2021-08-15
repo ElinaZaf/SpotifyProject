@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Omadiko.Entities.Song>
+﻿@model IPagedList<Omadiko.Entities.Song>
+@using PagedList;
+@using PagedList.Mvc;
 
 @{
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
@@ -34,10 +36,10 @@
                                     <tr>
                                         <th style="width: 5%;">No</th>
                                         <th style="width: 15%;">
-                                            @Html.DisplayNameFor(model => model.Title)
+                                            @Html.ActionLink("Title","Index",new {sortBy=ViewBag.SortNameParameter,searchBy=Request.QueryString["searchBy"],search=Request["search"]})
                                         </th>
                                         <th style="width: 15%;">
-                                            @Html.DisplayNameFor(model => model.Duration)
+                                            @Html.DisplayNameFor(model => model.First().Duration)
                                         </th>
                                         <th style="width: 10%;">Action</th>
                                     </tr>
@@ -73,6 +75,14 @@
 
                                 </tbody>
                             </table>
+                            <div class="pagination" style="justify-content:center">
+                                <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+                            </div>
+                            <div class="pagination" style="justify-content:center">
+                                @Html.PagedListPager(Model, page => Url.Action("Index",
+                            new { page, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] }),
+                            new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+                            </div>
                         </div>
                     </div>
                 </div>
