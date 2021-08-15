@@ -1,5 +1,6 @@
-﻿@model IEnumerable<Omadiko.Entities.Genre>  
-
+﻿@model IPagedList<Omadiko.Entities.Genre>
+@using PagedList;
+@using PagedList.Mvc;
 
 @{
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
@@ -35,10 +36,10 @@
                                 <thead>
                                     <tr>
                                         <th width="5%">
-                                            @Html.DisplayNameFor(model => model.GenreId)
+                                            @Html.DisplayNameFor(model => model.First().GenreId)
                                         </th>
-                                        <th width="20%">
-                                            @Html.DisplayNameFor(model => model.Kind)
+                                        <th style="width: 15%;">
+                                            @Html.ActionLink("Kind", "Index", new { sortBy = ViewBag.SortNameParameter, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] })
                                         </th>
                                         <th width="10%">Action</th>
                                     </tr>
@@ -65,6 +66,14 @@
 
                                 </tbody>
                             </table>
+                            <div class="pagination" style="justify-content:center">
+                                <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+                            </div>
+                            <div class="pagination" style="justify-content:center">
+                                @Html.PagedListPager(Model, page => Url.Action("Index",
+                            new{page,searchBy = Request.QueryString["searchBy"],search = Request.QueryString["search"],
+                            sortBy = Request.QueryString["sortBy"]}), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -67,10 +67,24 @@
                                                 @artist.Country
                                             </td>
                                             <td>
-                                                @artist.DateOfBirth
+                                                @if (artist.DateOfBirth.HasValue)
+                                                {
+                                                    @artist.DateOfBirth.Value.ToString("d")
+                                                }
+                                                else
+                                                {
+                                                    <text>nothing </text>
+                                                }
                                             </td>
                                             <td>
-                                                @artist.DateOfDeath
+                                                @if (artist.DateOfDeath.HasValue)
+                                                {
+                                                    @artist.DateOfDeath.Value.ToString("d")
+                                                }
+                                                else
+                                                {
+                                                    <text> </text>
+                                                }
                                             </td>
                                             <td>
                                                 <div class="flex align-items-center list-user-action">

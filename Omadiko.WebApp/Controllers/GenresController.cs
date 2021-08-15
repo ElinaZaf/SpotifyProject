@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Omadiko.Database;
 using Omadiko.Entities;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Omadiko.WebApp.Controllers
 {
@@ -16,17 +18,28 @@ namespace Omadiko.WebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Genres
-        public ActionResult Index(string searchBy)
+        public ActionResult Index(string searchBy, int? page, string sortBy)
         {
+            ViewBag.SortNameParameter = string.IsNullOrEmpty(sortBy) ? "NameDesc" : "";
+            var genres = db.Genres.AsQueryable();
+
             if (!(searchBy is null))
             {
-                return View(db.Genres.Where(x => x.Kind.Contains(searchBy)).ToList());
+                genres = genres.Where(x => x.Kind.Contains(searchBy));
 
             }
-            else
+
+            switch (sortBy)
             {
-                return View(db.Genres.ToList());
+                case "NameDesc":
+                    genres = genres.OrderByDescending(x => x.Kind);
+                    break;
+                default:
+                    genres = genres.OrderBy(x => x.Kind);
+                    break;
+
             }
+            return View(genres.ToPagedList(page ?? 1, 5));
         }
 
         // GET: Genres/Details/5

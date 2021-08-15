@@ -36,7 +36,7 @@
                                     <tr>
                                         <th style="width: 5%;">No</th>
                                         <th style="width: 15%;">
-                                            @Html.ActionLink("Title","Index",new {sortBy=ViewBag.SortNameParameter,searchBy=Request.QueryString["searchBy"],search=Request["search"]})
+                                            @Html.ActionLink("Title","Index",new {sortBy=ViewBag.SortNameParameter,searchBy=Request.QueryString["searchBy"],search=Request.QueryString["search"]})
                                         </th>
                                         <th style="width: 15%;">
                                             @Html.DisplayNameFor(model => model.First().Duration)
@@ -56,7 +56,9 @@
                                         foreach (var song in Model)
                                         {
                                             <tr>
-                                                <td>1</td>
+                                                <td>
+                                                    1
+                                                </td>
                                                 <td>
                                                     @song.Title
                                                 </td>
@@ -80,8 +82,8 @@
                             </div>
                             <div class="pagination" style="justify-content:center">
                                 @Html.PagedListPager(Model, page => Url.Action("Index",
-                            new { page, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] }),
-                            new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+                            new { page, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"],
+                            sortBy=Request.QueryString["sortBy"]}),new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
                             </div>
                         </div>
                     </div>
