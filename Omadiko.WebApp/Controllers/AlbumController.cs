@@ -95,8 +95,17 @@ namespace Omadiko.WebApp.Controllers
             {
                 return View(albums.Where(x => x.Artist.Name.Contains(search) || x.Artist.LastName.Contains(search)).ToList());
             }
-            else
+            else if (searchBy == "ReleaseDate")
             {
+                int searchByDate = Convert.ToInt32(search);
+                return View(albums.Where(x => x.ReleaseDate.Year == searchByDate).ToList());
+            }
+            else if (searchBy == "Genre")
+            {
+                return View(albums.Where(x => x.Genres.Any(y => y.Kind.Contains(search))).ToList());
+            }
+            else
+            {   
                 return View(albums.ToList());
             }
         }
