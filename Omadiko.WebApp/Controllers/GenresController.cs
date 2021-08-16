@@ -18,14 +18,14 @@ namespace Omadiko.WebApp.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Genres
-        public ActionResult Index(string searchBy, int? page, string sortBy)
+        public ActionResult Index(string searchBy, string search, int? page, string sortBy)
         {
             ViewBag.SortNameParameter = string.IsNullOrEmpty(sortBy) ? "NameDesc" : "";
             var genres = db.Genres.AsQueryable();
 
-            if (!(searchBy is null))
+            if (searchBy == "Kind")
             {
-                genres = genres.Where(x => x.Kind.Contains(searchBy));
+                genres = genres.Where(x => x.Kind.Contains(search) || search == null);
 
             }
 
