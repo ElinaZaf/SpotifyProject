@@ -92,21 +92,21 @@ namespace Omadiko.WebApp.Controllers
             var albums = db.Albums.AsQueryable().Include(a => a.Artist);
             if (searchBy == "Title")
             {
-                albums = albums.Where(x => x.Title.Contains(search));
+                albums = albums.Where(x => x.Title.Contains(search) || search == null);
 
             }
             else if (searchBy == "Artist")
             {
-                albums = albums.Where(x => x.Artist.Name.Contains(search) || x.Artist.LastName.Contains(search));
+                albums = albums.Where(x => x.Artist.Name.Contains(search) || x.Artist.LastName.Contains(search) || search == null);
             }
             else if (searchBy == "ReleaseDate")
             {
-                int searchByDate = Convert.ToInt32(search);
-                albums = albums.Where(x => x.ReleaseDate.Year == searchByDate);
+                int? searchByDate = Convert.ToInt32(search);
+                albums = albums.Where(x => x.ReleaseDate.Year == searchByDate || searchByDate == null);
             }
             else if(searchBy == "Genre")
             {
-                albums = albums.Where(x => x.Genres.Any(y => y.Kind.Contains(search)));
+                albums = albums.Where(x => x.Genres.Any(y => y.Kind.Contains(search)) || search == null);
             }
 
             switch (sortBy)
