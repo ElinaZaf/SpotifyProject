@@ -51,6 +51,25 @@
                                         </li>
                                     </ul>
                                 </div>
+                                @if (!(Model.FavouriteArtists is null))
+                                {
+                                    <ul>
+                                        @foreach (var artist in Model.FavouriteArtists)
+                                        {
+                                            <li>@artist.Name</li>
+                                        }
+                                    </ul>
+                                }
+                                @if (!(Model.FavouriteAlbums is null))
+                                {
+                                    <ul>
+                                        @foreach (var album in Model.FavouriteAlbums)
+                                        {
+                                            <li>@album.Title</li>
+                                        }
+                                    </ul>
+                                }
+
                             </div>
                         </div>
                     </div>

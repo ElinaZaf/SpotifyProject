@@ -1,0 +1,49 @@
+﻿@model Omadiko.Entities.ApplicationUser
+
+
+<div id="content-page" class="content-page">
+    <div class="container-fluid">
+        <div class="row">
+            @*Favourite Artists*@
+            <div class="col-lg-12">
+                <div class="iq-card">
+                    <div class="iq-card-header d-flex justify-content-between align-items-center">
+                        <div class="iq-header-title">
+                            <h4 class="card-title">Favourite Artists</h4>
+                        </div>
+                    </div>
+                    <div class="iq-card-body">
+                        @if (Model.FavouriteArtists.Count == 0)
+                        {
+                            <h3 style="text-align:center">No rows match search criteria</h3>
+                        }
+                        else
+                        {
+                            <ul class="list-unstyled row iq-box-hover mb-0">
+                                @foreach (var artist in Model.FavouriteArtists)
+                                {
+                                    <li class="col-lg-2  iq-music-box">
+                                        <div class="iq-card">
+                                            <div class="iq-card-body p-0">
+                                                <a href="~/Artist/ShowArtistDetails/@artist.ArtistId">
+                                                    <div class="iq-thumb-artist">
+                                                        <div class="iq-music-overlay"></div>
+                                                        <img src="@Url.Content(artist.PhotoUrl)" class="w-100 img-fluid" alt="">
+                                                    </div>
+                                                </a>
+                                                <div class="feature-list text-center">
+                                                    <h5 class="font-weight-600 mb-0" style="font-size:small">@artist.Name @artist.LastName</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

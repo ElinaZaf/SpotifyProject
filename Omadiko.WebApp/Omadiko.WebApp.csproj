@@ -2294,7 +2294,10 @@
     <Content Include="Views\Genres\Edit.cshtml" />
     <Content Include="Views\Genres\Index.cshtml" />
     <Content Include="Views\Song\ShowSongDetails.cshtml" />
-    <Content Include="Views\ApplicationUser\ShowProfile.cshtml" />
+    <Content Include="Views\ApplicationUser\UserProfile.cshtml" />
+    <Content Include="Views\ApplicationUser\FavouriteAlbums.cshtml" />
+    <Content Include="Views\ApplicationUser\FavouriteArtists.cshtml" />
+    <Content Include="Views\ApplicationUser\FavouriteSongs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

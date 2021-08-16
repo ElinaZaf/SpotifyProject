@@ -530,6 +530,44 @@
             //    manager.Create(user);
             //    manager.AddToRole(user.Id, "Admin");
             //}
+
+
+            var PasswordHash = new PasswordHasher();
+            var store = new UserStore<ApplicationUser>(context);
+            var manager = new UserManager<ApplicationUser>(store);
+            var user1 = new ApplicationUser
+            {
+                FirstName = "Josh",
+                LastName = "Philips",
+                Gender = Gender.Male,
+                Address = "Oxford 15",
+                Country = "UK",
+                Phone = "008465415864684",
+                DateOfBirth = new DateTime(1974, 12, 28),
+                PhotoUrl = "~/ Content / images / ArtistImages / whitney_houston400x410.jpg",
+                UserName = "josh@muzik.com",
+                Email = "josh@muzik.com",
+                PasswordHash = PasswordHash.HashPassword("123456Jj!"),
+                FavouriteArtists = new List<Artist>() { a1, a2, a3, a4, a5 }
+            };
+            var user2 = new ApplicationUser
+            {
+                FirstName = "Jane",
+                LastName = "Stone",
+                Gender = Gender.Male,
+                Address = "Oxford 15",
+                Country = "UK",
+                Phone = "008465415864684",
+                DateOfBirth = new DateTime(1974, 12, 28),
+                PhotoUrl = "~/ Content / images / ArtistImages / whitney_houston400x410.jpg",
+                UserName = "jane@muzik.com",
+                Email = "jane@muzik.com",
+                PasswordHash = PasswordHash.HashPassword("123456Jj!"),
+                FavouriteAlbums = new List<Album>() { al1, al2, al3, al4, al5}
+                
+            };
+            manager.Create(user1);
+            manager.Create(user2);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Omadiko.Entities
         public string PhotoUrl { get; set; }
 
         //Navigation Properties
-        public virtual ICollection<Artist> FanvouriteArtists { get; set; }
+        public virtual ICollection<Artist> FavouriteArtists { get; set; }
         public virtual ICollection<Album> FavouriteAlbums { get; set; }
         public virtual ICollection<Song> FavouriteSongs { get; set; }
        
