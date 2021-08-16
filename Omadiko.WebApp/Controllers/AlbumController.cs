@@ -10,6 +10,7 @@ using Omadiko.Database;
 using Omadiko.Entities;
 using Omadiko.RepositoryServices;
 using PagedList;
+using PagedList.Mvc;
 
 namespace Omadiko.WebApp.Controllers
 {
@@ -83,31 +84,54 @@ namespace Omadiko.WebApp.Controllers
 
 
         // GET: Album
-        public ActionResult Index(string searchBy, string search)
+        public ActionResult Index(string searchBy, string search, int? page, string sortBy)
         {
-            var albums = db.Albums.Include(a => a.Artist);
+            ViewBag.SortTitleParameter = string.IsNullOrEmpty(sortBy) ? "TitleDesc" : "";
+            ViewBag.SortArtistParameter = sortBy == "ArtistDesc" ? "ArtistAsc" : "ArtistDesc";
+            ViewBag.SortReleaseDateParameter = sortBy == "ReleaseDateDesc" ? "ReleaseDateAsc" : "ReleaseDateDesc";
+            var albums = db.Albums.AsQueryable().Include(a => a.Artist);
             if (searchBy == "Title")
             {
-                return View(albums.Where(x => x.Title.Contains(search)).ToList());
+                albums = albums.Where(x => x.Title.Contains(search));
 
             }
             else if (searchBy == "Artist")
             {
-                return View(albums.Where(x => x.Artist.Name.Contains(search) || x.Artist.LastName.Contains(search)).ToList());
+                albums = albums.Where(x => x.Artist.Name.Contains(search) || x.Artist.LastName.Contains(search));
             }
             else if (searchBy == "ReleaseDate")
             {
                 int searchByDate = Convert.ToInt32(search);
-                return View(albums.Where(x => x.ReleaseDate.Year == searchByDate).ToList());
+                albums = albums.Where(x => x.ReleaseDate.Year == searchByDate);
             }
-            else if (searchBy == "Genre")
+            else if(searchBy == "Genre")
             {
-                return View(albums.Where(x => x.Genres.Any(y => y.Kind.Contains(search))).ToList());
+                albums = albums.Where(x => x.Genres.Any(y => y.Kind.Contains(search)));
             }
-            else
-            {   
-                return View(albums.ToList());
+
+            switch (sortBy)
+            {
+                case "TitleDesc":
+                    albums = albums.OrderByDescending(x => x.Title);
+                    break;
+                case "ArtistDesc":
+                    albums = albums.OrderByDescending(x => x.Artist.Name);
+                    break;
+                case "ArtistAsc":
+                    albums = albums.OrderBy(x => x.Artist.Name);
+                    break;
+                case "ReleaseDateDesc":
+                    albums = albums.OrderByDescending(x => x.ReleaseDate);
+                    break;
+                case "ReleaseDateAsc":
+                    albums = albums.OrderBy(x => x.ReleaseDate);
+                    break;
+                default:
+                    albums = albums.OrderBy(x => x.Title);
+                    break;
+
             }
+            return View(albums.ToPagedList(page ?? 1, 10));
         }
 
         // GET: Album/Details/5

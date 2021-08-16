@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Omadiko.Entities.Album> 
+﻿@model IPagedList<Omadiko.Entities.Album>
+@using PagedList;
+@using PagedList.Mvc;
 
 @{
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
@@ -24,10 +26,10 @@
                         @using (Html.BeginForm("Index", "Album", FormMethod.Get))
                         {
                             <b>Search By:</b> @Html.RadioButton("searchBy", "Title") <text>Title</text>
-                                              @Html.RadioButton("searchBy", "Artist") <text>Artist</text>
-                                              @Html.RadioButton("searchBy", "Genre") <text>Genre</text>
-                                              @Html.RadioButton("searchBy", "ReleaseDate") <text>Release Date</text> <br />
-                                              @Html.TextBox("search") <input class="btn btn-outline-primary" type="submit" name="name" value="Search" />
+                            @Html.RadioButton("searchBy", "Artist") <text>Artist</text>
+                            @Html.RadioButton("searchBy", "Genre") <text>Genre</text>
+                            @Html.RadioButton("searchBy", "ReleaseDate") <text>Release Date</text> <br />
+                            @Html.TextBox("search") <input class="btn btn-outline-primary" type="submit" name="name" value="Search" />
                         }
                     </div>
 
@@ -39,16 +41,16 @@
                                         <th style="width: 5%;">No</th>
                                         <th style="width: 5%;">Picture</th>
                                         <th style="width: 15%;">
-                                            @Html.DisplayNameFor(model => model.Title)
+                                            @Html.ActionLink("Title", "Index", new { sortBy = ViewBag.SortTitleParameter, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] })
                                         </th>
                                         <th style="width: 15%;">
-                                            @Html.DisplayNameFor(model => model.Artist)
+                                            @Html.ActionLink("Artist", "Index", new { sortBy = ViewBag.SortArtistParameter, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] })
                                         </th>
                                         <th style="width: 15%;">
-                                            @Html.DisplayNameFor(model => model.Genres)
+                                            @Html.DisplayNameFor( model => model.First().Genres)
                                         </th>
                                         <th style="width: 15%;">
-                                            @Html.DisplayNameFor(model => model.ReleaseDate)
+                                            @Html.ActionLink("ReleaseDate", "Index", new { sortBy = ViewBag.SortReleaseDateParameter, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] })
                                         </th>
                                         <th style="width: 10%;">Action</th>
                                     </tr>
@@ -106,6 +108,14 @@
 
                                 </tbody>
                             </table>
+                            <div class="pagination" style="justify-content:center">
+                                <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+                            </div>
+                            <div class="pagination" style="justify-content:center">
+                                @Html.PagedListPager(Model, page => Url.Action("Index",
+                            new{page,searchBy = Request.QueryString["searchBy"],search = Request.QueryString["search"],
+                            sortBy = Request.QueryString["sortBy"]}), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+                            </div>
                         </div>
                     </div>
                 </div>
