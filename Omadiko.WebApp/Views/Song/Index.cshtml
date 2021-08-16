@@ -21,20 +21,22 @@
                         </div>
                     </div>
 
-                    <div><div class="iq-search-bar">
-                        @using (Html.BeginForm("Index", "Song", FormMethod.Get, new { @class = "searchbox" }))
-                        {
-                            <div style="padding-left: 10px">
-                                <b>Search by:</b>
-                                <span style="margin: 0px 10px">
-                                    @Html.RadioButton("searchBy", "Title", true) <text>Title</text>
-                                </span>
-                            </div>
-                            @Html.TextBox("search", null, new { @class = "text search-input", style = "width:80%; padding-left:10px; margin-right: 0px; border-top-right-radius: 0px", placeholder = "Search Here...", type = "search" })
-                            <button type="submit" title="Search" style="background-color:royalblue"><i class="ri-search-line"></i></button>
-                            <button id="ResetButton" title="Reset" style="background-color:forestgreen"><i class="las la-undo-alt"></i></button>
-                        }
-                    </div></div>
+                    <div class="iq-card-header d-flex justify-content-end">
+                        <div class="iq-search-bar">
+                            @using (Html.BeginForm("Index", "Song", FormMethod.Get, new { @class = "searchbox" }))
+                            {
+                                <div style="padding-left: 10px">
+                                    <b>Search by:</b>
+                                    <span style="margin: 0px 10px">
+                                        @Html.RadioButton("searchBy", "Title", true) <text>Title</text>
+                                    </span>
+                                </div>
+                                @Html.TextBox("search", null, new { @class = "text search-input", style = "width:80%; padding-left:10px; margin-right: 0px; border-top-right-radius: 0px", placeholder = "Search Here...", type = "search" })
+                                <button type="submit" title="Search" style="background-color:royalblue"><i class="ri-search-line"></i></button>
+                                <button id="ResetButton" title="Reset" style="background-color:forestgreen"><i class="las la-undo-alt"></i></button>
+                            }
+                        </div>
+                    </div>
 
                     <div class="iq-card-body">
                         <div class="table-responsive">
