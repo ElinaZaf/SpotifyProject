@@ -91,7 +91,7 @@ namespace Omadiko.WebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ArtistId,Name,LastName,PhotoId,Country,DateOfBirth,DateOfDeath")] Artist artist)
+        public ActionResult Create([Bind(Include = "ArtistId,Name,LastName,Country,DateOfBirth,DateOfDeath,PhotoUrl")] Artist artist)
         {
             if (ModelState.IsValid)
             {
@@ -123,7 +123,7 @@ namespace Omadiko.WebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ArtistId,Name,LastName,PhotoId,Country,DateOfBirth,DateOfDeath")] Artist artist)
+        public ActionResult Edit([Bind(Include = "ArtistId,Name,LastName,Country,DateOfBirth,DateOfDeath,PhotoUrl")] Artist artist)
         {
             if (ModelState.IsValid)
             {

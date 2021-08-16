@@ -65,9 +65,28 @@ namespace Omadiko.WebApp.Controllers
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // GET: Song
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, int? page, string sortBy)
         {
-            return View(db.Songs.ToList());
+            ViewBag.SortNameParameter = string.IsNullOrEmpty(sortBy) ? "NameDesc" : "";
+            var songs = db.Songs.AsQueryable();
+
+            if (!(searchBy is null))
+            {
+                songs = songs.Where(x => x.Title.Contains(searchBy));
+                       
+            }
+
+            switch (sortBy)
+            {
+                case "NameDesc":
+                    songs = songs.OrderByDescending(x => x.Title);
+                    break;
+                default:
+                    songs = songs.OrderBy(x => x.Title);
+                    break;
+
+            }
+            return View(songs.ToPagedList(page ?? 1, 10));
         }
 
         // GET: Song/Details/5

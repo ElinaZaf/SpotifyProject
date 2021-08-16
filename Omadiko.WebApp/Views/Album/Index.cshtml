@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Omadiko.Entities.Album> 
-
-
+﻿@model IPagedList<Omadiko.Entities.Album>
+@using PagedList;
+@using PagedList.Mvc;
 
 @{
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
@@ -18,9 +18,21 @@
                             <h4 class="card-title">Albums List</h4>
                         </div>
                         <div class="iq-card-header-toolbar d-flex align-items-center">
-                            <a href="admin-add-writer.html" class="btn btn-primary">Add New Writer</a>
+                            <a href="~/Album/Create" class="btn btn-primary">Add New Album</a>
                         </div>
                     </div>
+
+                    <div class="iq-card-header d-flex justify-content-start">
+                        @using (Html.BeginForm("Index", "Album", FormMethod.Get))
+                        {
+                            <b>Search By:</b> @Html.RadioButton("searchBy", "Title") <text>Title</text>
+                            @Html.RadioButton("searchBy", "Artist") <text>Artist</text>
+                            @Html.RadioButton("searchBy", "Genre") <text>Genre</text>
+                            @Html.RadioButton("searchBy", "ReleaseDate") <text>Release Date</text> <br />
+                            @Html.TextBox("search") <input class="btn btn-outline-primary" type="submit" name="name" value="Search" />
+                        }
+                    </div>
+
                     <div class="iq-card-body">
                         <div class="table-responsive">
                             <table class="data-tables table table-striped table-bordered" style="width:100%">
@@ -29,60 +41,81 @@
                                         <th style="width: 5%;">No</th>
                                         <th style="width: 5%;">Picture</th>
                                         <th style="width: 15%;">
-                                            @Html.DisplayNameFor(model => model.Title)
+                                            @Html.ActionLink("Title", "Index", new { sortBy = ViewBag.SortTitleParameter, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] })
                                         </th>
                                         <th style="width: 15%;">
-                                            @Html.DisplayNameFor(model => model.Genres)
+                                            @Html.ActionLink("Artist", "Index", new { sortBy = ViewBag.SortArtistParameter, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] })
                                         </th>
                                         <th style="width: 15%;">
-                                            @Html.DisplayNameFor(model => model.Duration)
+                                            @Html.DisplayNameFor( model => model.First().Genres)
                                         </th>
                                         <th style="width: 15%;">
-                                            @Html.DisplayNameFor(model => model.ReleaseDate)
+                                            @Html.ActionLink("ReleaseDate", "Index", new { sortBy = ViewBag.SortReleaseDateParameter, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] })
                                         </th>
-                                        <th style="width: 35%;">Album Description</th>
                                         <th style="width: 10%;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach (var album in Model)
+                                    @if (Model.Count() == 0)
                                     {
                                         <tr>
-                                            <td>1</td>
-                                            <td>
-                                                <img src="@Url.Content(album.Artist.PhotoUrl)" class="img-fluid avatar-50 rounded" alt="author-profile">
-                                            </td>
-                                            <td>
-                                                @album.Title
-                                            </td>
-                                            <td>
-                                                <ul>
-                                                    @foreach (var genre in album.Genres)
-                                                    {
-                                                        <li>@genre.Kind</li>
-                                                    }
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                @album.Duration
-                                            </td>
-                                            <td>
-                                                @album.ReleaseDate
-                                            </td>
-                                            <td>
-                                                <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus non elit a scelerisque.</p>
-                                            </td>
-                                            <td>
-                                                <div class="flex align-items-center list-user-action">
-                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="admin-add-category.html"><i class="ri-pencil-line"></i></a>
-                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
-                                                </div>
-                                            </td>
+                                            <td colspan="7" style="text-align:center">No match found.</td>
                                         </tr>
                                     }
+                                    else
+                                    {
+                                        foreach (var album in Model)
+                                        {
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    @if (!(album.PhotoUrl is null))
+                                                    {
+                                                        <img src="@Url.Content(album.PhotoUrl)" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/Content/images/notavailable400x410.jpg" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @album.Title
+                                                </td>
+                                                <td>
+                                                    @String.Format($"{album.Artist.Name} {album.Artist.LastName}")
+                                                </td>
+                                                <td>
+                                                    <ul>
+                                                        @foreach (var genre in album.Genres)
+                                                        {
+                                                            <li>@genre.Kind</li>
+                                                        }
+                                                    </ul>
+                                                </td>
+                                                <td>
+                                                    @album.ReleaseDate.Year
+                                                </td>
+                                                <td>
+                                                    <div class="flex align-items-center list-user-action">
+                                                        <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="~/Album/Edit/@album.AlbumId"><i class="ri-pencil-line"></i></a>
+                                                        <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="~/Album/Delete/@album.AlbumId"><i class="ri-delete-bin-line"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+
                                 </tbody>
                             </table>
+                            <div class="pagination" style="justify-content:center">
+                                <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+                            </div>
+                            <div class="pagination" style="justify-content:center">
+                                @Html.PagedListPager(Model, page => Url.Action("Index",
+                            new{page,searchBy = Request.QueryString["searchBy"],search = Request.QueryString["search"],
+                            sortBy = Request.QueryString["sortBy"]}), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Omadiko.Entities.Song>
+﻿@model IPagedList<Omadiko.Entities.Song>
+@using PagedList;
+@using PagedList.Mvc;
 
 @{
     Layout = "~/Views/Shared/_AdminLayoutPage.cshtml";
 }
-
-
 
 <!-- Page Content  -->
 <div id="content-page" class="content-page">
@@ -20,6 +20,15 @@
                             <a href="~/Song/Create" class="btn btn-primary">Add New Song</a>
                         </div>
                     </div>
+                    <div class="iq-card-header d-flex justify-content-start">
+                        @using (Html.BeginForm("Index","Song",FormMethod.Get))
+                        {
+                            <b>Search By Title: </b> @Html.TextBox("searchBy")
+                                              @*@Html.RadioButton("searchBy", "Title") <text>Title</text>*@
+                                              <input class="btn btn-outline-primary" type="submit" name="name" value="Search" />
+                        }
+                    </div>   
+                    
                     <div class="iq-card-body">
                         <div class="table-responsive">
                             <table class="data-tables table table-striped table-bordered" style="width:100%">
@@ -27,37 +36,55 @@
                                     <tr>
                                         <th style="width: 5%;">No</th>
                                         <th style="width: 15%;">
-                                            @Html.DisplayNameFor(model => model.Title)
+                                            @Html.ActionLink("Title","Index",new {sortBy=ViewBag.SortNameParameter,searchBy=Request.QueryString["searchBy"],search=Request.QueryString["search"]})
                                         </th>
                                         <th style="width: 15%;">
-                                            @Html.DisplayNameFor(model => model.Duration)
+                                            @Html.DisplayNameFor(model => model.First().Duration)
                                         </th>
                                         <th style="width: 10%;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    @foreach (var song in Model)
+                                    @if (Model.Count() == 0)
                                     {
                                         <tr>
-                                            <td>1</td>
-                                            <td>
-                                                @song.Title
-                                            </td>
-                                            <td>
-                                                @song.ConvertTime()
-                                            </td>
-                                            <td>
-                                                <div class="flex align-items-center list-user-action">
-                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="~/Song/Edit/@song.SongId"><i class="ri-pencil-line"></i></a>
-                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="~/Song/Delete/@song.SongId"><i class="ri-delete-bin-line"></i></a>
-                                                </div>
-                                            </td>
+                                            <td colspan="4">No match found.</td>
                                         </tr>
+                                    }
+                                    else
+                                    {
+                                        foreach (var song in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    1
+                                                </td>
+                                                <td>
+                                                    @song.Title
+                                                </td>
+                                                <td>
+                                                    @song.ConvertTime()
+                                                </td>
+                                                <td>
+                                                    <div class="flex align-items-center list-user-action">
+                                                        <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="~/Song/Edit/@song.SongId"><i class="ri-pencil-line"></i></a>
+                                                        <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="~/Song/Delete/@song.SongId"><i class="ri-delete-bin-line"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
                                     }
 
                                 </tbody>
                             </table>
+                            <div class="pagination" style="justify-content:center">
+                                <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+                            </div>
+                            <div class="pagination" style="justify-content:center">
+                                @Html.PagedListPager(Model, page => Url.Action("Index",
+                            new { page, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"],
+                            sortBy=Request.QueryString["sortBy"]}),new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+                            </div>
                         </div>
                     </div>
                 </div>
