@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Omadiko.Entities.Artist>
+﻿@model IPagedList<Omadiko.Entities.Artist>
+@using PagedList;
+@using PagedList.Mvc;
 
 
 @{
@@ -20,83 +22,122 @@
                             <a href="~/Artist/Create" class="btn btn-primary">Add New Artist</a>
                         </div>
                     </div>
+
+                    <div class="iq-card-header d-flex justify-content-end">
+                        @using (Html.BeginForm("Index", "Artist", FormMethod.Get))
+                        {
+                            <div style="padding-left: 10px">
+                                <b>Search by:</b>
+                                <span style="margin: 0px 10px">
+                                    @Html.RadioButton("searchBy", "FirstName") <text>FirstName</text>
+                                    @Html.RadioButton("searchBy", "LastName") <text>LastName</text>
+                                    @Html.RadioButton("searchBy", "Country") <text>Country</text>
+                                </span>
+                            </div>
+                            @Html.TextBox("search", null, new { @class = "text search-input", style = "width:80%; padding-left:10px; margin-right: 0px; border-top-right-radius: 0px", placeholder = "Search Here...", type = "search" })
+                            <button type="submit" title="Search" style="background-color:royalblue"><i class="ri-search-line"></i></button>
+                            <button id="ResetButton" title="Reset" style="background-color:forestgreen"><i class="las la-undo-alt"></i></button>
+                        }
+                    </div>
+
                     <div class="iq-card-body">
                         <div class="table-responsive">
-                            <table class="data-tables table table-striped table-bordered" style="width:100%">
+                            <table class="data-tables table table-striped table-bordered text-center" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th style="width: 5%;">No</th>
                                         <th style="width: 5%;">Profile</th>
                                         <th style="width: 10%;">
-                                            First Name
+                                            @Html.ActionLink("FirstName", "Index", new { sortBy = ViewBag.SortFNameParameter, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] })
                                         </th>
                                         <th style="width: 10%;">
-                                            @Html.DisplayNameFor(model => model.LastName)
+                                            @Html.ActionLink("LastName", "Index", new { sortBy = ViewBag.SortLNameParameter, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] })
                                         </th>
                                         <th style="width: 10%;">
-                                            @Html.DisplayNameFor(model => model.Country)
+                                            @Html.ActionLink("Country", "Index", new { sortBy = ViewBag.SortCountryParameter, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] })
                                         </th>
-                                        <th style="width: 25%;">@Html.DisplayNameFor(model => model.DateOfBirth)</th>
-                                        <th style="width: 25%;">@Html.DisplayNameFor(model => model.DateOfDeath)</th>
+                                        <th style="width: 25%;">@Html.DisplayNameFor(model => model.First().DateOfBirth)</th>
+                                        <th style="width: 25%;">@Html.DisplayNameFor(model => model.First().DateOfDeath)</th>
                                         <th style="width: 10%;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    @foreach (var artist in Model)
+                                    @if (Model.Count() == 0)
                                     {
                                         <tr>
-                                            <td>1</td>
-                                            <td>
-                                                @if (!(artist.PhotoUrl is null))
-                                                {
-                                                    <img src="@Url.Content(artist.PhotoUrl)" class="img-fluid avatar-50 rounded" alt="author-profile">
-                                                }
-                                                else
-                                                {
-                                                    <img src="~/Content/images/notavailable400x410.jpg" class="img-fluid avatar-50 rounded" alt="author-profile">
-                                                }
-                                            </td>
-                                            <td>
-                                                @artist.Name 
-                                            </td>
-                                            <td>
-                                                @artist.LastName
-                                            </td>
-                                            <td>
-                                                @artist.Country
-                                            </td>
-                                            <td>
-                                                @if (artist.DateOfBirth.HasValue)
-                                                {
-                                                    @artist.DateOfBirth.Value.ToString("d")
-                                                }
-                                                else
-                                                {
-                                                    <text>nothing </text>
-                                                }
-                                            </td>
-                                            <td>
-                                                @if (artist.DateOfDeath.HasValue)
-                                                {
-                                                    @artist.DateOfDeath.Value.ToString("d")
-                                                }
-                                                else
-                                                {
-                                                    <text> </text>
-                                                }
-                                            </td>
-                                            <td>
-                                                <div class="flex align-items-center list-user-action">
-                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="~/Artist/Edit/@artist.ArtistId"><i class="ri-pencil-line"></i></a>
-                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="~/Artist/Delete/@artist.ArtistId"><i class="ri-delete-bin-line"></i></a>
-                                                </div>
-                                            </td>
+                                            <td colspan="7" style="text-align:center">No match found.</td>
                                         </tr>
+                                    }
+                                    else
+                                    {
+                                        foreach (var artist in Model)
+                                        {
+                                            <tr>
+                                                <td>1</td>
+                                                <td>
+                                                    @if (!(artist.PhotoUrl is null))
+                                                    {
+                                                        <img src="@Url.Content(artist.PhotoUrl)" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/Content/images/notavailable400x410.jpg" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @artist.Name
+                                                </td>
+                                                <td>
+                                                    @artist.LastName
+                                                </td>
+                                                <td>
+                                                    @artist.Country
+                                                </td>
+                                                <td>
+                                                    @if (artist.DateOfBirth.HasValue)
+                                                    {
+                                                        @artist.DateOfBirth.Value.ToString("d")
+                                                    }
+                                                    else
+                                                    {
+                                                        <text>nothing </text>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @if (artist.DateOfDeath.HasValue)
+                                                    {
+                                                        @artist.DateOfDeath.Value.ToString("d")
+                                                    }
+                                                    else
+                                                    {
+                                                        <text> </text>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <div class="flex align-items-center list-user-action">
+                                                        <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="~/Artist/Edit/@artist.ArtistId"><i class="ri-pencil-line"></i></a>
+                                                        <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="~/Artist/Delete/@artist.ArtistId"><i class="ri-delete-bin-line"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
                                     }
 
                                 </tbody>
                             </table>
+                            <div class="pagination" style="justify-content:center">
+                                <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+                            </div>
+                            <div class="pagination" style="justify-content:center">
+                                @Html.PagedListPager(Model, page => Url.Action("Index",
+                            new
+                                 {
+                                     page,
+                                     searchBy = Request.QueryString["searchBy"],
+                                     search = Request.QueryString["search"],
+                            sortBy = Request.QueryString["sortBy"]
+                                 }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -104,3 +145,10 @@
         </div>
     </div>
 </div>
+@section MyCustomJavascript{
+    <script>
+        $("#ResetButton").click(function (e) {
+            $("#search").val("");
+        });
+    </script>
+}

@@ -129,7 +129,6 @@ namespace Omadiko.WebApp.Controllers
                 default:
                     albums = albums.OrderBy(x => x.Title);
                     break;
-
             }
             return View(albums.ToPagedList(page ?? 1, 10));
         }

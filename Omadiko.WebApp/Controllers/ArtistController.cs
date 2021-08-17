@@ -60,9 +60,49 @@ namespace Omadiko.WebApp.Controllers
 
 
         // GET: Artist
-        public ActionResult Index()
+        public ActionResult Index(string searchBy, string search, int? page, string sortBy)
         {
-            return View(db.Artists.ToList());
+            ViewBag.SortFNameParameter = string.IsNullOrEmpty(sortBy) ? "FNameDesc" : "";
+            ViewBag.SortLNameParameter = sortBy == "LNameDesc" ? "LNameAsc" : "LNameDesc";
+            ViewBag.SortCountryParameter = sortBy == "CountryDesc" ? "CountryAsc" : "CountryDesc";
+            var artist = db.Artists.AsQueryable();
+            if (searchBy == "FirstName")
+            {
+                artist = artist.Where(x => x.Name.Contains(search) || search == null);
+
+            }
+            else if (searchBy == "LastName")
+            {
+                artist = artist.Where(x => x.LastName.Contains(search) || search == null);
+            }
+            else if (searchBy == "Country")
+            {
+                artist = artist.Where(x => x.Country.Contains(search) || search == null);
+            }
+
+            switch (sortBy)
+            {
+                case "FNameDesc":
+                    artist = artist.OrderByDescending(x => x.Name);
+                    break;
+                case "LNameDesc":
+                    artist = artist.OrderByDescending(x => x.LastName);
+                    break;
+                case "LNameAsc":
+                    artist = artist.OrderBy(x => x.LastName);
+                    break;
+                case "CountryDesc":
+                    artist = artist.OrderByDescending(x => x.Country);
+                    break;
+                case "CountryAsc":
+                    artist = artist.OrderBy(x => x.Country);
+                    break;
+                default:
+                    artist = artist.OrderBy(x => x.Name);
+                    break;
+
+            }
+            return View(artist.ToPagedList(page ?? 1, 10));
         }
 
         // GET: Artist/Details/5

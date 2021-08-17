@@ -35,8 +35,8 @@
                                 </span>
                             </div>
                             @Html.TextBox("search", null, new { @class = "text search-input", style = "width:80%; padding-left:10px; margin-right: 0px; border-top-right-radius: 0px", placeholder = "Search Here...", type = "search" })
-                            <button type = "submit" title = "Search" style = "background-color:royalblue"><i class="ri-search-line"></i></button>
-                            <button id = "ResetButton" title="Reset" style="background-color:forestgreen"><i class="las la-undo-alt"></i></button>
+                            <button type="submit" title="Search" style="background-color:royalblue"><i class="ri-search-line"></i></button>
+                            <button id="ResetButton" title="Reset" style="background-color:forestgreen"><i class="las la-undo-alt"></i></button>
                          }
                     </div>
 
@@ -120,13 +120,8 @@
                             </div>
                             <div class="pagination" style="justify-content:center">
                                 @Html.PagedListPager(Model, page => Url.Action("Index",
-                            new
-                                 {
-                                     page,
-                                     searchBy = Request.QueryString["searchBy"],
-                                     search = Request.QueryString["search"],
-                            sortBy = Request.QueryString["sortBy"]
-                                 }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+                            new{page,searchBy = Request.QueryString["searchBy"],search = Request.QueryString["search"],
+                            sortBy = Request.QueryString["sortBy"]}), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
                             </div>
                         </div>
                     </div>
