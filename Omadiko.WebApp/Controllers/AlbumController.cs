@@ -12,6 +12,7 @@ using Omadiko.RepositoryServices;
 using PagedList;
 using PagedList.Mvc;
 
+
 namespace Omadiko.WebApp.Controllers
 {
     public class AlbumController : Controller
@@ -66,18 +67,57 @@ namespace Omadiko.WebApp.Controllers
         //ViewBags
         public void CreateArtistViewBag()
         {
-            var artist = db.Artists.ToList().Select
+            var artist = db.Artists.OrderBy(x=>x.Name).ToList().Select
                 (x => new { ArtistId = x.ArtistId, FullName = String.Format($"{x.Name} {x.LastName}") });
             ViewBag.ArtistId = new SelectList(artist, "ArtistId", "FullName");
         }
 
+        public void EditArtistViewBag(Album album)
+        {
+            var artist = db.Artists.OrderBy(x => x.Name).ToList().Select
+                (x => new { ArtistId = x.ArtistId, FullName = String.Format($"{x.Name} {x.LastName}") });
+            ViewBag.ArtistId = new SelectList(artist, "ArtistId", "FullName");
+        }
+
+        public void CreateSongViewBag()
+        {
+            ViewBag.SelectedSongIds = db.Songs.OrderBy(x => x.Title).ToList().Select(x =>
+            new SelectListItem()
+            {
+                Value = x.SongId.ToString(),
+                Text = String.Format($"{x.Title}")
+            });
+        }
+
+        public void EditSongViewBag(Album album)
+        {
+            ViewBag.SelectedSongIds = db.Songs.OrderBy(x => x.Title).ToList().Select(x =>
+            new SelectListItem()
+            {
+                Value = x.SongId.ToString(),
+                Text = String.Format($"{x.Title}"),
+                Selected = album.Songs.Any(g => g.SongId == x.SongId)
+            });
+        }
+
         public void CreateGenreViewBag()
         {
-            ViewBag.SelectedGenreIds = db.Genres.ToList().Select(x =>
+            ViewBag.SelectedGenreIds = db.Genres.OrderBy(x => x.Kind).ToList().Select(x =>
             new SelectListItem()
             {
                 Value = x.GenreId.ToString(),
                 Text = String.Format($"{x.Kind}")
+            });
+        }
+
+        public void EditGenreViewBag(Album album)
+        {
+            ViewBag.SelectedGenreIds = db.Genres.OrderBy(x => x.Kind).ToList().Select(x =>
+            new SelectListItem()
+            {
+                Value = x.GenreId.ToString(),
+                Text = String.Format($"{x.Kind}"),
+                Selected = album.Genres.Any(g=>g.GenreId == x.GenreId)
             });
         }
 
@@ -86,10 +126,14 @@ namespace Omadiko.WebApp.Controllers
         // GET: Album
         public ActionResult Index(string searchBy, string search, int? page, string sortBy)
         {
+            var albums = db.Albums.AsQueryable().Include(a => a.Artist);
+            
+
             ViewBag.SortTitleParameter = string.IsNullOrEmpty(sortBy) ? "TitleDesc" : "";
             ViewBag.SortArtistParameter = sortBy == "ArtistDesc" ? "ArtistAsc" : "ArtistDesc";
             ViewBag.SortReleaseDateParameter = sortBy == "ReleaseDateDesc" ? "ReleaseDateAsc" : "ReleaseDateDesc";
-            var albums = db.Albums.AsQueryable().Include(a => a.Artist);
+            
+
             if (searchBy == "Title")
             {
                 albums = albums.Where(x => x.Title.Contains(search) || search == null);
@@ -153,6 +197,7 @@ namespace Omadiko.WebApp.Controllers
         {
             CreateArtistViewBag();
             CreateGenreViewBag();
+            CreateSongViewBag();
 
             return View();
         }
@@ -162,13 +207,15 @@ namespace Omadiko.WebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AlbumId,Title,ReleaseDate,PhotoUrl,ArtistId")] Album album, IEnumerable<int> SelectedGenreIds)
+        public ActionResult Create([Bind(Include = "AlbumId,Title,ReleaseDate,PhotoUrl,ArtistId")] Album album, IEnumerable<int> SelectedGenreIds, IEnumerable<int> SelectedSongIds)
         {
             if (ModelState.IsValid)
             {
                 db.Albums.Attach(album);
                 db.Entry(album).Collection("Genres").Load();
                 album.Genres.Clear();
+                db.Entry(album).Collection("Songs").Load();
+                album.Songs.Clear();
                 db.SaveChanges();
                 if (!(SelectedGenreIds is null))
                 {
@@ -180,9 +227,19 @@ namespace Omadiko.WebApp.Controllers
                             album.Genres.Add(genre);
                         }
                     }
-                    //db.SaveChanges();
                 }
 
+                if (!(SelectedSongIds is null))
+                {
+                    foreach (var id in SelectedSongIds)
+                    {
+                        Song song = db.Songs.Find(id);
+                        if (song != null)
+                        {
+                            album.Songs.Add(song);
+                        }
+                    }
+                }
 
                 db.Entry(album).State = EntityState.Added;
                 db.SaveChanges();
@@ -191,6 +248,7 @@ namespace Omadiko.WebApp.Controllers
 
             CreateArtistViewBag();
             CreateGenreViewBag();
+            CreateSongViewBag();
             return View(album);
         }
        
@@ -207,10 +265,9 @@ namespace Omadiko.WebApp.Controllers
                 return HttpNotFound();
             }
 
-            CreateArtistViewBag();
-            
-            var genreIds = album.Genres.Select(x => x.GenreId);
-            CreateGenreViewBag();
+            EditArtistViewBag(album);
+            EditSongViewBag(album);
+            EditGenreViewBag(album);
             return View(album);
         }
 
@@ -219,14 +276,17 @@ namespace Omadiko.WebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AlbumId,Title,ReleaseDate,PhotoUrl,ArtistId")] Album album, IEnumerable<int> SelectedGenreIds)
+        public ActionResult Edit([Bind(Include = "AlbumId,Title,ReleaseDate,PhotoUrl,ArtistId")] Album album, IEnumerable<int> SelectedGenreIds, IEnumerable<int> SelectedSongIds)
         {
             if (ModelState.IsValid)
             {
                 db.Albums.Attach(album);
                 db.Entry(album).Collection("Genres").Load();
                 album.Genres.Clear();
+                db.Entry(album).Collection("Songs").Load();
+                album.Songs.Clear();
                 db.SaveChanges();
+                
                 if (!(SelectedGenreIds is null))
                 {
                     foreach (var id in SelectedGenreIds)
@@ -239,16 +299,28 @@ namespace Omadiko.WebApp.Controllers
                     }
                     db.SaveChanges();
                 }
+
+                if (!(SelectedSongIds is null))
+                {
+                    foreach (var id in SelectedSongIds)
+                    {
+                        Song song = db.Songs.Find(id);
+                        if (song != null)
+                        {
+                            album.Songs.Add(song);
+                        }
+                    }
+                    db.SaveChanges();
+                }
+
                 db.Entry(album).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             db.Albums.Attach(album);
-            db.Entry(album).Collection("Genres").Load();
-            var genreIds = album.Genres.Select(x => x.GenreId);
             CreateGenreViewBag();
-
+            CreateSongViewBag();
             CreateArtistViewBag();
 
             return View(album);
