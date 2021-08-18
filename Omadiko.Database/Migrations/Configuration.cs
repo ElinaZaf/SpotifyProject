@@ -468,11 +468,11 @@
             //    roleManager.Create(role);
             //}
 
-            if (!roleManager.RoleExists("Subscriber"))
-            {
-                var role = new IdentityRole { Name = "Subscriber" };
-                roleManager.Create(role);
-            }
+            //if (!roleManager.RoleExists("Subscriber"))
+            //{
+            //    var role = new IdentityRole { Name = "Subscriber" };
+            //    roleManager.Create(role);
+            //}
 
 
 
@@ -544,7 +544,7 @@
                 Country = "UK",
                 Phone = "008465415864684",
                 DateOfBirth = new DateTime(1974, 12, 28),
-                PhotoUrl = "~/ Content / images / ArtistImages / whitney_houston400x410.jpg",
+                PhotoUrl = "~/Content/images/ArtistImages/whitney_houston400x410.jpg",
                 UserName = "josh@muzik.com",
                 Email = "josh@muzik.com",
                 PasswordHash = PasswordHash.HashPassword("123456Jj!"),
@@ -554,12 +554,12 @@
             {
                 FirstName = "Jane",
                 LastName = "Stone",
-                Gender = Gender.Male,
+                Gender = Gender.Female,
                 Address = "Oxford 15",
                 Country = "UK",
                 Phone = "008465415864684",
                 DateOfBirth = new DateTime(1974, 12, 28),
-                PhotoUrl = "~/ Content / images / ArtistImages / whitney_houston400x410.jpg",
+                PhotoUrl = "~/Content/images/ArtistImages/whitney_houston400x410.jpg",
                 UserName = "jane@muzik.com",
                 Email = "jane@muzik.com",
                 PasswordHash = PasswordHash.HashPassword("123456Jj!"),

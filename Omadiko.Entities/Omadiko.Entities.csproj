@@ -67,6 +67,7 @@
     <Compile Include="Models\Membership.cs" />
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Song.cs" />
+    <Compile Include="Models\Subscription.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
