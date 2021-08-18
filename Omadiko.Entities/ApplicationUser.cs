@@ -27,7 +27,6 @@ namespace Omadiko.Entities
         public virtual ICollection<Artist> FavouriteArtists { get; set; }
         public virtual ICollection<Album> FavouriteAlbums { get; set; }
         public virtual ICollection<Song> FavouriteSongs { get; set; }
-       
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -15,6 +15,5 @@ namespace Omadiko.Entities.Models
         public byte DiscountRate { get; set; }
 
 
-       
     }
 }

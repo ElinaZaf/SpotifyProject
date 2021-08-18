@@ -1,141 +1,63 @@
-﻿
+﻿@model IEnumerable<Omadiko.Entities.Models.Membership>
+
 @{
     Layout = "~/Views/Shared/_MainLayoutPage.cshtml";
 }
 
-<!-- Page Content  -->
-<div id="content-page" class="content-page">
+<div id="content-page" class="content-page fit-image" style="margin:auto; background-image: url('/Content/images/testimage.jpg'); background-attachment:fixed; background-size:cover">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="iq-card">
-                    <div class="iq-card-body border text-center rounded">
-                        <span class="font-size-16 text-uppercase">Basic</span>
-                        <h2 class="mb-4 display-3 font-weight-bolder ">$26<small class="font-size-14 text-muted">/ Month</small></h2>
-                        <ul class="list-unstyled mb-0">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Consectetur adipiscing elit</li>
-                            <li>Integer molestie at massa</li>
-                            <li>Facilisis in pretium nisl aliquet</li>
-                            <li>Nulla volutpat aliquam velit</li>
-                        </ul>
-                        <a href="#" class="btn btn-primary mt-5">Start Starter</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="iq-card bg-primary text-white">
-                    <div class="iq-card-body border text-center rounded">
-                        <span class="font-size-16 text-uppercase">Basic</span>
-                        <h2 class="mb-4 display-3 font-weight-bolder text-white">$99<small class="font-size-14">/ Month</small></h2>
-                        <ul class="list-unstyled mb-0 ">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Consectetur adipiscing elit</li>
-                            <li>Integer molestie at massa</li>
-                            <li>Facilisis in pretium nisl aliquet</li>
-                            <li>Nulla volutpat aliquam velit</li>
-                        </ul>
-                        <a href="#" class="btn btn-light mt-5">Start Starter</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="iq-card">
-                    <div class="iq-card-body border text-center rounded">
-                        <span class="font-size-16 text-uppercase">Basic</span>
-                        <h2 class="mb-4 display-3 font-weight-bolder ">$39<small class="font-size-14 text-muted">/ Month</small></h2>
-                        <ul class="list-unstyled mb-0">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Consectetur adipiscing elit</li>
-                            <li>Integer molestie at massa</li>
-                            <li>Facilisis in pretium nisl aliquet</li>
-                            <li>Nulla volutpat aliquam velit</li>
-                        </ul>
-                        <a href="#" class="btn btn-primary mt-5">Start Starter</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="iq-card">
-                    <div class="iq-card-body border text-center rounded">
-                        <span class="font-size-16 text-uppercase">Basic</span>
-                        <h2 class="mb-4 display-3 font-weight-bolder ">$25<small class="font-size-14 text-muted">/ Month</small></h2>
-                        <ul class="list-unstyled mb-0">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Consectetur adipiscing elit</li>
-                            <li>Integer molestie at massa</li>
-                            <li>Facilisis in pretium nisl aliquet</li>
-                            <li>Nulla volutpat aliquam velit</li>
-                        </ul>
-                        <a href="#" class="btn btn-primary mt-5">Start Starter</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="iq-card bg-dark text-white text-center iq-mb-3">
-                    <img src="images/page-img/25.jpg" class="card-img rounded" alt="#">
-                    <div class="card-img-overlay">
-                        <h2 class="mb-4 display-3 font-weight-bolder text-white">19<small class="font-size-14 text-white">$ / Month</small></h2>
-                        <ul class="list-unstyled mb-0 ">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Consectetur adipiscing elit</li>
-                            <li>Integer molestie at massa</li>
-                            <li>Facilisis in pretium nisl aliquet</li>
-                            <li>Nulla volutpat aliquam velit</li>
-                        </ul>
-                        <button type="button" class="btn btn-primary mt-3">Get started</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="iq-card bg-dark text-white text-center iq-mb-3">
-                    <img src="images/page-img/26.jpg" class="card-img rounded" alt="#">
-                    <div class="card-img-overlay">
-                        <h2 class="mb-4 display-3 font-weight-bolder text-white">19<small class="font-size-14 text-white">$ / Month</small></h2>
-                        <ul class="list-unstyled mb-0 ">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Consectetur adipiscing elit</li>
-                            <li>Integer molestie at massa</li>
-                            <li>Facilisis in pretium nisl aliquet</li>
-                            <li>Nulla volutpat aliquam velit</li>
-                        </ul>
-                        <button type="button" class="btn btn-primary mt-3">Get started</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="iq-card bg-dark text-white text-center iq-mb-3">
-                    <img src="images/page-img/27.jpg" class="card-img rounded" alt="#">
-                    <div class="card-img-overlay">
-                        <h2 class="mb-4 display-3 font-weight-bolder text-white">19<small class="font-size-14 text-white">$ / Month</small></h2>
-                        <ul class="list-unstyled mb-0 ">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Consectetur adipiscing elit</li>
-                            <li>Integer molestie at massa</li>
-                            <li>Facilisis in pretium nisl aliquet</li>
-                            <li>Nulla volutpat aliquam velit</li>
-                        </ul>
-                        <button type="button" class="btn btn-primary mt-3">Get started</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="iq-card bg-dark text-white text-center iq-mb-3">
-                    <img src="images/page-img/28.jpg" class="card-img rounded" alt="#">
-                    <div class="card-img-overlay">
-                        <h2 class="mb-4 display-3 font-weight-bolder text-white">19<small class="font-size-14 text-white">$ / Month</small></h2>
-                        <ul class="list-unstyled mb-0 ">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Consectetur adipiscing elit</li>
-                            <li>Integer molestie at massa</li>
-                            <li>Facilisis in pretium nisl aliquet</li>
-                            <li>Nulla volutpat aliquam velit</li>
-                        </ul>
-                        <button type="button" class="btn btn-primary mt-3">Get started</button>
-                    </div>
+        <div class="row" style="justify-content:center">
+            <div class="iq-card text-center" style="margin-top:100px">
+                <div class="iq-card-body border text-center rounded">
+                    <h1>Pick your Premium!</h1>
+                    <h6>Listen witout limits on your phone, speaker and other devices.</h6>
                 </div>
             </div>
         </div>
+        @if (Model is null)
+        {
+            <h1 style="color:black; text-align:center">No memberships available at the moment</h1>
+        }
+        else
+        {
+            <div class="row">
+                @foreach (var membership in Model)
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="iq-card" style="margin-top:40px">
+                            <div class="iq-card-body border text-center rounded">
+                                <span class="font-size-16 text-uppercase">@membership.Type</span>
+                                <h2 class="mb-4 display-3 font-weight-bolder ">@membership.SignUpFee€</h2>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a href="~/Subscription/OrderNow/@membership.MembershipId" class="btn btn-primary mt-5">Get Subscription</a>
+                                }
+                                else
+                                {
+                                    <a href="~/Account/Register" class="btn btn-primary mt-5">Start</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="iq-card bg-primary text-white" style="margin-top:40px">
+                        <div class="iq-card-body border text-center rounded">
+                            <span class="font-size-16 text-uppercase">Basic</span>
+                            <h2 class="mb-4 display-3 font-weight-bolder text-white">$99<small class="font-size-14">/ Month</small></h2>
+                            <ul class="list-unstyled mb-0 ">
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Consectetur adipiscing elit</li>
+                                <li>Integer molestie at massa</li>
+                                <li>Facilisis in pretium nisl aliquet</li>
+                                <li>Nulla volutpat aliquam velit</li>
+                            </ul>
+                            <a href="#" class="btn btn-light mt-5">Start Starter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
     </div>
 </div>
-
