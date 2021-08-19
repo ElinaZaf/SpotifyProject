@@ -4,6 +4,7 @@ using Omadiko.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -23,10 +24,18 @@ namespace Omadiko.Entities
         public DateTime? DateOfBirth { get; set; }
         public string PhotoUrl { get; set; }
 
+        
+
         //Navigation Properties
         public virtual ICollection<Artist> FavouriteArtists { get; set; }
         public virtual ICollection<Album> FavouriteAlbums { get; set; }
         public virtual ICollection<Song> FavouriteSongs { get; set; }
+        public int SubscriptionId { get; set; }
+        public virtual Subscription Subscription { get; set; }
+
+        
+
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

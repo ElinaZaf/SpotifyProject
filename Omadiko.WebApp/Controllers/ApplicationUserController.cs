@@ -36,6 +36,7 @@ namespace Omadiko.WebApp.Controllers
             return View(applicationUser);
         }
 
+        
         public ActionResult FavouriteAlbums(string id)
         {
             if (id == null)

@@ -462,11 +462,11 @@
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            //if (!roleManager.RoleExists("Admin"))
-            //{
-            //    var role = new IdentityRole { Name = "Admin" };
-            //    roleManager.Create(role);
-            //}
+            if (!context.Roles.Any(x => x.Name == "Admin"))
+            {
+                var role = new IdentityRole { Name = "Admin" };
+                roleManager.Create(role);
+            }
 
             //if (!roleManager.RoleExists("Subscriber"))
             //{
@@ -476,19 +476,20 @@
 
 
 
-            //var PasswordHash = new PasswordHasher();
-            //if (!context.Users.Any(x => x.UserName == "admin@admin.net"))
-            //{
-            //    var user = new ApplicationUser
-            //    {
-            //        UserName = "admin@admin.net",
-            //        Email = "admin@admin.net",
-            //        PasswordHash = PasswordHash.HashPassword("Admin1!")
-            //    };
+            var PasswordHash = new PasswordHasher();
+            if (!context.Users.Any(x => x.UserName == "admin@admin.net"))
+            {
+                var user = new ApplicationUser
+                {
+                    FirstName = "El",
+                    UserName = "admin@admin.net",
+                    Email = "admin@admin.net",
+                    PasswordHash = PasswordHash.HashPassword("123456Aa!")
+                };
 
-            //    userManager.Create(user);
-            //    userManager.AddToRole(user.Id, "Admin");
-            //}
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "Admin");
+            }
 
             //if (!context.Users.Any(x => x.UserName == "elina_subscribed@gmail.com"))
             //{
@@ -506,33 +507,9 @@
 
             #endregion
 
-            //if (!context.Roles.Any(x => x.Name == "Admin"))
-            //{
-            //    var store = new RoleStore<IdentityRole>(context);
-            //    var manager = new RoleManager<IdentityRole>(store);
-            //    var role = new IdentityRole { Name = "Admin" };
-            //    manager.Create(role);
-            //}
 
 
-            //var PasswordHash = new PasswordHasher();
-            //if (!context.Users.Any(x => x.UserName == "admin@admin.net"))
-            //{
-            //    var store = new UserStore<ApplicationUser>(context);
-            //    var manager = new UserManager<ApplicationUser>(store);
-            //    var user = new ApplicationUser
-            //    {
-            //        UserName = "admin@admin.net",
-            //        Email = "admin@admin.net",
-            //        PasswordHash = PasswordHash.HashPassword("Admin1!")
-            //    };
 
-            //    manager.Create(user);
-            //    manager.AddToRole(user.Id, "Admin");
-            //}
-
-
-            var PasswordHash = new PasswordHasher();
             var store = new UserStore<ApplicationUser>(context);
             var manager = new UserManager<ApplicationUser>(store);
             var user1 = new ApplicationUser

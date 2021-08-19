@@ -29,6 +29,7 @@ namespace Omadiko.WebApp.Controllers
             return View();
         }
 
+
         public ActionResult Failure()
         {
             return View();
@@ -42,6 +43,9 @@ namespace Omadiko.WebApp.Controllers
             }
             if (Session[strSubscription] == null)
             {
+                Subscription selectedSubscription = new Subscription(membershipRepository.GetById(id), 1);
+                Session[strSubscription] = selectedSubscription;
+
                 List<Subscription> lsSubscription = new List<Subscription>
                 {
                     new Subscription(membershipRepository.GetById(id),1)
@@ -83,9 +87,10 @@ namespace Omadiko.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            int check = isExistingCheck(id);
             List<Subscription> lsSubscription = (List<Subscription>)Session[strSubscription];
+            int check = isExistingCheck(id);
             lsSubscription.RemoveAt(check);
+            Session[strSubscription] = lsSubscription;
             return View("Index");
         }
 
@@ -110,6 +115,7 @@ namespace Omadiko.WebApp.Controllers
                     quantity = subscription.Quantity.ToString(),
                     sku = "sku"
                 });
+
             }
             
             var payer = new Payer()
@@ -204,7 +210,7 @@ namespace Omadiko.WebApp.Controllers
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //PaypalLogger.Log("Error: " + ex.Message);
                 return View("Failure");
