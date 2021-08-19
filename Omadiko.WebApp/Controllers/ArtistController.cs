@@ -58,7 +58,27 @@ namespace Omadiko.WebApp.Controllers
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        // ViewBags
+        public void CreateAlbumViewBag()
+        {
+            ViewBag.SelectedAlbumIds = db.Albums.OrderBy(x => x.Title).ToList().Select(x =>
+            new SelectListItem()
+            {
+                Value = x.AlbumId.ToString(),
+                Text = String.Format($"{x.Title}")
+            });
+        }
 
+        public void EditAlbumViewBag(Artist artist)
+        {
+            ViewBag.SelectedAlbumIds = db.Albums.OrderBy(x => x.Title).ToList().Select(x =>
+            new SelectListItem()
+            {
+                Value = x.AlbumId.ToString(),
+                Text = String.Format($"{x.Title}"),
+                Selected = artist.Albums.Any(g => g.AlbumId == x.AlbumId)
+            });
+        }
         // GET: Artist
         public ActionResult Index(string searchBy, string search, int? page, string sortBy)
         {
@@ -123,6 +143,7 @@ namespace Omadiko.WebApp.Controllers
         // GET: Artist/Create
         public ActionResult Create()
         {
+            CreateAlbumViewBag();
             return View();
         }
 
@@ -131,15 +152,18 @@ namespace Omadiko.WebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ArtistId,Name,LastName,Country,DateOfBirth,DateOfDeath,PhotoUrl")] Artist artist)
+        public ActionResult Create([Bind(Include = "ArtistId,Name,LastName,Country,DateOfBirth,DateOfDeath,PhotoUrl")] Artist artist, IEnumerable<int> SelectedAlbumIds)
         {
             if (ModelState.IsValid)
             {
                 db.Artists.Add(artist);
+                db.Entry(artist).Collection("Albums").Load();
+                artist.Albums.Clear();
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
+            CreateAlbumViewBag();
             return View(artist);
         }
 
@@ -155,6 +179,7 @@ namespace Omadiko.WebApp.Controllers
             {
                 return HttpNotFound();
             }
+            EditAlbumViewBag(artist);
             return View(artist);
         }
 
@@ -163,10 +188,28 @@ namespace Omadiko.WebApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ArtistId,Name,LastName,Country,DateOfBirth,DateOfDeath,PhotoUrl")] Artist artist)
+        public ActionResult Edit([Bind(Include = "ArtistId,Name,LastName,Country,DateOfBirth,DateOfDeath,PhotoUrl")] Artist artist, IEnumerable<int> SelectedAlbumIds)
         {
             if (ModelState.IsValid)
             {
+                db.Artists.Attach(artist);
+                db.Entry(artist).Collection("Albums").Load();
+                artist.Albums.Clear();
+                db.SaveChanges();
+
+                if (!(SelectedAlbumIds is null))
+                {
+                    foreach (var id in SelectedAlbumIds)
+                    {
+                        Album album = db.Albums.Find(id);
+                        if (album != null)
+                        {
+                            artist.Albums.Add(album);
+                        }
+                    }
+                    db.SaveChanges();
+                }
+
                 db.Entry(artist).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

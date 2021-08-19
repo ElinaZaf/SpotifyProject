@@ -44,7 +44,7 @@
                                 <thead>
                                     <tr>
                                         <th width="5%">
-                                            @Html.DisplayNameFor(model => model.First().GenreId)
+                                            No.
                                         </th>
                                         <th style="width: 15%;">
                                             @Html.ActionLink("Kind", "Index", new { sortBy = ViewBag.SortNameParameter, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] })
@@ -61,11 +61,11 @@
                                     }
                                     else
                                     {
-                                        foreach (var genre in Model)
+                                        foreach (var genre in Model) 
                                         {
                                             <tr>
                                                 <td>
-                                                    @genre.GenreId
+                                                    1
                                                 </td>
                                                 <td>
                                                     @genre.Kind

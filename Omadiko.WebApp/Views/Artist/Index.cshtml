@@ -56,8 +56,9 @@
                                         <th style="width: 10%;">
                                             @Html.ActionLink("Country", "Index", new { sortBy = ViewBag.SortCountryParameter, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] })
                                         </th>
-                                        <th style="width: 25%;">@Html.DisplayNameFor(model => model.First().DateOfBirth)</th>
-                                        <th style="width: 25%;">@Html.DisplayNameFor(model => model.First().DateOfDeath)</th>
+                                        <th style="width: 10%;">@Html.DisplayNameFor(model => model.First().DateOfBirth)</th>
+                                        <th style="width: 10%;">@Html.DisplayNameFor(model => model.First().DateOfDeath)</th>
+                                        <th>Albums</th>
                                         <th style="width: 10%;">Action</th>
                                     </tr>
                                 </thead>
@@ -113,6 +114,10 @@
                                                         <text>Still alive!</text>
                                                     }
                                                 </td>
+                                                <td>@foreach (var album in artist.Albums)
+                                                {
+                                                    <li>@album.Title</li>
+                                                }</td>
                                                 <td>
                                                     <div class="flex align-items-center list-user-action">
                                                         <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="~/Artist/Edit/@artist.ArtistId"><i class="ri-pencil-line"></i></a>
