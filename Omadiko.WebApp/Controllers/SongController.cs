@@ -8,11 +8,13 @@ using System.Web;
 using System.Web.Mvc;
 using Omadiko.Database;
 using Omadiko.Entities;
+using Omadiko.Entities.Models;
 using Omadiko.RepositoryServices;
 using PagedList;
 
 namespace Omadiko.WebApp.Controllers
 {
+    
     public class SongController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -35,7 +37,6 @@ namespace Omadiko.WebApp.Controllers
             return View(songs.ToPagedList(pageNumber, pageSize));
         }
 
-
         public ActionResult ShowSongDetails(int? id)
         {
             if (id == null)
@@ -51,20 +52,10 @@ namespace Omadiko.WebApp.Controllers
             return View(song);
         }
 
-
-
-
-
-
-
-
-
-
-
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         // GET: Song
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Index(string searchBy, string search, int? page, string sortBy)
         {
             ViewBag.SortNameParameter = string.IsNullOrEmpty(sortBy) ? "NameDesc" : "";
@@ -73,7 +64,6 @@ namespace Omadiko.WebApp.Controllers
             if (searchBy == "Title")
             {
                 songs = songs.Where(x => x.Title.Contains(search));
-                       
             }
 
             switch (sortBy)
@@ -84,12 +74,12 @@ namespace Omadiko.WebApp.Controllers
                 default:
                     songs = songs.OrderBy(x => x.Title);
                     break;
-
             }
             return View(songs.ToPagedList(page ?? 1, 10));
         }
 
         // GET: Song/Details/5
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -105,6 +95,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
         // GET: Song/Create
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Create()
         {
             return View();
@@ -113,6 +104,7 @@ namespace Omadiko.WebApp.Controllers
         // POST: Song/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = Role.Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "SongId,Title,Duration,AudioUrl,VideoUrl")] Song song)
@@ -128,6 +120,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
         // GET: Song/Edit/5
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -145,6 +138,7 @@ namespace Omadiko.WebApp.Controllers
         // POST: Song/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = Role.Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "SongId,Title,Duration,AudioUrl,VideoUrl")] Song song)
@@ -159,6 +153,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
         // GET: Song/Delete/5
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -174,6 +169,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
         // POST: Song/Delete/5
+        [Authorize(Roles = Role.Admin)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

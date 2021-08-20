@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Omadiko.Database;
 using Omadiko.Entities;
+using Omadiko.Entities.Models;
 using Omadiko.RepositoryServices;
 using PagedList;
 
@@ -80,6 +81,7 @@ namespace Omadiko.WebApp.Controllers
             });
         }
         // GET: Artist
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Index(string searchBy, string search, int? page, string sortBy)
         {
             ViewBag.SortFNameParameter = string.IsNullOrEmpty(sortBy) ? "FNameDesc" : "";
@@ -126,6 +128,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
         // GET: Artist/Details/5
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -141,6 +144,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
         // GET: Artist/Create
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Create()
         {
             CreateAlbumViewBag();
@@ -150,6 +154,7 @@ namespace Omadiko.WebApp.Controllers
         // POST: Artist/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = Role.Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ArtistId,Name,LastName,Country,DateOfBirth,DateOfDeath,PhotoUrl")] Artist artist, IEnumerable<int> SelectedAlbumIds)
@@ -168,6 +173,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
         // GET: Artist/Edit/5
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -186,6 +192,7 @@ namespace Omadiko.WebApp.Controllers
         // POST: Artist/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = Role.Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ArtistId,Name,LastName,Country,DateOfBirth,DateOfDeath,PhotoUrl")] Artist artist, IEnumerable<int> SelectedAlbumIds)
@@ -218,6 +225,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
         // GET: Artist/Delete/5
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -233,6 +241,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
         // POST: Artist/Delete/5
+        [Authorize(Roles = Role.Admin)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

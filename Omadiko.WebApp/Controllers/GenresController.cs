@@ -8,11 +8,13 @@ using System.Web;
 using System.Web.Mvc;
 using Omadiko.Database;
 using Omadiko.Entities;
+using Omadiko.Entities.Models;
 using PagedList;
 using PagedList.Mvc;
 
 namespace Omadiko.WebApp.Controllers
 {
+    [Authorize(Roles = Role.Admin)]
     public class GenresController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

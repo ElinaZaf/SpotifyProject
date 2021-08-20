@@ -54,31 +54,10 @@ namespace Omadiko.WebApp.Controllers
             }
             else
             {
-                List<Subscription> lsSubscription = (List<Subscription>)Session[strSubscription];
-                int check = isExistingCheck(id);
-                if (check == -1)
-                {
-                    lsSubscription.Add(new Subscription(membershipRepository.GetById(id), 1));
-                }
-                else
-                {
-                    lsSubscription[check].Quantity++;
-                }
+                Session[strSubscription] = null;
+                OrderNow(id);
             }
             return View("Index");
-        }
-
-        private int isExistingCheck(int? id)
-        {
-            List<Subscription> lsSubscription = (List<Subscription>)Session[strSubscription];
-            for (int i = 0; i < lsSubscription.Count; i++)
-            {
-                if (lsSubscription[i].Membership.MembershipId == id)
-                {
-                    return i;
-                }
-            }
-            return -1;
         }
 
         public ActionResult Delete(int? id)
@@ -88,9 +67,7 @@ namespace Omadiko.WebApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             List<Subscription> lsSubscription = (List<Subscription>)Session[strSubscription];
-            int check = isExistingCheck(id);
-            lsSubscription.RemoveAt(check);
-            Session[strSubscription] = lsSubscription;
+            lsSubscription.Clear();
             return View("Index");
         }
 

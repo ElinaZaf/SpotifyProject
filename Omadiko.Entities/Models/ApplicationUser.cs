@@ -27,13 +27,12 @@ namespace Omadiko.Entities
         
 
         //Navigation Properties
+        public int SubscriptionId { get; set; }
+        public virtual Subscription Subscription { get; set; }
         public virtual ICollection<Artist> FavouriteArtists { get; set; }
         public virtual ICollection<Album> FavouriteAlbums { get; set; }
         public virtual ICollection<Song> FavouriteSongs { get; set; }
-        public int SubscriptionId { get; set; }
-        public virtual Subscription Subscription { get; set; }
 
-        
 
 
 

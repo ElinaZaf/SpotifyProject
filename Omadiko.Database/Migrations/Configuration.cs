@@ -445,10 +445,10 @@
             #endregion
 
             #region SEEDING MEMBERSHIPS
-            Membership m1 = new Membership() { Type = "Individual Monthly", SignUpFee = 6.5f, DurationInMonths = 1, DiscountRate = 0 }; 
-            Membership m2 = new Membership() { Type = "Individual Quarterly", SignUpFee = 19.5f, DurationInMonths = 3, DiscountRate = 5 }; 
-            Membership m3 = new Membership() { Type = "Individual HalfYear", SignUpFee = 39.0f, DurationInMonths = 6, DiscountRate = 10 }; 
-            Membership m4 = new Membership() { Type = "Individual Annual", SignUpFee = 78.0f, DurationInMonths = 12, DiscountRate = 15 }; 
+            Membership m1 = new Membership() { Type = "Individual Monthly", SignUpFee = 6.50f, DurationInMonths = 1, DiscountRate = 0 }; 
+            Membership m2 = new Membership() { Type = "Individual Quarterly", SignUpFee = 19.50f, DurationInMonths = 3, DiscountRate = 5 }; 
+            Membership m3 = new Membership() { Type = "Individual Semi-Annual", SignUpFee = 39.00f, DurationInMonths = 6, DiscountRate = 10 }; 
+            Membership m4 = new Membership() { Type = "Individual Annual", SignUpFee = 78.00f, DurationInMonths = 12, DiscountRate = 15 }; 
             #endregion
 
             context.Artists.AddOrUpdate(x => new { x.Name, x.LastName }, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40, a41, a42, a43, a44, a45, a46, a47, a48, a49, a50, a51, a52, a53, a54, a55, a56, a57, a58, a59, a60, a61);
@@ -458,7 +458,7 @@
             context.SaveChanges();
 
 
-            #region CREATE DEFAULT USER ROLES AND ADMIN USER
+            #region CREATE ADMIN & SUBSCRIBER ROLE AND SEEDING USERS 
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
@@ -468,11 +468,11 @@
                 roleManager.Create(role);
             }
 
-            //if (!roleManager.RoleExists("Subscriber"))
-            //{
-            //    var role = new IdentityRole { Name = "Subscriber" };
-            //    roleManager.Create(role);
-            //}
+            if (!context.Roles.Any(x => x.Name == "Subscriber"))
+            {
+                var role = new IdentityRole { Name = "Subscriber" };
+                roleManager.Create(role);
+            }
 
 
 
@@ -481,7 +481,7 @@
             {
                 var user = new ApplicationUser
                 {
-                    FirstName = "El",
+                    FirstName = "Admin",
                     UserName = "admin@admin.net",
                     Email = "admin@admin.net",
                     PasswordHash = PasswordHash.HashPassword("123456Aa!")
@@ -491,24 +491,28 @@
                 userManager.AddToRole(user.Id, "Admin");
             }
 
-            //if (!context.Users.Any(x => x.UserName == "elina_subscribed@gmail.com"))
-            //{
-            //    var user = new ApplicationUser
-            //    {
-            //        UserName = "Elina",
-            //        Email = "elina_subscribed@gmail.com",
-            //        FirstName = "Elina",
-            //        PasswordHash = PasswordHash.HashPassword("ElinaSubscribed*1")
-            //    };
+            if (!context.Users.Any(x => x.UserName == "katesubscriber@muzik.com"))
+            {
+                var user = new ApplicationUser
+                {
+                    FirstName = "Kate",
+                    LastName = "Johnson",
+                    Gender = Gender.Female,
+                    Address = "Rose 125",
+                    Country = "Denmark",
+                    Phone = "008465415864684",
+                    DateOfBirth = new DateTime(1988, 12, 28),
+                    PhotoUrl = "~/Content/images/ArtistImages/whitney_houston400x410.jpg",
+                    UserName = "katesubscriber@muzik.com",
+                    Email = "katesubscriber@muzik.com",
+                    PasswordHash = PasswordHash.HashPassword("123456Kk!"),
+                    FavouriteAlbums = new List<Album>() { al1, al2, al3, al4, al5 },
+                    FavouriteArtists = new List<Artist>() { a1, a2, a3, a4, a5 }
+                };
 
-            //    userManager.Create(user);
-            //    userManager.AddToRole(user.Id, "Subscriber");
-            //}
-
-            #endregion
-
-
-
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "Subscriber");
+            }
 
             var store = new UserStore<ApplicationUser>(context);
             var manager = new UserManager<ApplicationUser>(store);
@@ -524,8 +528,7 @@
                 PhotoUrl = "~/Content/images/ArtistImages/whitney_houston400x410.jpg",
                 UserName = "josh@muzik.com",
                 Email = "josh@muzik.com",
-                PasswordHash = PasswordHash.HashPassword("123456Jj!"),
-                FavouriteArtists = new List<Artist>() { a1, a2, a3, a4, a5 }
+                PasswordHash = PasswordHash.HashPassword("123456Jj!")
             };
             var user2 = new ApplicationUser
             {
@@ -539,12 +542,12 @@
                 PhotoUrl = "~/Content/images/ArtistImages/whitney_houston400x410.jpg",
                 UserName = "jane@muzik.com",
                 Email = "jane@muzik.com",
-                PasswordHash = PasswordHash.HashPassword("123456Jj!"),
-                FavouriteAlbums = new List<Album>() { al1, al2, al3, al4, al5}
-                
+                PasswordHash = PasswordHash.HashPassword("123456Jj!")
             };
             manager.Create(user1);
             manager.Create(user2);
+
+            #endregion
         }
     }
 }

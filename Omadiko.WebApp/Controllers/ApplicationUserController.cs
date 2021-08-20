@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Omadiko.Database;
 using Omadiko.Entities;
+using Omadiko.Entities.Models;
 using Omadiko.RepositoryServices;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ namespace Omadiko.WebApp.Controllers
             return View(applicationUser);
         }
 
-        
+        [Authorize(Roles = Role.Subscriber)]
         public ActionResult FavouriteAlbums(string id)
         {
             if (id == null)
@@ -51,6 +52,7 @@ namespace Omadiko.WebApp.Controllers
             return View(applicationUser);
         }
 
+        [Authorize(Roles = Role.Subscriber)]
         public ActionResult FavouriteArtists(string id)
         {
             if (id == null)
@@ -65,6 +67,7 @@ namespace Omadiko.WebApp.Controllers
             return View(applicationUser);
         }
 
+        [Authorize(Roles = Role.Subscriber)]
         public ActionResult FavouriteSongs(string id)
         {
             if (id == null)

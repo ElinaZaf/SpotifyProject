@@ -1,10 +1,20 @@
-﻿
-<h1>FailureFailureFailureFailureFailureFailureFailureFailurevvvFailureFailure</h1>
-<h1>FailureFailureFailureFailureFailureFailureFailureFailurevvvFailureFailure</h1>
-<h1>FailureFailureFailureFailureFailureFailureFailureFailurevvvFailureFailure</h1>
-<h1>FailureFailureFailureFailureFailureFailureFailureFailurevvvFailureFailure</h1>
-<h1>FailureFailureFailureFailureFailureFailureFailureFailurevvvFailureFailure</h1>
-<h1>FailureFailureFailureFailureFailureFailureFailureFailurevvvFailureFailure</h1>
-<h1>FailureFailureFailureFailureFailureFailureFailureFailurevvvFailureFailure</h1>
-<h1>FailureFailureFailureFailureFailureFailureFailureFailurevvvFailureFailure</h1>
+﻿@{
+    Layout = "~/Views/Shared/_MainLayoutPage.cshtml";
+}
 
+<div id="content-page" class="content-page fit-image" style="margin:auto; background-image: url('/Content/images/testimage.jpg'); background-attachment:fixed; background-size:cover">
+    <div class="container-fluid">
+        <div class="row" style="justify-content:center; padding:40px">
+            <div class="iq-card text-center border " style="margin-top:100px">
+                <div style="padding-bottom:10px">
+                    <div class="iq-card-body text-center rounded">
+                        <h3>Unable to complete transaction.</h3>
+                        <h6>Please, return to Premium Page and try again.</</h6>
+                    </div>
+                    @Html.ActionLink("Back to Premium Page", "Premium", "Main")
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

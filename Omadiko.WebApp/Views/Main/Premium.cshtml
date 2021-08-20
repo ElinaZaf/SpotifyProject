@@ -28,36 +28,27 @@
                             <div class="iq-card-body border text-center rounded">
                                 <span class="font-size-16 text-uppercase">@membership.Type</span>
                                 <h2 class="mb-4 display-3 font-weight-bolder ">@membership.SignUpFee€</h2>
+                                <div style="text-align:center">
+                                    <ol style="list-style:square; display:inline-block; text-align:left">
+                                        <li>Duration: @membership.DurationInMonths @(membership.DurationInMonths == 1 ? "month" : "months")</li>
+                                        <li>Listen to music ad-free</li>
+                                        <li>Play anywhere - even offline</li>
+                                        <li>Create your own music library</li>
+                                    </ol>
+                                </div>
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <a href="~/Subscription/OrderNow/@membership.MembershipId" class="btn btn-primary mt-5">Get Subscription</a>
+                                    <a href="~/Subscription/OrderNow/@membership.MembershipId" class="btn btn-primary mt-5">Get Started</a>
                                 }
                                 else
                                 {
-                                    <a href="~/Account/Register" class="btn btn-primary mt-5">Start</a>
+                            <a href="~/Account/Register" class="btn btn-primary mt-5">Get Started</a>
                                 }
                             </div>
                         </div>
                     </div>
                 }
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="iq-card bg-primary text-white" style="margin-top:40px">
-                        <div class="iq-card-body border text-center rounded">
-                            <span class="font-size-16 text-uppercase">Basic</span>
-                            <h2 class="mb-4 display-3 font-weight-bolder text-white">$99<small class="font-size-14">/ Month</small></h2>
-                            <ul class="list-unstyled mb-0 ">
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Consectetur adipiscing elit</li>
-                                <li>Integer molestie at massa</li>
-                                <li>Facilisis in pretium nisl aliquet</li>
-                                <li>Nulla volutpat aliquam velit</li>
-                            </ul>
-                            <a href="#" class="btn btn-light mt-5">Start Starter</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         }
-
     </div>
 </div>

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Omadiko.Database;
 using Omadiko.Entities;
+using Omadiko.Entities.Models;
 using Omadiko.RepositoryServices;
 using PagedList;
 using PagedList.Mvc;
@@ -124,6 +125,7 @@ namespace Omadiko.WebApp.Controllers
 
 
         // GET: Album
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Index(string searchBy, string search, int? page, string sortBy)
         {
             var albums = db.Albums.AsQueryable().Include(a => a.Artist);
@@ -178,6 +180,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
         // GET: Album/Details/5
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -193,6 +196,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
         // GET: Album/Create
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Create()
         {
             CreateArtistViewBag();
@@ -205,6 +209,7 @@ namespace Omadiko.WebApp.Controllers
         // POST: Album/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = Role.Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "AlbumId,Title,ReleaseDate,PhotoUrl,ArtistId")] Album album, IEnumerable<int> SelectedGenreIds, IEnumerable<int> SelectedSongIds)
@@ -251,8 +256,9 @@ namespace Omadiko.WebApp.Controllers
             CreateSongViewBag();
             return View(album);
         }
-       
+
         // GET: Album/Edit/5
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -274,6 +280,7 @@ namespace Omadiko.WebApp.Controllers
         // POST: Album/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = Role.Admin)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "AlbumId,Title,ReleaseDate,PhotoUrl,ArtistId")] Album album, IEnumerable<int> SelectedGenreIds, IEnumerable<int> SelectedSongIds)
@@ -327,6 +334,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
         // GET: Album/Delete/5
+        [Authorize(Roles = Role.Admin)]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -342,6 +350,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
         // POST: Album/Delete/5
+        [Authorize(Roles = Role.Admin)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
