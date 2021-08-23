@@ -9,28 +9,21 @@ using Omadiko.RepositoryServices;
 using PayPal.Api;
 using Omadiko.Entities.Models;
 using System.Net;
+using Microsoft.AspNet.Identity;
+using System.Data.Entity;
+using Omadiko.RepositoryServices.RepositoryServices;
 
 namespace Omadiko.WebApp.Controllers
 {
-    public class SubscriptionController : Controller
+    public class ShoppingCartController : Controller
     {
 
         private ApplicationDbContext db = new ApplicationDbContext();
         MembershipRepository membershipRepository = new MembershipRepository();
-        private string strSubscription = "Subscription";
+        ApplicationUserRepository applicationUserRepository = new ApplicationUserRepository();
+        private string strCart = "Cart";
 
         public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult Success()
-        {
-            return View();
-        }
-
-
-        public ActionResult Failure()
         {
             return View();
         }
@@ -41,36 +34,52 @@ namespace Omadiko.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            if (Session[strSubscription] == null)
+            if (Session[strCart] == null)
             {
-                Subscription selectedSubscription = new Subscription(membershipRepository.GetById(id), 1);
-                Session[strSubscription] = selectedSubscription;
-
-                List<Subscription> lsSubscription = new List<Subscription>
-                {
-                    new Subscription(membershipRepository.GetById(id),1)
-                };
-                Session[strSubscription] = lsSubscription;
+                var cart = new Cart() { Membership = membershipRepository.GetById(id), Quantity = 1, DateCreated = DateTime.Now };
+                List<Cart> listCart = new List<Cart>() { cart };
+                Session[strCart] = listCart;
             }
             else
             {
-                Session[strSubscription] = null;
+                Session[strCart] = null;
                 OrderNow(id);
             }
+            
             return View("Index");
         }
 
-        public ActionResult Delete(int? id)
+
+        public ActionResult CheckOut(FormCollection frc)
         {
-            if (id == null)
+            List<Cart> listCart = (List<Cart>)Session[strCart];
+            var subscription = new Subscription()
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            List<Subscription> lsSubscription = (List<Subscription>)Session[strSubscription];
-            lsSubscription.Clear();
-            return View("Index");
-        }
+                OrderDate = DateTime.Now,
+                PaymentType = "PayPal",
+                CustomerFirstName = frc["firstName"],
+                CustomerLastName = frc["lastName"],
+                CustomerAddress = frc["address"],
+                CustomerCity = frc["city"],
+                CustomerCountry = frc["country"]
+            };
+            db.Subscriptions.Add(subscription);
+            db.SaveChanges();
 
+            foreach (var cart in listCart)
+            {
+                var subscriptionDetails = new SubscriptionDetails()
+                {
+                    SubscriptionId = subscription.SubscriptionId,
+                    MembershipId = cart.Membership.MembershipId,
+                    Quantity = 1,
+                    Price = cart.Membership.SignUpFee
+                };
+                db.SubscriptionsDetails.Add(subscriptionDetails);
+                db.SaveChanges();
+            }
+            return RedirectToAction("PaymentWithPaypal");
+        }
 
         private Payment payment;
 
@@ -81,8 +90,8 @@ namespace Omadiko.WebApp.Controllers
                 items = new List<Item>()
             };
 
-            List<Subscription> listSubscription = (List<Subscription>)Session[strSubscription];
-            foreach (var subscription in listSubscription)
+            List<Cart> listCart = (List<Cart>)Session[strCart];
+            foreach (var subscription in listCart)
             {
                 listItems.items.Add(new Item()
                 {
@@ -94,7 +103,7 @@ namespace Omadiko.WebApp.Controllers
                 });
 
             }
-            
+
             var payer = new Payer()
             {
                 payment_method = "paypal"
@@ -110,7 +119,7 @@ namespace Omadiko.WebApp.Controllers
             {
                 tax = "1",
                 shipping = "1",
-                subtotal = listSubscription.Sum(x => x.Quantity * x.Membership.SignUpFee).ToString()
+                subtotal = listCart.Sum(x => x.Quantity * x.Membership.SignUpFee).ToString()
             };
 
             var amount = new Amount()
@@ -160,7 +169,7 @@ namespace Omadiko.WebApp.Controllers
                 string payerId = Request.Params["PayerID"];
                 if (string.IsNullOrEmpty(payerId))
                 {
-                    string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/Subscription/PaymentWithPaypal?";
+                    string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/ShoppingCart/PaymentWithPaypal?";
                     var guid = Convert.ToString((new Random()).Next(100000));
                     var createdPayment = CreatePayment(apiContext, baseURI + "guid=" + guid);
 
@@ -187,13 +196,86 @@ namespace Omadiko.WebApp.Controllers
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //PaypalLogger.Log("Error: " + ex.Message);
+                PaypalLogger.Log("Error: " + ex.Message);
                 return View("Failure");
             }
             return View("Success");
         }
 
+        public ActionResult Success()
+        {
+            return View();
+        }
+
+        public ActionResult Failure()
+        {
+            return View();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
+
+
+
+
+
+    //List<Cart> listCart = (List<Cart>)Session[strCart];
+    //Subscription subscription = new Subscription()
+    //{
+    //    FirstName = frc["firstName"],
+    //    LastName = frc["lastName"],
+    //    Address = frc["address"],
+    //    City = frc["city"],
+    //    PostalCode = frc["postalCode"],
+    //    Country = frc["country"],
+    //    Phone = frc["phone"],
+    //    Email = frc["email"],
+    //    OrderDate = DateTime.Now
+    //};
+    //db.Subscriptions.Add(subscription);
+    //db.SaveChanges();
+
+    //foreach (var cart in listCart)
+    //{
+    //    SubscriptionDetails subscriptionDetails = new SubscriptionDetails()
+    //    {
+    //        SubscriptionId = subscription.SubscriptionId,
+    //        MembershipId = cart.Membership.MembershipId,
+    //        Quantity = cart.Quantity,
+    //        Price = cart.Membership.SignUpFee
+    //    };
+    //    db.SubscriptionsDetails.Add(subscriptionDetails);
+    //    db.SaveChanges();
+    //}
+    //return View("CheckOut");
 }
+
+
+

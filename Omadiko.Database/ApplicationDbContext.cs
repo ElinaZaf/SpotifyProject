@@ -31,6 +31,7 @@ namespace Omadiko.Database
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Membership> Memberships { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
+        public DbSet<SubscriptionDetails> SubscriptionsDetails { get; set; }
 
 
     }

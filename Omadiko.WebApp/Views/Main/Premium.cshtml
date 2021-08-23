@@ -38,11 +38,11 @@
                                 </div>
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <a href="~/Subscription/OrderNow/@membership.MembershipId" class="btn btn-primary mt-5">Get Started</a>
+                                    <a href="~/ShoppingCart/OrderNow/@membership.MembershipId" class="btn btn-primary mt-5">Get Started</a>
                                 }
                                 else
                                 {
-                            <a href="~/Account/Register" class="btn btn-primary mt-5">Get Started</a>
+                                    <a href="~/Account/Register" class="btn btn-primary mt-5">Get Started</a>
                                 }
                             </div>
                         </div>

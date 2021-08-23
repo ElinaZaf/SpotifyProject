@@ -19,19 +19,19 @@ namespace Omadiko.Entities
         public string LastName { get; set; }
         public Gender Gender { get; set; }
         public string Address { get; set; }
+        public string City { get; set; }
+        public string PostalCode { get; set; }
         public string Country { get; set; }
         public string Phone { get; set; }
         public DateTime? DateOfBirth { get; set; }
         public string PhotoUrl { get; set; }
 
-        
 
         //Navigation Properties
-        public int SubscriptionId { get; set; }
-        public virtual Subscription Subscription { get; set; }
         public virtual ICollection<Artist> FavouriteArtists { get; set; }
         public virtual ICollection<Album> FavouriteAlbums { get; set; }
         public virtual ICollection<Song> FavouriteSongs { get; set; }
+
 
 
 

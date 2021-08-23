@@ -67,7 +67,8 @@ namespace Omadiko.WebApp.Models
     {
         [Required]
         [Display(Name = "First Name")]
-        public string FirstName { get; set; }
+        public string UserName { get; set; } ///////////////////////////////////////////////////////////////////////////////////////
+        
 
         [Required]
         public Gender Gender { get; set; }

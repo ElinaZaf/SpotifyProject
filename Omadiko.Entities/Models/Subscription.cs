@@ -10,22 +10,17 @@ namespace Omadiko.Entities.Models
     public class Subscription
     {
         public int SubscriptionId { get; set; }
-        public Membership Membership { get; set; }
-        public int Quantity { get; set; }
+        public DateTime OrderDate { get; set; }
+        public string PaymentType { get; set; }
+        public string CustomerFirstName { get; set; }
+        public string CustomerLastName { get; set; }
+        public string CustomerAddress { get; set; }
+        public string CustomerCity { get; set; }
+        public string CustomerCountry { get; set; }
+        public List<SubscriptionDetails> SubscriptionDetails { get; set; }
 
+        
 
-        //Navigation Properties
-        [Required]
-        public virtual ApplicationUser ApplicationUser { get; set; }
-
-
-
-
-        public Subscription(Membership membership, int quantity)
-        {
-            Membership = membership;
-            Quantity = quantity;
-        }
 
     }
 }

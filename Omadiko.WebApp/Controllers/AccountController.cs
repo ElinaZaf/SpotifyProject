@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Omadiko.Database;
 using Omadiko.Entities;
+using Omadiko.Entities.Models;
+using Omadiko.RepositoryServices.RepositoryServices;
 using Omadiko.WebApp.Models;
 
 namespace Omadiko.WebApp.Controllers
@@ -24,6 +26,13 @@ namespace Omadiko.WebApp.Controllers
         public AccountController()
         {
         }
+
+        //private void MigrateShoppingCart(string UserName)
+        //{
+        //    var cart = ShoppingCart.GetCart(this.HttpContext);
+        //    cart.MigrateCart(UserName);
+        //    Session[ShoppingCart.CartSessionKey] = UserName;
+        //}
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
@@ -82,6 +91,7 @@ namespace Omadiko.WebApp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    //MigrateShoppingCart(model.Email);
                     var user = await UserManager.FindAsync(model.Email, model.Password);
                     var roles = await UserManager.GetRolesAsync(user.Id);
                     if (roles.Contains("Admin"))
@@ -151,6 +161,7 @@ namespace Omadiko.WebApp.Controllers
             return View();
         }
 
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -160,11 +171,12 @@ namespace Omadiko.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.FirstName, Email = model.Email, FirstName = model.FirstName, Gender = model.Gender};
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, FirstName = model.UserName, Gender = model.Gender };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //MigrateShoppingCart(model.UserName);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -172,7 +184,7 @@ namespace Omadiko.WebApp.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    
+
                     return RedirectToAction("Premium", "Main");
                 }
                 AddErrors(result);
