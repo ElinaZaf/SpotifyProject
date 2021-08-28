@@ -1,117 +1,33 @@
 ﻿@using Omadiko.Entities.Models
+@using Microsoft.AspNet.Identity
 
-<div id="content-page" class="content-page">
+@{
+    Layout = "~/Views/Shared/_MainLayoutPage.cshtml";
+}
+
+<div id="content-page" class="content-page fit-image" style="margin:auto; background-image: url('/Content/images/testimage.jpg'); background-attachment:fixed; background-size:cover">
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="iq-card">
-                    <div class="iq-card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <img src="~/MuzikTemplate/html-dark/images/logo.png" class="img-fluid avatar-100" alt="">
-                            </div>
-                            <div class="col-lg-6 align-self-center">
-                                @*<h4 class="mb-0 float-right">Invoice</h4>*@
-                                
-                            </div>
-                            <div class="col-sm-12">
-                                <hr class="mt-3">
-                                @*<h5 class="mb-0">Hello, @Model.CustomerFirstName @Model.CustomerLastName</h5>*@
-                                <h5 class="mb-0">The transaction is completed successfully.</h5>
-                                @*<p>Here are the details of your recent transaction.</p>*@
-                            </div>
-                        </div>
-                        <!--<div class="row">
-                            <div class="col-lg-12">
-                                <div class="table-responsive-sm">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center" scope="col">#</th>
-                                                <th scope="col">Order Date</th>
-                                                <th scope="col">Order ID</th>
-                                                <th scope="col">Item</th>
-                                                <th scope="col">Quantity</th>
-                                                <th scope="col">Amount</th>
-                                                <th scope="col">Payment Method</th>
-                                                <th scope="col">Order Status</th>
-
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            foreach (var subscription in Model.SubscriptionDetails)
-                                            {
-                                <tr>
-                                    <th class="text-center" scope="row">1</th>
-                                    <td>Model.OrderDate</td>
-                                    <td>Model.SubscriptionId</td>
-                                    <td>subscription.Membership.Type</td>
-                                    <td>subscription.Quantity</td>
-                                    <td>subscription.Price</td>
-                                    <th>Model.PaymentType</th>
-                                    <td><span class="badge badge-danger">Paid</span></td>
-                                </tr>}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h5>Order Summary</h5>
-                                <div class="table-responsive-sm">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-
-                                                <th class="text-center" scope="col">Price</th>
-                                                <th class="text-center" scope="col">Totals</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>-->
-
-                                                @*<td class="text-center">@Model.Membership.SignUpFee</td>*@
-                                                <!--<td class="text-center"><b>$2,880.00</b></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <h5 class="mt-5">Order Details</h5>
-                                <div class="table-responsive-sm">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Bank</th>
-                                                <th scope="col">.Acc.No</th>
-                                                <th scope="col">Due Date</th>
-                                                <th scope="col">Sub-total</th>
-                                                <th scope="col">Discount</th>
-                                                <th scope="col">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">Threadneedle St</th>
-                                                <td>12333456789</td>
-                                                <td>12 November 2019</td>
-                                                <td>$4597.50</td>
-                                                <td>10%</td>
-                                                <td><b>$4137.75 USD</b></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 mt-5">
-                                <b class="text-danger">Notes:</b>
-                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-                            </div>
-                        </div>-->
+        <div class="row" style="justify-content:center">
+            <div class="iq-card text-center" style="margin-top:100px">
+                <div class="iq-card-body border text-center rounded">
+                    <div class="col-lg-12" style="justify-content:center">
+                        <img src="~/MuzikTemplate/html-dark/images/logo.png" class="img-fluid avatar-100" style="display:block; margin-left:auto; margin-right:auto" alt="" >
+                    </div>
+                    <div class="col-sm-12" style="text-align:center">
+                        <hr class="mt-3">
+                        <h3>Thank you for being part of our team!</h3>
+                        <br />
+                        <p>The transaction is completed successfully.</p>
+                        <p>If you would like to check the details of your recent transaction, please press <a href="~/ApplicationUser/SubscriptionDetails/@User.Identity.GetUserId()"><i style="text-decoration:underline">here</i></a>.</p>
+                    </div>
+                    <div class="col-sm-12" style="text-align:center; margin-bottom:40px">
+                        <a href="~/Home/Index/" class="btn btn-primary mt-5">Enter Site</a>
                     </div>
                 </div>
             </div>
         </div>
+       
+       
     </div>
 </div>
+

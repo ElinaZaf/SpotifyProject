@@ -37,6 +37,23 @@ namespace Omadiko.WebApp.Controllers
             return View(applicationUser);
         }
 
+        public ActionResult SubscriptionDetails(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser applicationUser = applicationUserRepository.GetById(id);
+            if (applicationUser == null)
+            {
+                return HttpNotFound();
+            }
+            return View(applicationUser);
+        }
+
+
+
+
         [Authorize(Roles = Role.Subscriber)]
         public ActionResult FavouriteAlbums(string id)
         {

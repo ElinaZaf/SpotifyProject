@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,10 +18,14 @@ namespace Omadiko.Entities.Models
         public string CustomerAddress { get; set; }
         public string CustomerCity { get; set; }
         public string CustomerCountry { get; set; }
-        public List<SubscriptionDetails> SubscriptionDetails { get; set; }
+
+
+        //Navigation Properties
+        public virtual ICollection<SubscriptionDetails> SubscriptionDetails { get; set; }
+        public string UserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
         
-
 
     }
 }

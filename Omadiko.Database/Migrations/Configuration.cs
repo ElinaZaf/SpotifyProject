@@ -448,13 +448,27 @@
             Membership m1 = new Membership() { Type = "Individual Monthly", SignUpFee = 6, DurationInMonths = 1, DiscountRate = 0 }; 
             Membership m2 = new Membership() { Type = "Individual Quarterly", SignUpFee = 19, DurationInMonths = 3, DiscountRate = 5 }; 
             Membership m3 = new Membership() { Type = "Individual Semi-Annual", SignUpFee = 39, DurationInMonths = 6, DiscountRate = 10 }; 
-            Membership m4 = new Membership() { Type = "Individual Annual", SignUpFee = 78, DurationInMonths = 12, DiscountRate = 15 }; 
+            Membership m4 = new Membership() { Type = "Individual Annual", SignUpFee = 78, DurationInMonths = 12, DiscountRate = 15 };
             #endregion
+
+
+            #region SEEDING SUBSCRIPTIONSDETAILS
+            SubscriptionDetails sd1 = new SubscriptionDetails() { Quantity = 1, Price = 100 };
+            sd1.Membership = m1;
+            #endregion
+
+            #region SEEDING SUBSCRIPTIONS
+            Subscription sb1 = new Subscription() { OrderDate= new DateTime(2021, 08, 28), PaymentType = "PayPal", CustomerFirstName = "Jane", CustomerLastName = "Stone", CustomerAddress = "Burton 126", CustomerCity = "London", CustomerCountry = "UK"  };
+            sb1.SubscriptionDetails = new List<SubscriptionDetails>() { sd1 };
+            #endregion
+
 
             context.Artists.AddOrUpdate(x => new { x.Name, x.LastName }, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24, a25, a26, a27, a28, a29, a30, a31, a32, a33, a34, a35, a36, a37, a38, a39, a40, a41, a42, a43, a44, a45, a46, a47, a48, a49, a50, a51, a52, a53, a54, a55, a56, a57, a58, a59, a60, a61);
             context.Genres.AddOrUpdate(x => x.Kind, g1, g2, g3, g4, g5, g6, g7, g8, g9);
             context.Songs.AddOrUpdate(x => new { x.Title, x.Duration }, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20, s21, s22, s23, s24, s25, s26, s27, s28, s29, s30, s31, s32, s33, s34, s35, s36, s37, s38, s39, s40, s41, s42, s43, s44, s45, s46, s47, s48, s49, s50, s51, s52, s53, s54, s55, s56, s57, s58, s59, s60, s61, s62, s63, s64, s65, s66, s67, s68, s69, s70, s71, s72, s73, s74, s75, s76, s77, s78, s79, s80, s81, s82, s83, s84, s85, s86, s87, s88, s89, s90, s91, s92, s93, s94, s95, s96, s97, s98, s99, s100, s101, s102, s103, s104, s105, s106, s107, s108, s109, s110, s111, s112, s113, s114, s115, s116, s117, s118, s119, s120, s121, s122, s123, s124, s125, s126, s127, s128, s129, s130, s131, s132, s133, s134, s135, s136, s137, s138, s139, s140, s141, s142, s143, s144, s145, s146, s147, s148, s149, s150);
             context.Memberships.AddOrUpdate(x => new { x.Type, x.DurationInMonths }, m1, m2, m3, m4);
+            context.SubscriptionsDetails.Add(sd1);
+            context.Subscriptions.Add(sb1);
             context.SaveChanges();
 
 
@@ -542,7 +556,8 @@
                 PhotoUrl = "~/Content/images/ArtistImages/whitney_houston400x410.jpg",
                 UserName = "jane@muzik.com",
                 Email = "jane@muzik.com",
-                PasswordHash = PasswordHash.HashPassword("123456Jj!")
+                PasswordHash = PasswordHash.HashPassword("123456Jj!"),
+                Subscriptions = new List<Subscription>() { sb1 }
             };
             manager.Create(user1);
             manager.Create(user2);

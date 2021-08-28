@@ -9,5 +9,6 @@ namespace Omadiko.Entities.Models
     public class Subscriber : ApplicationUser
     {
         
+        
     }
 }

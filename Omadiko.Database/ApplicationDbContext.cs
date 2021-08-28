@@ -24,6 +24,9 @@ namespace Omadiko.Database
         {
             return new ApplicationDbContext();
         }
+
+       
+
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Album> Albums { get; set; }
         public DbSet<Photo> Photos { get; set; }
@@ -32,7 +35,6 @@ namespace Omadiko.Database
         public DbSet<Membership> Memberships { get; set; }
         public DbSet<Subscription> Subscriptions { get; set; }
         public DbSet<SubscriptionDetails> SubscriptionsDetails { get; set; }
-
 
     }
 }

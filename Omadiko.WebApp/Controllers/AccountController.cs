@@ -12,7 +12,6 @@ using Microsoft.Owin.Security;
 using Omadiko.Database;
 using Omadiko.Entities;
 using Omadiko.Entities.Models;
-using Omadiko.RepositoryServices.RepositoryServices;
 using Omadiko.WebApp.Models;
 
 namespace Omadiko.WebApp.Controllers

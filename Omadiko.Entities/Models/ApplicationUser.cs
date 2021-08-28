@@ -31,7 +31,8 @@ namespace Omadiko.Entities
         public virtual ICollection<Artist> FavouriteArtists { get; set; }
         public virtual ICollection<Album> FavouriteAlbums { get; set; }
         public virtual ICollection<Song> FavouriteSongs { get; set; }
-
+        public virtual ICollection<Subscription> Subscriptions { get; set; }
+        
 
 
 

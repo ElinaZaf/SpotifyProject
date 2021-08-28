@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Omadiko.Entities;
 using Omadiko.RepositoryServices;
-using Omadiko.RepositoryServices.RepositoryServices;
 
 namespace Omadiko.Console2
 {

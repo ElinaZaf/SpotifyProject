@@ -67,7 +67,7 @@
                         </div>
                         <div class="pagination" style="justify-content:center">
                             @Html.PagedListPager(Model, page => Url.Action("ShowArtists", new { page, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] }),
-                                             new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+                                             new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded } )
                         </div>
                     </div>
                 </div>

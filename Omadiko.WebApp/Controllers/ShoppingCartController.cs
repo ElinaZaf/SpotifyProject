@@ -11,7 +11,7 @@ using Omadiko.Entities.Models;
 using System.Net;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
-using Omadiko.RepositoryServices.RepositoryServices;
+using Omadiko.Entities;
 
 namespace Omadiko.WebApp.Controllers
 {
@@ -62,6 +62,7 @@ namespace Omadiko.WebApp.Controllers
                 CustomerAddress = frc["address"],
                 CustomerCity = frc["city"],
                 CustomerCountry = frc["country"]
+                
             };
             db.Subscriptions.Add(subscription);
             db.SaveChanges();
@@ -78,8 +79,13 @@ namespace Omadiko.WebApp.Controllers
                 db.SubscriptionsDetails.Add(subscriptionDetails);
                 db.SaveChanges();
             }
+            var user = db.Users.Find(User.Identity.GetUserId());
+            user.Subscriptions = new List<Subscription>() { subscription };
+            db.Entry(user).State = EntityState.Modified;
+            db.SaveChanges();
             return RedirectToAction("PaymentWithPaypal");
         }
+
 
         private Payment payment;
 
