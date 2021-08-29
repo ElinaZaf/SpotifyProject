@@ -3,4 +3,71 @@
     Layout = "~/Views/Shared/_MainLayoutPage.cshtml";
 }
 
+<div id="content-page" class="content-page fit-image" style="margin:auto; background-image: url('/Content/images/testimage.jpg'); background-attachment:fixed; background-size:cover">
+    <div class="container-fluid">
+        <div class="row" style="justify-content:center">
+            <div class="iq-card text-center" style="margin-top:100px">
+                <div class="iq-card-body border text-center rounded">
+                    <h2>Get Support!</h2>
+                    <p style="margin-bottom:30px">Start a live chat session with our expert Muzik Support team for a quick response to your question.</p>
+                    <hr />
+                    <div class="container">
+                        <div class="chat-panel panel panel-default">
+                            <div class="panel-heading">
+                                <p style="color:red">LiveChat Box</p>
+                            </div>
+                            <div class="panel-body" id="chat" style="height:250px; overflow:scroll">
+                                <input type="hidden" id="displayname" />
+                                <p id="discussion"></p>
+                            </div>
+                            <div class="panel-footer" style="margin-top:20px">
+                                <div class="input-group">
+                                    <input id="message" type="text" name="message" class="form-control input-sm" placeholder="Type your message here..." />
+                                    <span style="margin-top:10px">
+                                        <input type="button" class="btn-success" id="sendmessage" value="Send" style="margin-left:10px"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+
+
+
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        $(function () {
+            var chat = $.connection.chatHub;
+            chat.client.addNewMessageToPage = function (name, message) {
+                if (name.toUpperCase() == "ADMIN") {
+                    $('#discussion').append('<p style="color: blue; text-align:left;"><strong>' + htmlEncode(name) + '</strong>: ' + htmlEncode(message) + '</p>');
+                }
+                else if (name != "Admin") {
+                    $('#discussion').append('<p style="color: green; text-align:right;"><strong>' + htmlEncode(name) + '</strong>: ' + htmlEncode(message) + '</p>');
+
+                }
+            };
+            $('#displayname').val(prompt('Enter your name:', ''));
+            $('#message').focus();
+            $.connection.hub.start().done(function () {
+                $('#sendmessage').click(function () {
+                    chat.server.send($('#displayname').val(), $('#message').val());
+                    $('#message').val('').focus();
+                });
+            });
+        });
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        }
+    </script>
+}
 
