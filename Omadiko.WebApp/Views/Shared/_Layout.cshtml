@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿@using Microsoft.AspNet.Identity
+
+<!doctype html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -15,6 +17,21 @@
     <link rel="stylesheet" href="~/MuzikTemplate/html-dark/css/style.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="~/MuzikTemplate/html-dark/css/responsive.css">
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <script>
+        var userId = "@User.Identity.GetUserId()";
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "https://localhost:44399/api/applicationUsers/GetCurrentApplicationUserPhotoUrl/" + userId,
+            success: function (data) {
+                var newdata = JSON.stringify(data);
+                /*$(".appendPhotoUrl").empty();*/
+                $(".appendPhotoUrl").append("<img src=" + newdata + " class='img-fluid rounded-circle' alt='user'>");
+            }
+        });
+    </script>
 </head>
 <body>
     <!-- loader Start -->

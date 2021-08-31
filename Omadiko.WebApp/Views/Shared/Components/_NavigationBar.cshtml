@@ -26,10 +26,10 @@
                     {
                         @Html.AntiForgeryToken()
 
-                        <ul class="navbar-nav ml-auto navbar-list">
+                        <ul class="navbar-nav ml-auto navbar-list appendHere">
                             <li class="line-height pt-3">
-                                <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center" title="Show User Profile">
-                                    <img src="~/MuzikTemplate/html-dark/images/user/11.png" class="img-fluid rounded-circle" alt="user">
+                                <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center appendPhotoUrl" title="Show User Profile">
+
                                 </a>
                                 <div class="iq-sub-dropdown iq-user-dropdown">
                                     <div class="iq-card shadow-none m-0">
@@ -84,3 +84,24 @@
         </nav>
     </div>
 </div>
+
+
+
+
+
+
+@*@section scripts {
+    <script>
+        $.ajax({
+            type: 'GET',
+            dataType: "json",
+            url: 'https://localhost:44399/api/applicationUsers/GetCurrentApplicationUserPhotoUrl',
+            success: function (data) {
+                var newdata = JSON.stringify(data);
+                $(".appendPhotoUrl").empty();
+                $(".appendPhotoUrl").append("<img src=" + newdata + " class='img-fluid rounded-circle' alt='user'>");
+            }
+        });
+
+    </script>
+}*@

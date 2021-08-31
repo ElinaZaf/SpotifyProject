@@ -305,7 +305,7 @@
             a2.Albums = new List<Album>() { al2 };
             Artist a3 = new Artist() { Name = "Shakira", LastName = "", PhotoUrl = "~/Content/images/ArtistImages/shakira400x410.jpg", Country = "Colombia", DateOfBirth = new DateTime(1977, 2, 2) };
             a3.Albums = new List<Album>() { al3 };
-            Artist a4 = new Artist() { Name = "Whitney ", LastName = "Houston ", PhotoUrl = "~/Content/images/ArtistImages/whitney_houston400x410.jpg", Country = "USA", DateOfBirth = new DateTime(1963, 8, 9), DateOfDeath = new DateTime(2012, 2, 11) };
+            Artist a4 = new Artist() { Name = "Whitney ", LastName = "Houston ", PhotoUrl = "/Content/images/ArtistImages/whitney_houston400x410.jpg", Country = "USA", DateOfBirth = new DateTime(1963, 8, 9), DateOfDeath = new DateTime(2012, 2, 11) };
             a4.Albums = new List<Album>() { al4 };
             Artist a5 = new Artist() { Name = "George", LastName = "Michael", PhotoUrl = "~/Content/images/ArtistImages/george_michael400x410.jpg", Country = "UK", DateOfBirth = new DateTime(1963, 7, 25), DateOfDeath = new DateTime(2016, 12, 25) };
             a5.Albums = new List<Album>() { al5 };
@@ -539,7 +539,7 @@
                 Country = "UK",
                 Phone = "008465415864684",
                 DateOfBirth = new DateTime(1974, 12, 28),
-                PhotoUrl = "~/Content/images/ArtistImages/whitney_houston400x410.jpg",
+                PhotoUrl = "/Content/images/ArtistImages/whitney_houston400x410.jpg",
                 UserName = "josh@muzik.com",
                 Email = "josh@muzik.com",
                 PasswordHash = PasswordHash.HashPassword("123456Jj!")
@@ -553,7 +553,7 @@
                 Country = "UK",
                 Phone = "008465415864684",
                 DateOfBirth = new DateTime(1974, 12, 28),
-                PhotoUrl = "~/Content/images/ArtistImages/whitney_houston400x410.jpg",
+                PhotoUrl = "/Content/images/ArtistImages/whitney_houston400x410.jpg",
                 UserName = "jane@muzik.com",
                 Email = "jane@muzik.com",
                 PasswordHash = PasswordHash.HashPassword("123456Jj!"),

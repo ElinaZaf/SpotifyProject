@@ -15,7 +15,7 @@ namespace Omadiko.Database
     {
         public ApplicationDbContext() : base("Sindesmos")
         {
-
+            
         }
        
 

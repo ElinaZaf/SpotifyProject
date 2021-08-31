@@ -46,7 +46,7 @@
                                     <div class="music-right">
                                         <div class="d-flex align-items-center">
                                             <div class="iq-circle mr-2 share"><a href="javascript:void();"><i class="las la-share-alt-square text-primary"></i></a></div>
-                                            <div class="iq-circle mr-2"><a href="javascript:void();"><i class="ri-heart-fill  text-primary"></i></a></div>
+                                            <div id="artistAddToFav" class="iq-circle mr-2"><a href="javascript:void();"><i class="ri-heart-fill  text-primary"></i></a></div>
                                             <div class="iq-circle">
                                                 <a href="javascript:void();"><i class="las la-download text-primary"></i></a>
                                             </div>
@@ -99,3 +99,20 @@
         </div>
     </div>
 </div>
+
+
+
+@*<script>
+    $('#artistAddToFav').click(function () {
+        var $artistaddToFav = $(this);
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:44399/ApplicationUsers/addArtistToFavorites/" + $artistaddToFav.data("id"),
+            data: "name=John&location=Boston",
+            dataType: "json",
+            success: function (response) {
+
+            }
+        });
+    })
+</script>*@
