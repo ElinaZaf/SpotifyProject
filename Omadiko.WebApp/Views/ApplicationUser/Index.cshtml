@@ -19,6 +19,7 @@
 
                     <div class="iq-card-body">
                         <div class="table-responsive">
+
                             <table class="data-tables table table-striped table-bordered text-center" style="width:100%">
                                 <thead>
                                     <tr>
@@ -29,10 +30,10 @@
                                             Photo Url
                                         </th>
                                         <th style="width: 15%;">
-                                            First Name
+                                            @Html.ActionLink("First Name", "Index", new { sortBy = ViewBag.SortFNameParameter})
                                         </th>
                                         <th style="width: 15%;">
-                                            Last Name
+                                            @Html.ActionLink("Last Name", "Index", new { sortBy = ViewBag.SortLNameParameter})
                                         </th>
                                         <th style="width: 15%;">
                                             Gender
@@ -41,19 +42,19 @@
                                             Adderess
                                         </th>
                                         <th style="width: 15%;">
-                                            City
+                                            @Html.ActionLink("City", "Index", new { sortBy = ViewBag.SortCityParameter})
                                         </th>
                                         <th style="width: 15%;">
                                             Postal code
                                         </th>
                                         <th style="width: 15%;">
-                                            Country
+                                            @Html.ActionLink("Country", "Index", new { sortBy = ViewBag.SortCountryParameter})
                                         </th>
                                         <th style="width: 15%;">
                                             Phone
                                         </th>
                                         <th style="width: 15%;">
-                                            Date of birth
+                                            @Html.ActionLink("Date of Birth", "Index", new { sortBy = ViewBag.SortDoBParameter })
                                         </th>
                                         <th width="10%">Action</th>
                                     </tr>
@@ -119,7 +120,7 @@
                                     </td>
                                     <td>
                                         <div class="flex align-items-center list-user-action">
-                                            <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="~/Genres/Edit/@subscribers.Id"><i class="ri-pencil-line"></i></a>
+                                            @*<a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="~/Genres/Edit/@subscribers.Id"><i class="ri-pencil-line"></i></a>*@
                                             <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="~/Genres/Delete/@subscribers.Id"><i class="ri-delete-bin-line"></i></a>
                                         </div>
                                     </td>
@@ -131,6 +132,7 @@
                             
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

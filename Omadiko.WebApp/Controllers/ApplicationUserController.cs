@@ -100,9 +100,50 @@ namespace Omadiko.WebApp.Controllers
         }
 
         //=== Show all users Admin index view ===//
-        public ActionResult Index()
+        public ActionResult Index(string sortBy)
         {
-            return View(applicationUserRepository.GetAll());
+            ViewBag.SortFNameParameter = string.IsNullOrEmpty(sortBy) ? "FNameDesc" : "";
+            ViewBag.SortLNameParameter = sortBy == "LNameDesc" ? "LNameAsc" : "LNameDesc";
+            ViewBag.SortCityParameter = sortBy == "CityDesc" ? "CityAsc" : "CityDesc";
+            ViewBag.SortCountryParameter = sortBy == "CountryDesc" ? "CountryAsc" : "CountryDesc";
+            ViewBag.SortDoBParameter = sortBy == "DoBDesc" ? "DoBAsc" : "DoBDesc";
+            var members = db.Users.AsQueryable();
+
+            switch (sortBy)
+            {
+                case "FNameDesc":
+                    members = members.OrderByDescending(x => x.FirstName);
+                    break;
+                case "LNameDesc":
+                    members = members.OrderByDescending(x => x.LastName);
+                    break;
+                case "LNameAsc":
+                    members = members.OrderBy(x => x.LastName);
+                    break;
+                case "CityDesc":
+                    members = members.OrderByDescending(x => x.City);
+                    break;
+                case "CityAsc":
+                    members = members.OrderBy(x => x.City);
+                    break;
+                case "CountryDesc":
+                    members = members.OrderByDescending(x => x.Country);
+                    break;
+                case "CountryAsc":
+                    members = members.OrderBy(x => x.Country);
+                    break;
+                case "DoBDesc":
+                    members = members.OrderByDescending(x => x.DateOfBirth);
+                    break;
+                case "DoBAsc":
+                    members = members.OrderBy(x => x.DateOfBirth);
+                    break;
+                default:
+                    members = members.OrderBy(x => x.FirstName);
+                    break;
+            }
+
+            return View(members);
         }
     }
 }
