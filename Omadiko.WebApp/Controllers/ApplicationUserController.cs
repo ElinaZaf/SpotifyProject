@@ -169,7 +169,7 @@ namespace Omadiko.WebApp.Controllers
 
         // GET: User/Delete/5
         [Authorize(Roles = Role.Admin)]
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
@@ -187,9 +187,10 @@ namespace Omadiko.WebApp.Controllers
         [Authorize(Roles = Role.Admin)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
             var member = db.Users.Find(id);
+            
             db.Users.Remove(member);
             db.SaveChanges();
             return RedirectToAction("Index");
