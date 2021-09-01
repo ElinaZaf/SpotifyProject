@@ -98,5 +98,11 @@ namespace Omadiko.WebApp.Controllers
             }
             return View(applicationUser);
         }
+
+        //=== Show all users Admin index view ===//
+        public ActionResult Index()
+        {
+            return View(applicationUserRepository.GetAll());
+        }
     }
 }
