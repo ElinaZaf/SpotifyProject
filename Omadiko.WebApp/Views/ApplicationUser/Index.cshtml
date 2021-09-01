@@ -1,6 +1,8 @@
 ﻿@model IPagedList<Omadiko.Entities.ApplicationUser>
 @using PagedList;
 @using PagedList.Mvc;
+@using Microsoft.AspNet.Identity;
+
 
 @{
     ViewBag.Title = "Index";
@@ -142,7 +144,7 @@
                                                 <td>
                                                     <div class="flex align-items-center list-user-action">
                                                         @*<a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="~/Genres/Edit/@subscribers.Id"><i class="ri-pencil-line"></i></a>*@
-                                                        <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="~/ApplicationUSer/Delete/@subscribers.Id"><i class="ri-delete-bin-line"></i></a>
+                                                        <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="~/ApplicationUser/Delete/@User.Identity.GetUserId()"><i class="ri-delete-bin-line"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -100,6 +100,8 @@ namespace Omadiko.WebApp.Controllers
             return View(applicationUser);
         }
 
+        //============================================= Admin crud and views ============================================================//
+
         //=== Show all users Admin index view ===//
         public ActionResult Index(string searchBy, string search, int? page, string sortBy)
         {
@@ -163,6 +165,34 @@ namespace Omadiko.WebApp.Controllers
             }
 
             return View(members.ToPagedList(page ?? 1, 2));
+        }
+
+        // GET: User/Delete/5
+        [Authorize(Roles = Role.Admin)]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var member = db.Users.Find(id);
+            if (member == null)
+            {
+                return HttpNotFound();
+            }
+            return View(member);
+        }
+
+        // POST: User/Delete/5
+        [Authorize(Roles = Role.Admin)]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            var member = db.Users.Find(id);
+            db.Users.Remove(member);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
