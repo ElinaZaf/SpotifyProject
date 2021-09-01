@@ -4,6 +4,7 @@ using Omadiko.Database;
 using Omadiko.Entities;
 using Omadiko.Entities.Models;
 using Omadiko.RepositoryServices;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -100,7 +101,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
         //=== Show all users Admin index view ===//
-        public ActionResult Index(string sortBy)
+        public ActionResult Index(string searchBy, string search, int? page, string sortBy)
         {
             ViewBag.SortFNameParameter = string.IsNullOrEmpty(sortBy) ? "FNameDesc" : "";
             ViewBag.SortLNameParameter = sortBy == "LNameDesc" ? "LNameAsc" : "LNameDesc";
@@ -108,6 +109,24 @@ namespace Omadiko.WebApp.Controllers
             ViewBag.SortCountryParameter = sortBy == "CountryDesc" ? "CountryAsc" : "CountryDesc";
             ViewBag.SortDoBParameter = sortBy == "DoBDesc" ? "DoBAsc" : "DoBDesc";
             var members = db.Users.AsQueryable();
+
+            if (searchBy == "First Name")
+            {
+                members = members.Where(x => x.FirstName.Contains(search) || search == null);
+
+            }
+            else if (searchBy == "Last Name")
+            {
+                members = members.Where(x => x.LastName.Contains(search) || x.LastName.Contains(search) || search == null);
+            }
+            else if (searchBy == "City")
+            {
+                members = members.Where(x => x.City.Contains(search) || search == null);
+            }
+            else if (searchBy == "Country")
+            {
+                members = members.Where(x => x.Country.Contains(search) || search == null);
+            }
 
             switch (sortBy)
             {
@@ -143,7 +162,7 @@ namespace Omadiko.WebApp.Controllers
                     break;
             }
 
-            return View(members);
+            return View(members.ToPagedList(page ?? 1, 2));
         }
     }
 }

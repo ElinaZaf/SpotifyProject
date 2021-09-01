@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Omadiko.Entities.ApplicationUser>
+﻿@model IPagedList<Omadiko.Entities.ApplicationUser>
+@using PagedList;
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -17,6 +19,25 @@
                         </div>
                     </div>
 
+                    <div class="iq-card-header d-flex justify-content-end">
+                        @using (Html.BeginForm("Index", "ApplicationUser", FormMethod.Get))
+                        {
+                            <div style="padding-left: 10px">
+                                <b>Search by:</b>
+                                <span style="margin: 0px 10px">
+                                    @Html.RadioButton("searchBy", "First Name") <text>First Name</text>
+                                    @Html.RadioButton("searchBy", "Last Name") <text>Last Name</text>
+                                    @Html.RadioButton("searchBy", "Gender") <text>Gender</text>
+                                    @Html.RadioButton("searchBy", "City") <text>City</text>
+                                    @Html.RadioButton("searchBy", "Country") <text>Country</text>
+                                </span>
+                            </div>
+                            @Html.TextBox("search", null, new { @class = "text search-input", style = "width:80%; padding-left:10px; margin-right: 0px; border-top-right-radius: 0px", placeholder = "Search Here...", type = "search" })
+                            <button type="submit" title="Search" style="background-color:royalblue"><i class="ri-search-line"></i></button>
+                            <button id="ResetButton" title="Reset" style="background-color:forestgreen"><i class="las la-undo-alt"></i></button>
+                        }
+                    </div>
+
                     <div class="iq-card-body">
                         <div class="table-responsive">
 
@@ -30,10 +51,10 @@
                                             Photo Url
                                         </th>
                                         <th style="width: 15%;">
-                                            @Html.ActionLink("First Name", "Index", new { sortBy = ViewBag.SortFNameParameter})
+                                            @Html.ActionLink("First Name", "Index", new { sortBy = ViewBag.SortFNameParameter })
                                         </th>
                                         <th style="width: 15%;">
-                                            @Html.ActionLink("Last Name", "Index", new { sortBy = ViewBag.SortLNameParameter})
+                                            @Html.ActionLink("Last Name", "Index", new { sortBy = ViewBag.SortLNameParameter })
                                         </th>
                                         <th style="width: 15%;">
                                             Gender
@@ -42,13 +63,13 @@
                                             Adderess
                                         </th>
                                         <th style="width: 15%;">
-                                            @Html.ActionLink("City", "Index", new { sortBy = ViewBag.SortCityParameter})
+                                            @Html.ActionLink("City", "Index", new { sortBy = ViewBag.SortCityParameter })
                                         </th>
                                         <th style="width: 15%;">
                                             Postal code
                                         </th>
                                         <th style="width: 15%;">
-                                            @Html.ActionLink("Country", "Index", new { sortBy = ViewBag.SortCountryParameter})
+                                            @Html.ActionLink("Country", "Index", new { sortBy = ViewBag.SortCountryParameter })
                                         </th>
                                         <th style="width: 15%;">
                                             Phone
@@ -63,73 +84,82 @@
                                     @if (Model.Count() == 0)
                                     {
                                         <tr>
-                                            <td colspan="4">No match found.</td>
+                                            <td colspan="12">No match found.</td>
                                         </tr>
                                     }
                                     else
                                     {
                                         foreach (var subscribers in Model)
                                         {
-                                <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        @if (!(subscribers.PhotoUrl is null))
-                                        {
-                                            <img src="@Url.Content(subscribers.PhotoUrl)" class="img-fluid avatar-50 rounded" alt="author-profile">
-                                        }
-                                        else
-                                        {
-                                            <img src="~/Content/images/notavailable400x410.jpg" class="img-fluid avatar-50 rounded" alt="author-profile">
-                                        }
-                                    </td>
-                                    <td>
-                                        @subscribers.FirstName
-                                    </td>
-                                    <td>
-                                        @subscribers.LastName
-                                    </td>
-                                    <td>
-                                        @subscribers.Gender
-                                    </td>
-                                    <td>
-                                        @subscribers.Address
-                                    </td>
-                                    <td>
-                                        @subscribers.City
-                                    </td>
-                                    <td>
-                                        @subscribers.PostalCode
-                                    </td>
-                                    <td>
-                                        @subscribers.Country
-                                    </td>
-                                    <td>
-                                        @subscribers.Phone
-                                    </td>
-                                    <td>
-                                        @if (subscribers.DateOfBirth.HasValue)
-                                        {
-                                            @subscribers.DateOfBirth.Value.ToString("d")
-                                        }
-                                        else
-                                        {
-                                            <text>Unavailable </text>
-                                        }
-                                    </td>
-                                    <td>
-                                        <div class="flex align-items-center list-user-action">
-                                            @*<a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="~/Genres/Edit/@subscribers.Id"><i class="ri-pencil-line"></i></a>*@
-                                            <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="~/Genres/Delete/@subscribers.Id"><i class="ri-delete-bin-line"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                            <tr>
+                                                <td>
+                                                    1
+                                                </td>
+                                                <td>
+                                                    @if (!(subscribers.PhotoUrl is null))
+                                                    {
+                                                        <img src="@Url.Content(subscribers.PhotoUrl)" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="~/Content/images/notavailable400x410.jpg" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @subscribers.FirstName
+                                                </td>
+                                                <td>
+                                                    @subscribers.LastName
+                                                </td>
+                                                <td>
+                                                    @subscribers.Gender
+                                                </td>
+                                                <td>
+                                                    @subscribers.Address
+                                                </td>
+                                                <td>
+                                                    @subscribers.City
+                                                </td>
+                                                <td>
+                                                    @subscribers.PostalCode
+                                                </td>
+                                                <td>
+                                                    @subscribers.Country
+                                                </td>
+                                                <td>
+                                                    @subscribers.Phone
+                                                </td>
+                                                <td>
+                                                    @if (subscribers.DateOfBirth.HasValue)
+                                                    {
+                                                        @subscribers.DateOfBirth.Value.ToString("d")
+                                                    }
+                                                    else
+                                                    {
+                                                        <text>Unavailable </text>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <div class="flex align-items-center list-user-action">
+                                                        @*<a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="~/Genres/Edit/@subscribers.Id"><i class="ri-pencil-line"></i></a>*@
+                                                        <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="~/ApplicationUSer/Delete/@subscribers.Id"><i class="ri-delete-bin-line"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         }
                                     }
                                 </tbody>
                             </table>
-                            
+
+                            <div class="pagination" style="justify-content:center">
+                                <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
+                            </div>
+                            <div class="pagination" style="justify-content:center">
+                                @Html.PagedListPager(Model, page => Url.Action("Index",
+                            new{page,searchBy = Request.QueryString["searchBy"],search = Request.QueryString["search"],
+                            sortBy = Request.QueryString["sortBy"]}), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+                            </div>
+
                         </div>
                     </div>
 
@@ -138,4 +168,10 @@
         </div>
     </div>
 </div>
-
+@section MyCustomJavascript{
+    <script>
+        $("#ResetButton").click(function (e) {
+            $("#search").val("");
+        });
+    </script>
+}
