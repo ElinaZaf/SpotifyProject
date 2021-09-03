@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Omadiko.Entities.Models
 
 <div class="iq-sidebar">
     <div class="iq-sidebar-logo d-flex justify-content-between">
@@ -31,6 +32,11 @@
                         <li><a href="~/ApplicationUser/FavouriteSongs/@User.Identity.GetUserId()"><i class="ion-ios-heart-outline"></i>Songs</a></li>
                     </ul>
                 </li>
+                @if (User.IsInRole(Role.Admin))
+                {
+                    <li class="active"><a href="~/Admin/Index"><i class="fa fa-arrow-left"></i>back to Admin View</a></li>
+                }
+
             </ul>
         </nav>
     </div>

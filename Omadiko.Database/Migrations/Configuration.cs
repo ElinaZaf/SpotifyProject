@@ -498,7 +498,8 @@
                     FirstName = "Admin",
                     UserName = "admin@admin.net",
                     Email = "admin@admin.net",
-                    PasswordHash = PasswordHash.HashPassword("123456Aa!")
+                    PasswordHash = PasswordHash.HashPassword("123456Aa!"),
+                    PhotoUrl = "~/Content/images/UserImages/egw.jpg"
                 };
 
                 userManager.Create(user);
