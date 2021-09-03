@@ -364,6 +364,8 @@
     <Content Include="Content\images\paypal.png" />
     <Content Include="Content\images\testimage.jpg" />
     <Content Include="Content\images\testimage1600x900.jpg" />
+    <Content Include="Content\images\UserImages\adminIcon.jpg" />
+    <Content Include="Content\images\UserImages\egw.jpg" />
     <Content Include="Content\images\UserImages\female.png" />
     <Content Include="Content\images\UserImages\male.png" />
     <Content Include="Content\images\UserImages\nonbinary.png" />

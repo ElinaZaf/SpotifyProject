@@ -190,10 +190,19 @@ namespace Omadiko.WebApp.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             var member = db.Users.Find(id);
-            
+            member.Subscriptions.Clear();
             db.Users.Remove(member);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
