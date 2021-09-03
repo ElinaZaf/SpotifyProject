@@ -17,6 +17,21 @@
     <link rel="stylesheet" href="~/MuzikTemplate/html-dark/css/style.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="~/MuzikTemplate/html-dark/css/responsive.css">
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+    <script>
+        var userId = "@User.Identity.GetUserId()";
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "https://localhost:44399/api/applicationUsers/GetCurrentApplicationUserPhotoUrl/" + userId,
+            success: function (data) {
+                var newdata = JSON.stringify(data);
+                /*$(".appendPhotoUrl").empty();*/
+                $(".appendPhotoUrl").append("<img src=" + newdata + " class='img-fluid rounded-circle' alt='user'>");
+            }
+        });
+    </script>
 </head>
 <body>
     <!-- loader Start -->
@@ -41,7 +56,6 @@
     <!-- Footer END -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    @*<script src="~/Scripts/jquery-3.4.1.js"></script>*@
     <script src="~/MuzikTemplate/html-dark/js/jquery.min.js"></script>
     <script src="~/MuzikTemplate/html-dark/js/popper.min.js"></script>
     <script src="~/MuzikTemplate/html-dark/js/bootstrap.min.js"></script>
@@ -101,19 +115,5 @@
     @RenderSection("MyCustomJavascript", required: false)
     @RenderSection("scripts", required: false)
 
-    @*<script type="text/javascript" src="script.js"></script>*@
-    <script>
-        var userId = "@User.Identity.GetUserId()";
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            url: "https://localhost:44399/api/applicationUsers/GetCurrentApplicationUserPhotoUrl/" + userId,
-            success: function (data) {
-                var newdata = JSON.stringify(data);
-                /*$(".appendPhotoUrl").empty();*/
-                $(".appendPhotoUrl").append("<img src=" + newdata + " class='img-fluid rounded-circle' alt='user'>");
-            }
-        });
-    </script>
 </body>
 </html>

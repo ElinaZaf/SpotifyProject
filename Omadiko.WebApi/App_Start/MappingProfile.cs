@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Omadiko.Entities;
-using Omadiko.Entities.Models;
+using Omadiko.WebApi.Dtos;
 
 namespace Omadiko.WebApi.App_Start
 {
