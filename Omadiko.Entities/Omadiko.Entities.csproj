@@ -136,6 +136,7 @@
     <Compile Include="Custom Validations\Methods.cs" />
     <Compile Include="Custom Validations\ValidationMethods.cs" />
     <Compile Include="Models\Album.cs" />
+    <Compile Include="Models\ApplicationUserDto.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\Genre.cs" />

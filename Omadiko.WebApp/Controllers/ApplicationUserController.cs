@@ -37,7 +37,7 @@ namespace Omadiko.WebApp.Controllers
             return View(applicationUser);
         }
 
-        public ActionResult SubscriptionDetails(string id)
+        public ActionResult EditProfile(string id)
         {
             if (id == null)
             {
@@ -52,6 +52,19 @@ namespace Omadiko.WebApp.Controllers
         }
 
 
+        public ActionResult SubscriptionDetails(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser applicationUser = applicationUserRepository.GetById(id);
+            if (applicationUser == null)
+            {
+                return HttpNotFound();
+            }
+            return View(applicationUser);
+        }
 
 
         [Authorize(Roles = Role.Subscriber)]

@@ -26,19 +26,19 @@ let track_list = [
     name: "Pop Smoke",
     artist: "Cascada",
     image: "images/dashboard/audio/01.png",
-    path: "images/dashboard/audio/audio.mp3"
+        path: "https://localhost:44363/MuzikTemplate/html-dark/images/dashboard/audio/audio.mp3"
   },
   {
     name: "Gabby Barrett",
     artist: "Emeli Sande",
     image: "images/dashboard/audio/01.png",
-    path: "images/dashboard/audio/audio.mp3"
+      path: "https://localhost:44363/MuzikTemplate/html-dark/images/dashboard/audio/audio.mp3"
   },
   {
     name: "Megan Thee",
     artist: "Jessie J",
     image: "images/dashboard/audio/01.png",
-    path: "images/dashboard/audio/audio.mp3",
+      path: "https://localhost:44363/MuzikTemplate/html-dark/images/dashboard/audio/audio.mp3",
   },
 ];
 
