@@ -48,7 +48,7 @@
                                                     </div>
                                                 </div>
                                             </a>
-                                            <a href="~/MuzikTemplate/html-dark/profile-edit.html" class="iq-sub-card iq-bg-primary-hover">
+                                            <a href="~/ApplicationUser/EditProfile/@User.Identity.GetUserId()" class="iq-sub-card iq-bg-primary-hover">
                                                 <div class="media align-items-center">
                                                     <div class="rounded iq-card-icon iq-bg-primary">
                                                         <i class="ri-profile-line"></i>
@@ -91,17 +91,17 @@
 
 
 @*@section scripts {
-    <script>
-        $.ajax({
-            type: 'GET',
-            dataType: "json",
-            url: 'https://localhost:44399/api/applicationUsers/GetCurrentApplicationUserPhotoUrl',
-            success: function (data) {
-                var newdata = JSON.stringify(data);
-                $(".appendPhotoUrl").empty();
-                $(".appendPhotoUrl").append("<img src=" + newdata + " class='img-fluid rounded-circle' alt='user'>");
-            }
-        });
+        <script>
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                url: 'https://localhost:44399/api/applicationUsers/GetCurrentApplicationUserPhotoUrl',
+                success: function (data) {
+                    var newdata = JSON.stringify(data);
+                    $(".appendPhotoUrl").empty();
+                    $(".appendPhotoUrl").append("<img src=" + newdata + " class='img-fluid rounded-circle' alt='user'>");
+                }
+            });
 
-    </script>
-}*@
+        </script>
+    }*@

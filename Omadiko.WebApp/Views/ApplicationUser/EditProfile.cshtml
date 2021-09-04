@@ -1,0 +1,139 @@
+﻿@using Omadiko.Entities.Models
+@model Omadiko.Entities.ApplicationUser
+
+<div id="content-page" class="content-page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="iq-card">
+                    <div class="iq-card-body p-0">
+                        <div class="iq-edit-list">
+                            <ul class="iq-edit-profile d-flex nav nav-pills">
+                                <li class="col-md-3 p-0">
+                                    <a class="nav-link active" data-toggle="pill" href="#personal-information">
+                                        Personal Information
+                                    </a>
+                                </li>
+                                <li class="col-md-3 p-0">
+                                    <a class="nav-link" data-toggle="pill" href="#chang-pwd">
+                                        Change Password
+                                    </a>
+                                </li>
+                                <li class="col-md-3 p-0">
+                                    <a class="nav-link" data-toggle="pill" href="#emailandsms">
+                                        Email and SMS
+                                    </a>
+                                </li>
+                                <li class="col-md-3 p-0">
+                                    <a class="nav-link" data-toggle="pill" href="#manage-contact">
+                                        Manage Contact
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="iq-edit-list-data">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="personal-information" role="tabpanel">
+                            <div class="iq-card">
+                                <div class="iq-card-header d-flex justify-content-between">
+                                    <div class="iq-header-title">
+                                        <h4 class="card-title">Personal Information</h4>
+                                    </div>
+                                </div>
+                                <div class="iq-card-body">
+                                    <div class="form-group row align-items-center">
+                                        <div class="col-md-12">
+                                            <div class="profile-img-edit">
+                                                <img class="profile-pic" src="@Model.PhotoUrl" alt="profile-pic">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class=" row align-items-center">
+                                        <div class="form-group col-sm-6">
+                                            <label for="fname">First Name:</label>
+                                            <input type="text" class="form-control" id="firstName" value=@Model.FirstName>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="lastName">Last Name:</label>
+                                            <input type="text" class="form-control" id="lastName" value=@Model.LastName>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="dob">Date Of Birth:</label>
+                                            <input class="form-control" id="dateOfBirth" value=@Model.DateOfBirth>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="cname">Address:</label>
+                                            <input type="text" class="form-control" id="address" value=@Model.Address>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="cname">City:</label>
+                                            <input type="text" class="form-control" id="city" value=@Model.City>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="cname">Postal Code:</label>
+                                            <input type="text" class="form-control" id="postalCode" value=@Model.PostalCode>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="cname">Country:</label>
+                                            <input type="text" class="form-control" id="country" value=@Model.Country>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="cname">Phone:</label>
+                                            <input type="text" class="form-control" id="phone" value=@Model.Phone>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="cname">PhotoUrl:</label>
+                                            <input type="text" class="form-control" id="photoUrl" value=@Model.PhotoUrl>
+                                        </div>
+                                    </div>
+                                    <button id="sbtn" type="submit" class="btn btn-primary mr-2">Submit</button>
+                                    <button type="reset" class="btn iq-bg-danger">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section scripts{
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#sbtn").click(function () {
+                console.log("mitsis");
+                var id = "@Model.Id";
+                var lastName = $("#lastName").val();
+                console.log(id);
+                console.log(lastName);
+            var settings = {
+                    "url": "https://localhost:44399/api/ApplicationUsers/PutApplicationUser/" + id,
+                    "method": "PUT",
+                    "timeout": 0,
+                    "headers": {
+                        "Content-Type": "application/json"
+                    },
+                    "data": JSON.stringify({
+                        "UserId": id,
+                        "FirstName": "bbbbb",
+                        "LastName": lastName
+                    }),
+                };
+
+                $.ajax(settings).done(function () {
+                    alert("to allaxa");
+                });
+            })
+        });
+
+    </script>
+}

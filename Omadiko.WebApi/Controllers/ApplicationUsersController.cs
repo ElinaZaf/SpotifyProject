@@ -8,10 +8,10 @@ using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using Omadiko.Database;
-using Omadiko.Entities;
-using Omadiko.WebApi.Dtos;
 using AutoMapper;
 using Omadiko.Entities.Models;
+using System.Web.Http.Description;
+using System.Data.Entity.Infrastructure;
 
 namespace Omadiko.WebApi.Controllers
 {
@@ -19,25 +19,6 @@ namespace Omadiko.WebApi.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationUserRepository applicationUserRepository = new ApplicationUserRepository();
-        private ArtistRepository artistRepository = new ArtistRepository();
-
-
-        //GET /api/ApplicationUsers
-        //public IEnumerable<ApplicationUserDto> GetApplicationUsers()
-        //{
-        //    return db.Users.ToList().Select(Mapper.Map<ApplicationUser, ApplicationUserDto>);
-        //}
-
-        ////GET /api/ApplicationUsers/1
-        //public IHttpActionResult GetCurrentApplicationUser(string id)
-        //{
-        //    var applicationUser = db.Users.SingleOrDefault(x => User.Identity.GetUserId() == id);
-        //    if (applicationUser == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(Mapper.Map<ApplicationUser, ApplicationUserDto>(applicationUser));
-        //}
 
         [HttpPost]
         public IHttpActionResult GetCurrentApplicationUserPhotoUrl(string id)
@@ -72,8 +53,49 @@ namespace Omadiko.WebApi.Controllers
         }
 
 
+        // PUT: api/ApplicationUsers/PutApplicationUser/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutApplicationUser(string id, ApplicationUserDto applicationUserDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var applicationUser = db.Users.Find(id);
+
+            if (applicationUser == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+
+            Mapper.Map(applicationUserDto, applicationUser);
+            db.Entry(applicationUser).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ApplicationUserExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
 
 
+        private bool ApplicationUserExists(string id)
+        {
+            return db.Users.Count(e => e.Id == id) > 0;
+        }
 
         //[HttpPost]
         //public void addArtistToFavorites(int id)
@@ -90,7 +112,14 @@ namespace Omadiko.WebApi.Controllers
         //}
 
 
-
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
 
 
