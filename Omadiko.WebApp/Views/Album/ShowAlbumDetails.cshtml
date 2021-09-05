@@ -24,17 +24,17 @@
                                             }
                                         </div>
                                         @if (!(Model.Songs.Count == 0 || Model.Songs == null))
-                                            {
-                                                <div class="d-flex align-items-center" style="margin-bottom: 10px">
-                                                    <a href="javascript:void(0);" class="btn btn-primary iq-play mr-2">Play Music</a>
-                                                </div>
-                                            }
+                                        {
+                                            <div class="d-flex align-items-center" style="margin-bottom: 10px">
+                                                <a href="javascript:void(0);" class="btn btn-primary iq-play mr-2">Play Music</a>
+                                            </div>
+                                        }
                                         <p class="mb-0">389382k Likes</p>
                                     </div>
                                     <div class="music-right">
                                         <div class="d-flex align-items-center">
                                             <div class="iq-circle mr-2 share"><a href="javascript:void();"><i class="las la-share-alt-square text-primary"></i></a></div>
-                                            <div class="iq-circle mr-2"><a href="javascript:void();"><i class="ri-heart-fill text-primary"></i></a></div>
+                                            <div class="iq-circle mr-2"><a onclick="AddToFavoriteAlbums(@Model.AlbumId)"><i id="albumHeart" class="ri-heart-fill text-primary"></i></a></div>
                                             <div class="iq-circle">
                                                 <a href="javascript:void();"><i class="las la-download text-primary"></i></a>
                                             </div>
@@ -81,7 +81,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                </li>}
+                                </li>
+}
                         </ul>
                     </div>
                 }
@@ -96,3 +97,69 @@
         </div>
     </div>
 </div>
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script>
+
+
+
+
+
+
+
+
+                 function AddToFavoriteAlbums(id) {
+
+                     $.ajax({
+                         url: "@Url.Action("addFavoriteAlbum","Subscriber")",
+                         data: {
+                             "albumId": id
+                         },
+                         success: function (result) {
+                             if (result) {
+                                 alert("The album is added to your favourites!")
+                             }
+                             else {
+                                 alert("The album is removed from your favourites!")
+                             }
+                         }
+                     })
+
+                    
+                };
+
+
+
+
+
+
+
+
+
+        
+    </script>
+
+
+    @*<script>
+        $(document).ready(function () {
+            $("#albumHeart").click(function (obj, list) {
+                for (var i = 0; i < list.length; i++) {
+                    if (list[i] === obj) {
+                        alert("This item is already in your favourites' list!")
+
+                    }
+                    else {
+                        list.push(obj);
+                        alert("The item was added in your favourites' list!")
+                    }
+                }
+                console.log("mitsis");
+            })
+        });
+
+    </script>*@
+}
