@@ -42,5 +42,45 @@ namespace Omadiko.WebApp.Controllers
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult addFavoriteArtist(int artistId)
+        {
+            var user = db.Users.Find(User.Identity.GetUserId());
+            var artist = db.Artists.Find(artistId);
+            bool result;
+            if (!(user.FavouriteArtists.Any(x => x.ArtistId == artistId)))
+            {
+                user.FavouriteArtists.Add(artist);
+                db.SaveChanges();
+                result = true;
+            }
+            else
+            {
+                user.FavouriteArtists.Remove(artist);
+                db.SaveChanges();
+                result = false;
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult addFavoriteSong(int songId)
+        {
+            var user = db.Users.Find(User.Identity.GetUserId());
+            var song = db.Songs.Find(songId);
+            bool result;
+            if (!(user.FavouriteSongs.Any(x => x.SongId == songId)))
+            {
+                user.FavouriteSongs.Add(song);
+                db.SaveChanges();
+                result = true;
+            }
+            else
+            {
+                user.FavouriteSongs.Remove(song);
+                db.SaveChanges();
+                result = false;
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

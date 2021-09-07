@@ -28,9 +28,7 @@ namespace Omadiko.WebApi.Controllers
             {
                 return NotFound();
             }
-
             var photoUrl = applicationUser.PhotoUrl;
-
             if (!(photoUrl is null))
             {
                 return Ok(photoUrl);
@@ -52,8 +50,6 @@ namespace Omadiko.WebApi.Controllers
             }
         }
 
-
-        // PUT: api/ApplicationUsers/PutApplicationUser/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutApplicationUser(string id, ApplicationUserDto applicationUserDto)
         {
@@ -61,17 +57,13 @@ namespace Omadiko.WebApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             var applicationUser = db.Users.Find(id);
-
             if (applicationUser == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-
             Mapper.Map(applicationUserDto, applicationUser);
             db.Entry(applicationUser).State = EntityState.Modified;
-
             try
             {
                 db.SaveChanges();
@@ -87,30 +79,13 @@ namespace Omadiko.WebApi.Controllers
                     throw;
                 }
             }
-
             return StatusCode(HttpStatusCode.NoContent);
         }
-
 
         private bool ApplicationUserExists(string id)
         {
             return db.Users.Count(e => e.Id == id) > 0;
         }
-
-        //[HttpPost]
-        //public void addArtistToFavorites(int id)
-        //{
-        //    var user = applicationUserRepository.GetById(User.Identity.GetUserId());
-        //    var countFavorite = user.FavouriteArtists.Where(x => x.ArtistId == id).Count();
-        //    if (countFavorite == 0)
-        //    {
-        //        List<string> errors = new List<string>();
-        //        user.FavouriteArtists.Add(artistRepository.GetById(id));
-        //        db.Entry(user).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //    }
-        //}
-
 
         protected override void Dispose(bool disposing)
         {

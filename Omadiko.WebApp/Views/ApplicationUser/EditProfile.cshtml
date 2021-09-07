@@ -1,6 +1,12 @@
 ﻿@using Omadiko.Entities.Models
 @model Omadiko.Entities.ApplicationUser
 
+<style>
+    .disabledOption:hover {
+        cursor: not-allowed;
+    }
+</style>
+
 <div id="content-page" class="content-page">
     <div class="container-fluid">
         <div class="row">
@@ -15,17 +21,17 @@
                                     </a>
                                 </li>
                                 <li class="col-md-3 p-0">
-                                    <a class="nav-link" data-toggle="pill" href="#chang-pwd">
+                                    <a class="nav-link disabledOption" data-toggle="pill" href="#chang-pwd">
                                         Change Password
                                     </a>
                                 </li>
                                 <li class="col-md-3 p-0">
-                                    <a class="nav-link" data-toggle="pill" href="#emailandsms">
+                                    <a class="nav-link disabledOption" data-toggle="pill" href="#emailandsms">
                                         Email and SMS
                                     </a>
                                 </li>
                                 <li class="col-md-3 p-0">
-                                    <a class="nav-link" data-toggle="pill" href="#manage-contact">
+                                    <a class="nav-link disabledOption" data-toggle="pill" href="#manage-contact">
                                         Manage Contact
                                     </a>
                                 </li>
@@ -55,7 +61,7 @@
                                     <div class=" row align-items-center">
                                         <div class="form-group col-sm-6">
                                             <label for="fname">First Name:</label>
-                                            <input type="text" class="form-control" id="firstName" value=@Model.FirstName>
+                                            <input type="text" class="form-control" id="firstName" required value=@Model.FirstName>
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="lastName">Last Name:</label>
@@ -63,7 +69,7 @@
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="dob">Date Of Birth:</label>
-                                            <input class="form-control" id="dateOfBirth" value=@Model.DateOfBirth>
+                                            <input type="date" class="form-control" id="dateOfBirth" value=@Model.DateOfBirth>
                                         </div>
                                         <div class="form-group col-sm-6">
                                             <label for="cname">Address:</label>
@@ -110,11 +116,16 @@
     <script>
         $(document).ready(function () {
             $("#sbtn").click(function () {
-                console.log("mitsis");
                 var id = "@Model.Id";
+                var firstName = $("#firstName").val();
                 var lastName = $("#lastName").val();
-                console.log(id);
-                console.log(lastName);
+                var dateOfBirth = $("#dateOfBirth").val();
+                var address = $("#address").val();
+                var city = $("#city").val();
+                var postalCode = $("#postalCode").val();
+                var country = $("#country").val();
+                var phone = $("#phone").val();
+                var photoUrl = $("#photoUrl").val();
             var settings = {
                     "url": "https://localhost:44399/api/ApplicationUsers/PutApplicationUser/" + id,
                     "method": "PUT",
@@ -124,13 +135,20 @@
                     },
                     "data": JSON.stringify({
                         "UserId": id,
-                        "FirstName": "bbbbb",
-                        "LastName": lastName
+                        "FirstName": firstName,
+                        "LastName": lastName,
+                        "Address": address,
+                        "City": city,
+                        "PostalCode": postalCode,
+                        "Country": country,
+                        "Phone": phone,
+                        "DateOfBirth": dateOfBirth,
+                        "PhotoUrl": photoUrl
                     }),
                 };
 
                 $.ajax(settings).done(function () {
-                    alert("to allaxa");
+                    alert("You have successfully updated your profile data");
                 });
             })
         });

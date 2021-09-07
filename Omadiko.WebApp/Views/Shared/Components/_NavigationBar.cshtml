@@ -87,21 +87,3 @@
 
 
 
-
-
-
-@*@section scripts {
-        <script>
-            $.ajax({
-                type: 'GET',
-                dataType: "json",
-                url: 'https://localhost:44399/api/applicationUsers/GetCurrentApplicationUserPhotoUrl',
-                success: function (data) {
-                    var newdata = JSON.stringify(data);
-                    $(".appendPhotoUrl").empty();
-                    $(".appendPhotoUrl").append("<img src=" + newdata + " class='img-fluid rounded-circle' alt='user'>");
-                }
-            });
-
-        </script>
-    }*@

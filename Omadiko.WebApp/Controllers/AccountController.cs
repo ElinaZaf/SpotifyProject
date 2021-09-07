@@ -26,13 +26,6 @@ namespace Omadiko.WebApp.Controllers
         {
         }
 
-        //private void MigrateShoppingCart(string UserName)
-        //{
-        //    var cart = ShoppingCart.GetCart(this.HttpContext);
-        //    cart.MigrateCart(UserName);
-        //    Session[ShoppingCart.CartSessionKey] = UserName;
-        //}
-
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;

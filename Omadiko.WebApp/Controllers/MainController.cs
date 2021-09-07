@@ -12,19 +12,14 @@ namespace Omadiko.WebApp.Controllers
     {
         private MembershipRepository membershipRepository = new MembershipRepository();
 
-        // GET: Main
         public ActionResult Index()
         {
             return View();
         }
-
-
-        // GET: Subscription
         public ActionResult Premium()
         {
             return View(membershipRepository.GetAll());
         }
-
         public ActionResult Support()
         {
             return View();

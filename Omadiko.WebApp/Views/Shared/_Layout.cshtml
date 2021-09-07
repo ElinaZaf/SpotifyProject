@@ -3,104 +3,59 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Muzik</title>
-    <!-- Favicon -->
     <link rel="shortcut icon" href="~/MuzikTemplate/html-dark/images/favicon.ico" />
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/MuzikTemplate/html-dark/css/bootstrap.min.css">
-    <!-- Typography CSS -->
     <link rel="stylesheet" href="~/MuzikTemplate/html-dark/css/typography.css">
-    <!-- Style CSS -->
     <link rel="stylesheet" href="~/MuzikTemplate/html-dark/css/style.css">
-    <!-- Responsive CSS -->
     <link rel="stylesheet" href="~/MuzikTemplate/html-dark/css/responsive.css">
 </head>
 <body>
-    <!-- loader Start -->
     <div id="loading">
         <div id="loading-center">
         </div>
     </div>
-    <!-- loader END -->
-    <!-- Wrapper Start -->
     <div class="wrapper">
-        <!-- Sidebar  -->
         @Html.Partial("~/Views/Shared/Components/_SideBar.cshtml")
-        <!-- TOP Nav Bar -->
         @Html.Partial("~/Views/Shared/Components/_NavigationBar.cshtml")
-        <!-- TOP Nav Bar END -->
-        <!-- Page Content  -->
         @RenderBody()
     </div>
-    <!-- Wrapper END -->
-    <!-- Footer -->
     @Html.Partial("~/Views/Shared/Components/_Footer.cshtml")
-    <!-- Footer END -->
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     @*<script src="~/Scripts/jquery-3.4.1.js"></script>*@
     <script src="~/MuzikTemplate/html-dark/js/jquery.min.js"></script>
     <script src="~/MuzikTemplate/html-dark/js/popper.min.js"></script>
     <script src="~/MuzikTemplate/html-dark/js/bootstrap.min.js"></script>
-    <!-- Appear JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/jquery.appear.js"></script>
-    <!-- Countdown JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/countdown.min.js"></script>
-    <!-- Counterup JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/waypoints.min.js"></script>
     <script src="~/MuzikTemplate/html-dark/js/jquery.counterup.min.js"></script>
-    <!-- Wow JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/wow.min.js"></script>
-    <!-- Apexcharts JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/apexcharts.js"></script>
-    <!-- Slick JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/slick.min.js"></script>
-    <!-- Select2 JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/select2.min.js"></script>
-    <!-- Owl Carousel JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/owl.carousel.min.js"></script>
-    <!-- Magnific Popup JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/jquery.magnific-popup.min.js"></script>
-    <!-- Smooth Scrollbar JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/smooth-scrollbar.js"></script>
-    <!-- lottie JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/lottie.js"></script>
-    <!-- am core JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/core.js"></script>
-    <!-- am charts JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/charts.js"></script>
-    <!-- am animated JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/animated.js"></script>
-    <!-- am kelly JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/kelly.js"></script>
-    <!-- am maps JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/maps.js"></script>
-    <!-- am worldLow JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/worldLow.js"></script>
-    <!-- Raphael-min JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/raphael-min.js"></script>
-    <!-- Morris JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/morris.js"></script>
-    <!-- Morris min JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/morris.min.js"></script>
-    <!-- Flatpicker Js -->
     <script src="~/MuzikTemplate/html-dark/js/flatpickr.js"></script>
-    <!-- Style Customizer -->
     <script src="~/MuzikTemplate/html-dark/js/style-customizer.js"></script>
-    <!-- Chart Custom JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/chart-custom.js"></script>
-    <!-- music js -->
     <script src="~/MuzikTemplate/html-dark/js/music-player.js"></script>
-    <!-- music-player js -->
     <script src="~/MuzikTemplate/html-dark/js/music-player-dashboard.js"></script>
-    <!-- Custom JavaScript -->
     <script src="~/MuzikTemplate/html-dark/js/custom.js"></script>
     @RenderSection("MyCustomJavascript", required: false)
     @RenderSection("scripts", required: false)
-
     @*<script type="text/javascript" src="script.js"></script>*@
     <script>
         var userId = "@User.Identity.GetUserId()";
@@ -109,9 +64,8 @@
             dataType: "json",
             url: "https://localhost:44399/api/applicationUsers/GetCurrentApplicationUserPhotoUrl/" + userId,
             success: function (data) {
-                var newdata = JSON.stringify(data);
-                /*$(".appendPhotoUrl").empty();*/
-                $(".appendPhotoUrl").append("<img src=" + newdata + " class='img-fluid rounded-circle' alt='user'>");
+                var photoUrl = JSON.stringify(data);
+                $(".appendPhotoUrl").append("<img style='background-color: lightgrey' src=" + photoUrl + " class='img-fluid rounded-circle' alt='user'>");
             }
         });
     </script>

@@ -491,7 +491,7 @@
 
 
             var PasswordHash = new PasswordHasher();
-            if (!context.Users.Any(x => x.UserName == "admin@admin.net"))
+            if (!context.Users.Any(x => x.Email == "admin@admin.net"))
             {
                 var user = new ApplicationUser
                 {
@@ -506,7 +506,7 @@
                 userManager.AddToRole(user.Id, "Admin");
             }
 
-            if (!context.Users.Any(x => x.UserName == "katesubscriber@muzik.com"))
+            if (!context.Users.Any(x => x.Email == "katesubscriber@muzik.com"))
             {
                 var user = new ApplicationUser
                 {
@@ -517,7 +517,7 @@
                     Country = "Denmark",
                     Phone = "008465415864684",
                     DateOfBirth = new DateTime(1988, 12, 28),
-                    PhotoUrl = "~/Content/images/ArtistImages/whitney_houston400x410.jpg",
+                    PhotoUrl = "/Content/images/UserImages/kateSubscriber.jpg",
                     UserName = "katesubscriber@muzik.com",
                     Email = "katesubscriber@muzik.com",
                     PasswordHash = PasswordHash.HashPassword("123456Kk!"),
@@ -540,7 +540,7 @@
                 Country = "UK",
                 Phone = "008465415864684",
                 DateOfBirth = new DateTime(1974, 12, 28),
-                PhotoUrl = "/Content/images/ArtistImages/whitney_houston400x410.jpg",
+                PhotoUrl = "/Content/images/UserImages/joshUser.jpg",
                 UserName = "josh@muzik.com",
                 Email = "josh@muzik.com",
                 PasswordHash = PasswordHash.HashPassword("123456Jj!")
@@ -554,7 +554,7 @@
                 Country = "UK",
                 Phone = "008465415864684",
                 DateOfBirth = new DateTime(1974, 12, 28),
-                PhotoUrl = "/Content/images/ArtistImages/whitney_houston400x410.jpg",
+                PhotoUrl = "/Content/images/UserImages/janeUser.jpg",
                 UserName = "jane@muzik.com",
                 Email = "jane@muzik.com",
                 PasswordHash = PasswordHash.HashPassword("123456Jj!"),

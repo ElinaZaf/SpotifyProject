@@ -1,4 +1,15 @@
 ﻿@model Omadiko.Entities.Song
+@using Omadiko.Entities.Models
+
+<style>
+    .disabledOption:hover {
+        cursor: not-allowed;
+    }
+
+    .enabledOption:hover {
+        cursor: pointer;
+    }
+</style>
 
 <div id="content-page" class="content-page">
     <div class="container-fluid">
@@ -28,15 +39,19 @@
                                             </div>
                                             <p class="mb-0">389382k Likes</p>
                                         </div>
-                                        <div class="music-right">
-                                            <div class="d-flex align-items-center">
-                                                <div class="iq-circle mr-2 share"><a href="javascript:void();"><i class="las la-share-alt-square text-primary"></i></a></div>
-                                                <div class="iq-circle mr-2"><a href="javascript:void();"><i class="ri-heart-fill  text-primary"></i></a></div>
-                                                <div class="iq-circle">
-                                                    <a href="javascript:void();"><i class="las la-download text-primary"></i></a>
+
+                                        @if (User.IsInRole(Role.Subscriber))
+                                            {
+                                                <div class="music-right">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="iq-circle mr-2 share"><a href="javascript:void();"><i class="las la-share-alt-square text-primary"></i></a></div>
+                                                        <div class="iq-circle mr-2"><a href="javascript:void();"><i class="ri-heart-fill  text-primary"></i></a></div>
+                                                        <div class="iq-circle">
+                                                            <a href="javascript:void();"><i class="las la-download text-primary"></i></a>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                            }
                                     </div>
                                 </div> }
                             else
@@ -64,17 +79,14 @@
                                             </div>
                                             <div class="music-right">
                                                 <div class="d-flex align-items-center">
-                                                    <div class="iq-circle mr-2 share"><a href="javascript:void();"><i class="las la-share-alt-square text-primary"></i></a></div>
-                                                    <div class="iq-circle mr-2"><a href="javascript:void();"><i class="ri-heart-fill  text-primary"></i></a></div>
-                                                    <div class="iq-circle">
-                                                        <a href="javascript:void();"><i class="las la-download text-primary"></i></a>
-                                                    </div>
+                                                    <div class="iq-circle mr-2 share "><a class="disabledOption" href="#"><i class="las la-share-alt-square text-primary"></i></a></div>
+                                                    <div class="iq-circle mr-2"><a class="enabledOption" onclick="AddToFavoriteSongs(@Model.SongId)"><i class="ri-heart-fill text-primary"></i></a></div>
+                                                    <div class="iq-circle"><a class="disabledOption" href="#"><i class="las la-download text-primary"></i></a></div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>}
                                 }
-                            }
                         </div>
                     </div>
                 </div>
@@ -82,3 +94,28 @@
         </div>
     </div>
 </div>
+
+
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script>
+         function AddToFavoriteSongs(id) {
+             $.ajax({
+                 url: "@Url.Action("addFavoriteSong","Subscriber")",
+                 data: {
+                     "songId": id
+                 },
+                 success: function (result) {
+                     if (result) {
+                         alert("The song is added to your favourites!")
+                     }
+                     else {
+                         alert("The song is removed from your favourites!")
+                     }
+                 }
+             })
+        };
+    </script>
+}

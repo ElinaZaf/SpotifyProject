@@ -1,5 +1,17 @@
 ﻿@model Omadiko.Entities.Artist
 @using Omadiko.WebApp.Utilities
+@using Omadiko.Entities.Models
+
+<style>
+    .disabledOption:hover {
+        cursor: not-allowed;
+    }
+
+    .enabledOption:hover {
+        cursor: pointer;
+    }
+</style>
+
 
 <div id="content-page" class="content-page">
     <div class="container-fluid">
@@ -40,18 +52,18 @@
                                         <p class="mb-0">389382k Likes</p>
                                     </div>
 
-
-
-
-                                    <div class="music-right">
-                                        <div class="d-flex align-items-center">
-                                            <div class="iq-circle mr-2 share"><a href="javascript:void();"><i class="las la-share-alt-square text-primary"></i></a></div>
-                                            <div id="artistAddToFav" class="iq-circle mr-2"><a href="javascript:void();"><i class="ri-heart-fill  text-primary"></i></a></div>
-                                            <div class="iq-circle">
-                                                <a href="javascript:void();"><i class="las la-download text-primary"></i></a>
+                                    @if (User.IsInRole(Role.Subscriber))
+                                    {
+                                        <div class="music-right">
+                                            <div class="d-flex align-items-center">
+                                                <div class="iq-circle mr-2 share"><a href="javascript:void();"><i class="las la-share-alt-square text-primary"></i></a></div>
+                                                <div id="artistAddToFav" class="iq-circle mr-2"><a onclick="AddToFavoriteArtists(@Model.ArtistId)"><i class="ri-heart-fill  text-primary"></i></a></div>
+                                                <div class="iq-circle">
+                                                    <a href="javascript:void();"><i class="las la-download text-primary"></i></a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -72,27 +84,27 @@
                         <h3>There are no albums available.</h3>
                     }
                     else
-                    { 
+                    {
                         <ul class="list-unstyled row iq-box-hover mb-0">
                             @foreach (var album in Model.Albums)
                             {
-                                 <li class="col-lg-2  iq-music-box">
-                                     <div class="iq-card mb-0">
-                                         <div class="iq-card-body p-0">
-                                             <a href="~/Album/ShowAlbumDetails">
-                                                 <div class="iq-thumb">
-                                                     <div class="iq-music-overlay"></div>
-                                                     <img src=@Url.Content(album.PhotoUrl) class="img-border-radius img-fluid w-100" alt="">
-                                                 </div>
-                                             </a>
-                                             <div class="feature-list text-center">
-                                                 <h5 class="font-weight-600 mb-0">@album.Title</h5>
-                                             </div>
-                                         </div>
-                                     </div>
-                                 </li>
-                             }
-                         </ul>
+                                <li class="col-lg-2  iq-music-box">
+                                    <div class="iq-card mb-0">
+                                        <div class="iq-card-body p-0">
+                                            <a href="~/Album/ShowAlbumDetails/@album.AlbumId">
+                                                <div class="iq-thumb">
+                                                    <div class="iq-music-overlay"></div>
+                                                    <img src=@Url.Content(album.PhotoUrl) class="img-border-radius img-fluid w-100" alt="">
+                                                </div>
+                                            </a>
+                                            <div class="feature-list text-center">
+                                                <h5 class="font-weight-600 mb-0">@album.Title</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
                     }
                 </div>
             </div>
@@ -102,17 +114,27 @@
 
 
 
-@*<script>
-    $('#artistAddToFav').click(function () {
-        var $artistaddToFav = $(this);
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:44399/ApplicationUsers/addArtistToFavorites/" + $artistaddToFav.data("id"),
-            data: "name=John&location=Boston",
-            dataType: "json",
-            success: function (response) {
 
-            }
-        });
-    })
-</script>*@
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script>
+         function AddToFavoriteArtists(id) {
+             $.ajax({
+                 url: "@Url.Action("addFavoriteArtist","Subscriber")",
+                 data: {
+                     "artistId": id
+                 },
+                 success: function (result) {
+                     if (result) {
+                         alert("The artist is added to your favourites!")
+                     }
+                     else {
+                         alert("The artist is removed from your favourites!")
+                     }
+                 }
+             })
+        };
+    </script>
+}
