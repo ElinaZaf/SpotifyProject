@@ -21,127 +21,127 @@ let curr_track = document.createElement('audio');
 console.log(curr_track);
 
 // Define the tracks that have to be played
-let track_list = [
-  {
-    name: "Pop Smoke",
-    artist: "Cascada",
-    image: "images/dashboard/audio/01.png",
-    path: "images/dashboard/audio/audio.mp3"
-  },
-  {
-    name: "Gabby Barrett",
-    artist: "Emeli Sande",
-    image: "images/dashboard/audio/01.png",
-    path: "images/dashboard/audio/audio.mp3"
-  },
-  {
-    name: "Megan Thee",
-    artist: "Jessie J",
-    image: "images/dashboard/audio/01.png",
-    path: "images/dashboard/audio/audio.mp3",
-  },
+let track_list1 = [
+    {
+        name: "Beat It",
+        artist: "Michael Jackson",
+        image: "https://localhost:44363/Content/images/AlbumImages/afterhours400x410.jpg",
+        path: "https://localhost:44363/Content/"
+    },
+    {
+        name: "Beat It",
+        artist: "Michael Jackson",
+        image: "https://localhost:44363/Content/images/AlbumImages/afterhours400x410.jpg",
+        path: "https://localhost:44363/Content/mp3/BeatIt.mp3"
+    },
+    {
+        name: "Beat It",
+        artist: "Michael Jackson",
+        image: "https://localhost:44363/Content/images/AlbumImages/afterhours400x410.jpg",
+        path: "https://localhost:44363/Content/mp3/BeatIt.mp3"
+    },
 ];
 
 function random_bg_color() {
 
-  // Get a number between 64 to 256 (for getting lighter colors)
-  let red = Math.floor(Math.random() * 256) + 64;
-  let green = Math.floor(Math.random() * 256) + 64;
-  let blue = Math.floor(Math.random() * 256) + 64;
+    // Get a number between 64 to 256 (for getting lighter colors)
+    let red = Math.floor(Math.random() * 256) + 64;
+    let green = Math.floor(Math.random() * 256) + 64;
+    let blue = Math.floor(Math.random() * 256) + 64;
 
-  // Construct a color withe the given values
-  let bgColor = "rgb(" + red + "," + green + "," + blue + ")";
+    // Construct a color withe the given values
+    let bgColor = "rgb(" + red + "," + green + "," + blue + ")";
 
 }
 
 function loadTrack(track_index) {
-  clearInterval(updateTimer);
-  resetValues();
-  curr_track.src = track_list[track_index].path;
-  curr_track.load();
+    clearInterval(updateTimer);
+    resetValues();
+    curr_track.src = track_list[track_index].path;
+    curr_track.load();
 
-  track_art.style.backgroundImage = "url(" + track_list[track_index].image + ")";
-  track_name.textContent = track_list[track_index].name;
-  track_artist.textContent = track_list[track_index].artist;
-  now_playing.textContent = "PLAYING " + (track_index + 1) + " OF " + track_list.length;
+    track_art.style.backgroundImage = "url(" + track_list[track_index].image + ")";
+    track_name.textContent = track_list[track_index].name;
+    track_artist.textContent = track_list[track_index].artist;
+    now_playing.textContent = "PLAYING " + (track_index + 1) + " OF " + track_list.length;
 
-  updateTimer = setInterval(seekUpdate, 1000);
-  curr_track.addEventListener("ended", nextTrack);
-  random_bg_color();
+    updateTimer = setInterval(seekUpdate, 1000);
+    curr_track.addEventListener("ended", nextTrack);
+    random_bg_color();
 }
 
 function resetValues() {
-  curr_time.textContent = "00:00";
-  total_duration.textContent = "00:00";
-  seek_slider.value = 0;
+    curr_time.textContent = "00:00";
+    total_duration.textContent = "00:00";
+    seek_slider.value = 0;
 }
 
 // Load the first track in the tracklist
 loadTrack(track_index);
 
 function playpauseTrack() {
-  if (!isPlaying) playTrack();
-  else pauseTrack();
+    if (!isPlaying) playTrack();
+    else pauseTrack();
 }
 
 function playTrack() {
-  curr_track.play();
-  isPlaying = true;
-  playpause_btn.innerHTML = '<i class="fa fa-pause-circle fa-3x"></i>';
+    curr_track.play();
+    isPlaying = true;
+    playpause_btn.innerHTML = '<i class="fa fa-pause-circle fa-3x"></i>';
 }
 
 function pauseTrack() {
-  curr_track.pause();
-  isPlaying = false;
-  playpause_btn.innerHTML = '<i class="fa fa-play-circle fa-3x"></i>';;
+    curr_track.pause();
+    isPlaying = false;
+    playpause_btn.innerHTML = '<i class="fa fa-play-circle fa-3x"></i>';;
 }
 
 function nextTrack() {
-  if (track_index < track_list.length - 1)
-    track_index += 1;
-  else track_index = 0;
-  loadTrack(track_index);
-  playTrack();
+    if (track_index < track_list.length - 1)
+        track_index += 1;
+    else track_index = 0;
+    loadTrack(track_index);
+    playTrack();
 }
 
 function prevTrack() {
-  if (track_index > 0)
-    track_index -= 1;
-  else track_index = track_list.length;
-  loadTrack(track_index);
-  playTrack();
+    if (track_index > 0)
+        track_index -= 1;
+    else track_index = track_list.length;
+    loadTrack(track_index);
+    playTrack();
 }
 
 function seekTo() {
-  seekto = curr_track.duration * (seek_slider.value / 100);
-  curr_track.currentTime = seekto;
+    seekto = curr_track.duration * (seek_slider.value / 100);
+    curr_track.currentTime = seekto;
 }
 
 function setVolume() {
-  curr_track.volume = volume_slider.value / 100;
+    curr_track.volume = volume_slider.value / 100;
 }
 
 function seekUpdate() {
-  let seekPosition = 0;
+    let seekPosition = 0;
 
-  if (!isNaN(curr_track.duration)) {
-    seekPosition = curr_track.currentTime * (100 / curr_track.duration);
+    if (!isNaN(curr_track.duration)) {
+        seekPosition = curr_track.currentTime * (100 / curr_track.duration);
 
-    seek_slider.value = seekPosition;
+        seek_slider.value = seekPosition;
 
-    let currentMinutes = Math.floor(curr_track.currentTime / 60);
-    let currentSeconds = Math.floor(curr_track.currentTime - currentMinutes * 60);
-    let durationMinutes = Math.floor(curr_track.duration / 60);
-    let durationSeconds = Math.floor(curr_track.duration - durationMinutes * 60);
+        let currentMinutes = Math.floor(curr_track.currentTime / 60);
+        let currentSeconds = Math.floor(curr_track.currentTime - currentMinutes * 60);
+        let durationMinutes = Math.floor(curr_track.duration / 60);
+        let durationSeconds = Math.floor(curr_track.duration - durationMinutes * 60);
 
-    if (currentSeconds < 10) { currentSeconds = "0" + currentSeconds; }
-    if (durationSeconds < 10) { durationSeconds = "0" + durationSeconds; }
-    if (currentMinutes < 10) { currentMinutes = "0" + currentMinutes; }
-    if (durationMinutes < 10) { durationMinutes = "0" + durationMinutes; }
+        if (currentSeconds < 10) { currentSeconds = "0" + currentSeconds; }
+        if (durationSeconds < 10) { durationSeconds = "0" + durationSeconds; }
+        if (currentMinutes < 10) { currentMinutes = "0" + currentMinutes; }
+        if (durationMinutes < 10) { durationMinutes = "0" + durationMinutes; }
 
-    curr_time.textContent = currentMinutes + ":" + currentSeconds;
-    total_duration.textContent = durationMinutes + ":" + durationSeconds;
-  }
+        curr_time.textContent = currentMinutes + ":" + currentSeconds;
+        total_duration.textContent = durationMinutes + ":" + durationSeconds;
+    }
 }
 
 

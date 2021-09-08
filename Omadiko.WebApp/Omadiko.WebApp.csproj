@@ -373,7 +373,7 @@
     <Content Include="Content\images\UserImages\kateSubscriber.jpg" />
     <Content Include="Content\images\UserImages\male.png" />
     <Content Include="Content\images\UserImages\nonbinary.png" />
-    <Content Include="Content\mp3\Michael Jackson - Beat It.mp3" />
+    <Content Include="Content\mp3\BeatIt.mp3" />
     <Content Include="Content\mp3\Michael Jackson - Billie Jean.mp3" />
     <Content Include="Content\mp3\Michael Jackson - Thriller .mp3" />
     <Content Include="Content\PagedList.css" />
