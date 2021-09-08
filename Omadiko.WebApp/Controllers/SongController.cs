@@ -18,7 +18,12 @@ namespace Omadiko.WebApp.Controllers
     public class SongController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private SongRepository songRepository = new SongRepository();
+        private SongRepository songRepository;
+
+        public SongController()
+        {
+            this.songRepository = new SongRepository(db);
+        }
 
         public ActionResult ShowSongs(string searchBy, string search, int? page)
         {
@@ -48,7 +53,6 @@ namespace Omadiko.WebApp.Controllers
             {
                 return HttpNotFound();
             }
-
             return View(song);
         }
 

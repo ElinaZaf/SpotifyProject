@@ -18,12 +18,17 @@ namespace Omadiko.WebApi.Controllers
     public class ApplicationUsersController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private ApplicationUserRepository applicationUserRepository = new ApplicationUserRepository();
+        private ApplicationUserRepository userRepository;
+
+        public ApplicationUsersController()
+        {
+            this.userRepository = new ApplicationUserRepository(db);
+        }
 
         [HttpPost]
         public IHttpActionResult GetCurrentApplicationUserPhotoUrl(string id)
         {
-            var applicationUser = applicationUserRepository.GetById(id);
+            var applicationUser = userRepository.GetById(id);
             if (applicationUser == null)
             {
                 return NotFound();
@@ -57,16 +62,16 @@ namespace Omadiko.WebApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var applicationUser = db.Users.Find(id);
+            var applicationUser = userRepository.GetById(id);
             if (applicationUser == null)
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
             Mapper.Map(applicationUserDto, applicationUser);
-            db.Entry(applicationUser).State = EntityState.Modified;
+            userRepository.UpdateUser(applicationUser);
             try
             {
-                db.SaveChanges();
+                userRepository.Save();
             }
             catch (DbUpdateConcurrencyException)
             {

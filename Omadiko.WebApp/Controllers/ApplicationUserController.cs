@@ -17,12 +17,15 @@ namespace Omadiko.WebApp.Controllers
     public class ApplicationUserController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private ApplicationUserRepository applicationUserRepository = new ApplicationUserRepository();
+        private ApplicationUserRepository userRepository;
         public UserManager<ApplicationUser> UserManager { get; set; }
+
         public ApplicationUserController()
         {
+            this.userRepository = new ApplicationUserRepository(db);
             this.UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
         }
+
 
         public ActionResult UserProfile(string id)
         {
@@ -30,7 +33,7 @@ namespace Omadiko.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = applicationUserRepository.GetById(id);
+            ApplicationUser applicationUser = userRepository.GetById(id);
             if (applicationUser == null)
             {
                 return HttpNotFound();
@@ -44,14 +47,13 @@ namespace Omadiko.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = applicationUserRepository.GetById(id);
+            ApplicationUser applicationUser = userRepository.GetById(id);
             if (applicationUser == null)
             {
                 return HttpNotFound();
             }
             return View(applicationUser);
         }
-
 
         public ActionResult SubscriptionDetails(string id)
         {
@@ -59,14 +61,13 @@ namespace Omadiko.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = applicationUserRepository.GetById(id);
+            ApplicationUser applicationUser = userRepository.GetById(id);
             if (applicationUser == null)
             {
                 return HttpNotFound();
             }
             return View(applicationUser);
         }
-
 
         [Authorize(Roles = Role.Subscriber)]
         public ActionResult FavouriteAlbums(string id)
@@ -75,13 +76,14 @@ namespace Omadiko.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = applicationUserRepository.GetById(id);
+            ApplicationUser applicationUser = userRepository.GetById(id);
             if (applicationUser == null)
             {
                 return HttpNotFound();
             }
             return View(applicationUser);
         }
+
 
         [Authorize(Roles = Role.Subscriber)]
         public ActionResult FavouriteArtists(string id)
@@ -90,13 +92,14 @@ namespace Omadiko.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = applicationUserRepository.GetById(id);
+            ApplicationUser applicationUser = userRepository.GetById(id);
             if (applicationUser == null)
             {
                 return HttpNotFound();
             }
             return View(applicationUser);
         }
+
 
         [Authorize(Roles = Role.Subscriber)]
         public ActionResult FavouriteSongs(string id)
@@ -105,7 +108,7 @@ namespace Omadiko.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = applicationUserRepository.GetById(id);
+            ApplicationUser applicationUser = userRepository.GetById(id);
             if (applicationUser == null)
             {
                 return HttpNotFound();

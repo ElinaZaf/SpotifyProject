@@ -10,7 +10,11 @@ namespace Omadiko.RepositoryServices
 {
     public class MembershipRepository
     {
-        ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db;
+        public MembershipRepository(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
 
         public List<Membership> GetAll()
         {

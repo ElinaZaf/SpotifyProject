@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using System.Web.Http.Results;
 using Omadiko.Entities;
+using Omadiko.RepositoryServices;
 
 namespace Omadiko.WebApp.Controllers
 {
@@ -14,30 +15,39 @@ namespace Omadiko.WebApp.Controllers
     {
 
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationUserRepository userRepository;
+        private ArtistRepository artistRepository;
+        private AlbumRepository albumRepository;
+        private SongRepository songRepository;
 
+        public SubscriberController()
+        {
+            this.userRepository = new ApplicationUserRepository(db);
+            this.artistRepository = new ArtistRepository(db);
+            this.albumRepository = new AlbumRepository(db);
+            this.songRepository = new SongRepository(db);
+        }
 
-        // GET: Subscriber
         public ActionResult Index()
         {
             return View();
         }
 
-
         public JsonResult addFavoriteAlbum(int albumId)
         {
-            var user = db.Users.Find(User.Identity.GetUserId());
-            var album = db.Albums.Find(albumId);
+            var user = userRepository.GetById(User.Identity.GetUserId());
+            var album = albumRepository.GetById(albumId);
             bool result;
             if (!(user.FavouriteAlbums.Any(x => x.AlbumId == albumId)))
             {
                 user.FavouriteAlbums.Add(album);
-                db.SaveChanges();
+                userRepository.Save();
                 result = true;
             }
             else
             {
                 user.FavouriteAlbums.Remove(album);
-                db.SaveChanges();
+                userRepository.Save();
                 result = false;
             }
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -45,19 +55,19 @@ namespace Omadiko.WebApp.Controllers
 
         public JsonResult addFavoriteArtist(int artistId)
         {
-            var user = db.Users.Find(User.Identity.GetUserId());
-            var artist = db.Artists.Find(artistId);
+            var user = userRepository.GetById(User.Identity.GetUserId());
+            var artist = artistRepository.GetById(artistId);
             bool result;
             if (!(user.FavouriteArtists.Any(x => x.ArtistId == artistId)))
             {
                 user.FavouriteArtists.Add(artist);
-                db.SaveChanges();
+                userRepository.Save();
                 result = true;
             }
             else
             {
                 user.FavouriteArtists.Remove(artist);
-                db.SaveChanges();
+                userRepository.Save();
                 result = false;
             }
             return Json(result, JsonRequestBehavior.AllowGet);
@@ -65,19 +75,19 @@ namespace Omadiko.WebApp.Controllers
 
         public JsonResult addFavoriteSong(int songId)
         {
-            var user = db.Users.Find(User.Identity.GetUserId());
-            var song = db.Songs.Find(songId);
+            var user = userRepository.GetById(User.Identity.GetUserId());
+            var song = songRepository.GetById(songId);
             bool result;
             if (!(user.FavouriteSongs.Any(x => x.SongId == songId)))
             {
                 user.FavouriteSongs.Add(song);
-                db.SaveChanges();
+                userRepository.Save();
                 result = true;
             }
             else
             {
                 user.FavouriteSongs.Remove(song);
-                db.SaveChanges();
+                userRepository.Save();
                 result = false;
             }
             return Json(result, JsonRequestBehavior.AllowGet);

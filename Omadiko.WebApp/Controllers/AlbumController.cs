@@ -18,9 +18,14 @@ namespace Omadiko.WebApp.Controllers
 {
     public class AlbumController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-        private AlbumRepository albumRepository = new AlbumRepository();
 
+        private ApplicationDbContext db = new ApplicationDbContext();
+        private AlbumRepository albumRepository;
+
+        public AlbumController()
+        {
+            this.albumRepository = new AlbumRepository(db);
+        }
 
         public ActionResult ShowAlbums(string searchBy, string search, int? page)
         {

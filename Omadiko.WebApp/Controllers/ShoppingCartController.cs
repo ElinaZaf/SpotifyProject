@@ -19,9 +19,16 @@ namespace Omadiko.WebApp.Controllers
     {
 
         private ApplicationDbContext db = new ApplicationDbContext();
-        MembershipRepository membershipRepository = new MembershipRepository();
-        ApplicationUserRepository applicationUserRepository = new ApplicationUserRepository();
+        private ApplicationUserRepository userRepository;
+        private MembershipRepository membershipRepository;
         private string strCart = "Cart";
+        private Payment payment;
+
+        public ShoppingCartController()
+        {
+            this.userRepository = new ApplicationUserRepository(db);
+            this.membershipRepository = new MembershipRepository(db);
+        }
 
         public ActionResult Index()
         {
@@ -48,7 +55,6 @@ namespace Omadiko.WebApp.Controllers
             
             return View("Index");
         }
-
 
         public ActionResult CheckOut(FormCollection frc)
         {
@@ -79,15 +85,12 @@ namespace Omadiko.WebApp.Controllers
                 db.SubscriptionsDetails.Add(subscriptionDetails);
                 db.SaveChanges();
             }
-            var user = db.Users.Find(User.Identity.GetUserId());
+            var user = userRepository.GetById(User.Identity.GetUserId());
             user.Subscriptions = new List<Subscription>() { subscription };
-            db.Entry(user).State = EntityState.Modified;
-            db.SaveChanges();
+            userRepository.UpdateUser(user);
+            userRepository.Save();
             return RedirectToAction("PaymentWithPaypal");
         }
-
-
-        private Payment payment;
 
         private Payment CreatePayment(APIContext apiContext, string redirectUrl)
         {
@@ -178,7 +181,6 @@ namespace Omadiko.WebApp.Controllers
                     string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/ShoppingCart/PaymentWithPaypal?";
                     var guid = Convert.ToString((new Random()).Next(100000));
                     var createdPayment = CreatePayment(apiContext, baseURI + "guid=" + guid);
-
                     var links = createdPayment.links.GetEnumerator();
                     string paypalRedirectUrl = string.Empty;
                     while (links.MoveNext())
@@ -219,68 +221,7 @@ namespace Omadiko.WebApp.Controllers
         {
             return View();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-    //List<Cart> listCart = (List<Cart>)Session[strCart];
-    //Subscription subscription = new Subscription()
-    //{
-    //    FirstName = frc["firstName"],
-    //    LastName = frc["lastName"],
-    //    Address = frc["address"],
-    //    City = frc["city"],
-    //    PostalCode = frc["postalCode"],
-    //    Country = frc["country"],
-    //    Phone = frc["phone"],
-    //    Email = frc["email"],
-    //    OrderDate = DateTime.Now
-    //};
-    //db.Subscriptions.Add(subscription);
-    //db.SaveChanges();
-
-    //foreach (var cart in listCart)
-    //{
-    //    SubscriptionDetails subscriptionDetails = new SubscriptionDetails()
-    //    {
-    //        SubscriptionId = subscription.SubscriptionId,
-    //        MembershipId = cart.Membership.MembershipId,
-    //        Quantity = cart.Quantity,
-    //        Price = cart.Membership.SignUpFee
-    //    };
-    //    db.SubscriptionsDetails.Add(subscriptionDetails);
-    //    db.SaveChanges();
-    //}
-    //return View("CheckOut");
 }
 
 

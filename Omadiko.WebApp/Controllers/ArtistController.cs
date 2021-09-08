@@ -17,7 +17,12 @@ namespace Omadiko.WebApp.Controllers
     public class ArtistController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private ArtistRepository artistRepository = new ArtistRepository();
+        private ArtistRepository artistRepository;
+
+        public ArtistController()
+        {
+            this.artistRepository = new ArtistRepository(db);
+        }
 
         public ActionResult ShowArtists(string searchBy, string search, int? page)
         {
@@ -51,11 +56,6 @@ namespace Omadiko.WebApp.Controllers
 
             return View(artist);
         }
-
-
-
-
-
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

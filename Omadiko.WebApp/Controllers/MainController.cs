@@ -1,4 +1,5 @@
-﻿using Omadiko.RepositoryServices;
+﻿using Omadiko.Database;
+using Omadiko.RepositoryServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,13 @@ namespace Omadiko.WebApp.Controllers
     [AllowAnonymous]
     public class MainController : Controller
     {
-        private MembershipRepository membershipRepository = new MembershipRepository();
+        private ApplicationDbContext db = new ApplicationDbContext();
+        private MembershipRepository membershipRepository;
+
+        public MainController()
+        {
+            this.membershipRepository = new MembershipRepository(db);
+        }
 
         public ActionResult Index()
         {

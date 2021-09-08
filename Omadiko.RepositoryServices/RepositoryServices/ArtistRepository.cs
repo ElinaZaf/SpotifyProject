@@ -10,8 +10,11 @@ namespace Omadiko.RepositoryServices
 {
     public class ArtistRepository
     {
-        ApplicationDbContext db = new ApplicationDbContext();
-
+        private ApplicationDbContext db;
+        public ArtistRepository(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
 
         public List<Artist> GetAll()
         {
