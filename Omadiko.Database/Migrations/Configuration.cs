@@ -522,7 +522,8 @@
                     Email = "katesubscriber@muzik.com",
                     PasswordHash = PasswordHash.HashPassword("123456Kk!"),
                     FavouriteAlbums = new List<Album>() { al1, al2, al3, al4, al5 },
-                    FavouriteArtists = new List<Artist>() { a1, a2, a3, a4, a5 }
+                    FavouriteArtists = new List<Artist>() { a1, a2, a3, a4, a5 },
+                    Subscriptions = new List<Subscription> { sb1 }
                 };
 
                 userManager.Create(user);
