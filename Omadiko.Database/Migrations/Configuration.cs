@@ -456,14 +456,14 @@
             SubscriptionDetails sd1 = new SubscriptionDetails() { Quantity = 1, Price = 6 };
             sd1.Membership = m1;
             SubscriptionDetails sd2 = new SubscriptionDetails() { Quantity = 1, Price = 78 };
-            sd1.Membership = m4;
+            sd2.Membership = m4;
             #endregion
 
             #region SEEDING SUBSCRIPTIONS
             Subscription sb1 = new Subscription() { OrderDate= new DateTime(2021, 08, 28), PaymentType = "PayPal", CustomerFirstName = "Jane", CustomerLastName = "Stone", CustomerAddress = "Burton 126", CustomerCity = "London", CustomerCountry = "UK"  };
             sb1.SubscriptionDetails = new List<SubscriptionDetails>() { sd1 };
             Subscription sb2 = new Subscription() { OrderDate = new DateTime(2021, 03, 08), PaymentType = "PayPal", CustomerFirstName = "Kate", CustomerLastName = "Johnson", CustomerAddress = "Kane 35", CustomerCity = "Austin", CustomerCountry = "USA" };
-            sb1.SubscriptionDetails = new List<SubscriptionDetails>() { sd2 };
+            sb2.SubscriptionDetails = new List<SubscriptionDetails>() { sd2 };
             #endregion
 
 
