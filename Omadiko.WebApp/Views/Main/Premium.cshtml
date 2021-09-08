@@ -1,14 +1,30 @@
-﻿@model IEnumerable<Omadiko.Entities.Models.Membership>
+﻿@using Microsoft.AspNet.Identity;
+@model IEnumerable<Omadiko.Entities.Models.Membership>
 
 @{
     Layout = "~/Views/Shared/_MainLayoutPage.cshtml";
 }
+
+<style>
+    .enterUser:hover{
+        font-size: large;
+    }
+</style>
 
 <div id="content-page" class="content-page fit-image" style="margin:auto; background-image: url('/Content/images/testimage.jpg'); background-attachment:fixed; background-size:cover">
     <div class="container-fluid">
         <div class="row" style="justify-content:center">
             <div class="iq-card text-center" style="margin-top:100px">
                 <div class="iq-card-body border text-center rounded">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="enterUser" href="~/Home/Index"><h6>Enter without subscription</h6></a>
+                    }
+                    else
+                    {
+                        <a class="enterUser" onclick="alert('You have to be a registered User to access our site')" href="~/Account/Register"><h6>Enter without subscription</h6></a>
+                    }
+                    <small>or</small>
                     <h1>Pick your Premium!</h1>
                     <h6>Listen witout limits on your phone, speaker and other devices.</h6>
                 </div>

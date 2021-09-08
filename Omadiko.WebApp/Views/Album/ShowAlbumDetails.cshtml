@@ -44,17 +44,15 @@
                                         <p class="mb-0">389382k Likes</p>
                                     </div>
                                     @if (User.IsInRole(Role.Subscriber))
-                                        {
-                                            <div class="music-right">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="iq-circle mr-2 share disabledOption"><a href="javascript:void();"><i class="las la-share-alt-square text-primary"></i></a></div>
-                                                    <div class="iq-circle mr-2"><a onclick="AddToFavoriteAlbums(@Model.AlbumId)"><i class="ri-heart-fill text-primary"></i></a></div>
-                                                    <div class="iq-circle">
-                                                        <a href="javascript:void();"><i class="las la-download text-primary"></i></a>
-                                                    </div>
-                                                </div>
+                                    {
+                                        <div class="music-right">
+                                            <div class="d-flex align-items-center">
+                                                <div class="iq-circle mr-2 share"><a href="#"><i class="las la-share-alt-square text-primary"></i></a></div>
+                                                <div class="iq-circle mr-2"><a class="enabledOption" onclick="AddToFavoriteAlbums(@Model.AlbumId)"><i class="ri-heart-fill text-primary"></i></a></div>
+                                                <div class="iq-circle"><a class="disabledOption" href="#"><i class="las la-download text-primary"></i></a></div>
                                             </div>
-                                        }
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
