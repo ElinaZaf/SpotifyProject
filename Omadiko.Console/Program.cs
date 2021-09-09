@@ -12,8 +12,8 @@ namespace Omadiko.Console2
     {
         static void Main(string[] args)
         {
-            
-           
+
+            Console.WriteLine("Test Ektoras");
         }
 
        
