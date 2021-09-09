@@ -33,7 +33,14 @@ namespace Omadiko.WebApi.Controllers
                 return NotFound();
             }
 
-            return Ok(new {url = song.AudioUrl});
+            //id song
+            //Title
+            //Artist f l
+            //eikona album
+
+
+
+            return Ok(new { id = song.SongId, name = song.Title, artist = string.Format($"{song.Albums.First().Artist.Name} {song.Albums.First().Artist.LastName}"), image=song.Albums.First().PhotoUrl.TrimStart('~'), path = song.AudioUrl });
         }
 
         // PUT: api/Songs/5

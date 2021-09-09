@@ -21,27 +21,26 @@ let curr_track = document.createElement('audio');
 console.log(curr_track);
 
 // Define the tracks that have to be played
-let track_list = [
-    {
-        name: "BeatIt",
-        artist: "Cascada",
-        image: "images/dashboard/audio/01.png",
-        //path: "images/dashboard/audio/audio.mp3"
-        path: "/Content/mp3/BeatIt.mp3"
-    },
-    {
-        name: "Billi Jean",
-        artist: "Emeli Sande",
-        image: "images/dashboard/audio/01.png",
-        path: "/Content/mp3/Michael Jackson - Billie Jean.mp3"
-    },
-    {
-        name: "Thriller",
-        artist: "Jessie J",
-        image: "images/dashboard/audio/01.png",
-        path: "/Content/mp3/Michael Jackson - Thriller .mp3"
-    },
-];
+//let track_list = [
+//    {
+//        name: "BeatIt",
+//        artist: "Cascada",
+//        image: "/Content/images/AlbumImages/thriller400x410.jpg",
+//        path: "/Content/mp3/BeatIt.mp3"
+//    },
+//    {
+//        name: "Billi Jean",
+//        artist: "Emeli Sande",
+//        image: "/Content/images/AlbumImages/thriller400x410.jpg",
+//        path: "/Content/mp3/Michael Jackson - Billie Jean.mp3"
+//    },
+//    {
+//        name: "Thriller",
+//        artist: "Jessie J",
+//        image: "/Content/images/AlbumImages/thriller400x410.jpg",
+//        path: "/Content/mp3/Michael Jackson - Thriller .mp3"
+//    },
+//];
 
 function random_bg_color() {
 
@@ -55,13 +54,16 @@ function random_bg_color() {
 
 }
 
-function loadTrack(track_index,foo) {
-    console.log("eftasa");
+function loadTrack(track_index) {
+    console.log("load track player");
+    console.log(track_list);
+
     clearInterval(track_index);
     resetValues();
     curr_track.src = track_list[track_index].path;
     console.log(curr_track.src);
     curr_track.load();
+    console.log(curr_track);
 
     track_art.style.backgroundImage = "url(" + track_list[track_index].image + ")";
     track_name.textContent = track_list[track_index].name;
@@ -71,7 +73,7 @@ function loadTrack(track_index,foo) {
     updateTimer = setInterval(seekUpdate, 1000);
     curr_track.addEventListener("ended", nextTrack);
     random_bg_color();
-    
+
 }
 
 function resetValues() {
@@ -84,12 +86,42 @@ function resetValues() {
 //loadTrack(track_index);
 
 function playpauseTrack() {
-   
+
     if (!isPlaying) playTrack();
     else pauseTrack();
 }
 
-function playTrack() {
+function playTrack(songId) {
+    console.log(songId);
+   
+  
+    //------------
+    if (songId) {
+
+        var index = track_list.findIndex(x => x.id == songId);
+        
+
+        clearInterval(index);
+        resetValues();
+        curr_track.src = track_list[index].path;
+        console.log(curr_track.src);
+        curr_track.load();
+        console.log(curr_track);
+
+        track_art.style.backgroundImage = "url(" + track_list[index].image + ")";
+        track_name.textContent = track_list[index].name;
+        track_artist.textContent = track_list[index].artist;
+        now_playing.textContent = "PLAYING " + (index + 1) + " OF " + track_list.length;
+
+        updateTimer = setInterval(seekUpdate, 1000);
+    }
+   
+    
+    
+
+
+
+    //------------
     curr_track.play();
     isPlaying = true;
     playpause_btn.innerHTML = '<i class="fa fa-pause-circle fa-3x"></i>';
