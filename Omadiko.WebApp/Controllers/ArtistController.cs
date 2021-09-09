@@ -91,7 +91,6 @@ namespace Omadiko.WebApp.Controllers
             if (searchBy == "FirstName")
             {
                 artist = artist.Where(x => x.Name.Contains(search) || search == null);
-
             }
             else if (searchBy == "LastName")
             {
