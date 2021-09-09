@@ -161,9 +161,31 @@ namespace Omadiko.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Artists.Add(artist);
+                //db.Artists.Add(artist);
+                //db.Entry(artist).Collection("Albums").Load();
+                //artist.Albums.Clear();
+                //db.SaveChanges();
+                //return RedirectToAction("Index");
+
+                db.Artists.Attach(artist);
                 db.Entry(artist).Collection("Albums").Load();
                 artist.Albums.Clear();
+                db.Entry(artist).Collection("Albums").Load();
+                artist.Albums.Clear();
+                db.SaveChanges();
+                if (!(SelectedAlbumIds is null))
+                {
+                    foreach (var id in SelectedAlbumIds)
+                    {
+                        Album album = db.Albums.Find(id);
+                        if (album != null)
+                        {
+                            artist.Albums.Add(album);
+                        }
+                    }
+                }
+
+                db.Entry(artist).State = EntityState.Added;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -221,6 +243,10 @@ namespace Omadiko.WebApp.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            db.Artists.Attach(artist);
+            CreateAlbumViewBag();
+
             return View(artist);
         }
 
