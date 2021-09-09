@@ -38,7 +38,7 @@
                                         @if (!(Model.Songs.Count == 0 || Model.Songs == null))
                                         {
                                             <div class="d-flex align-items-center" style="margin-bottom: 10px">
-                                                <a href="javascript:void(0);" class="btn btn-primary iq-play mr-2">Play Music</a>
+                                                <a  class="btn btn-primary iq-play mr-2 playBtn">Play Music</a>
                                             </div>
                                         }
                                         <p class="mb-0">389382k Likes</p>
@@ -70,7 +70,7 @@
                             {
                                 <li class="mb-3">
                                     <div class="d-flex justify-content-between align-items-center row">
-                                        <div class="media align-items-center col-10 col-md-5">
+                                        <div class="media align-items-center col-10 col-md-5" >
                                             <div class="iq-realese-song ">
                                                 <a href="javascript:void(0);"><img src=@Url.Content(Model.PhotoUrl) class="img-border-radius avatar-60 img-fluid" alt=""></a>
                                             </div>
@@ -80,7 +80,7 @@
                                         </div>
                                         <p class="mb-0 col-md-2 col-md-2 iq-music-time">@song.ConvertTime()</p>
                                         <p class="mb-0 col-md-2 col-md-2 iq-musc-icone"><i class="lar la-star font-size-20"></i></p>
-                                        <p class="mb-0 col-2 col-md-2 iq-music-play"><i class="las la-play-circle font-size-32"></i></p>
+                                        <p id=@song.SongId class="mb-0 col-2 col-md-2 iq-music-play kiklos"><i class="las la-play-circle font-size-32"></i></p>
                                         <div class="iq-card-header-toolbar iq-music-drop d-flex align-items-center col-2 col-md-1">
                                             <div class="dropdown">
                                                 <span class="dropdown-toggle text-primary" id="dropdownMenuButton2" data-toggle="dropdown" aria-expanded="false" role="button">
@@ -134,4 +134,78 @@
              })
         };
     </script>
+    <script>
+           //loadTrack();
+
+        var albumId = @Model.AlbumId;
+        console.log("albmum :" + albumId);
+       var settings = {
+           "url": "https://localhost:44399/api/Albums/GetAlbumSongs/" + albumId,
+            "method": "GET",
+            "timeout": 0,
+        };
+
+        $.ajax(settings).done(function (songlist) {
+            track_list = songlist;
+            //console.log(track_list);
+            loadTrack(0);
+
+        });
+
+
+
+        $(".playBtn").click(function (e) {
+            playpauseTrack();
+            if ($(".playBtn").text() == "Play Music") {
+                $(".playBtn").text("Pause Music");
+            }
+            else {
+                $(".playBtn").text("Play Music");
+            }
+
+        });
+
+        $(".kiklos").click(function (e) {
+
+         
+            var ele = $(this).children().first();
+
+            //Play
+            if (ele.hasClass("la-play-circle")) {
+               var songId = $(this).attr("id");
+                playTrack(songId);
+                $(".kiklos").children().addClass("la-play-circle");
+                ele.removeClass("la-play-circle")
+                ele.addClass("la-pause-circle")
+
+               //style = "background-color:yellow"
+
+                $(this).parent().css("background-color", "yellow");
+            }
+            //Pause
+            else {
+                pauseTrack();
+                ele.removeClass("la-pause-circle")
+                ele.addClass("la-play-circle")
+
+                $(this).parent().css("background-color", "#151616");
+            }
+
+        });
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
 }
