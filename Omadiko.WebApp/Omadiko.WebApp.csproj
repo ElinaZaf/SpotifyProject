@@ -376,6 +376,9 @@
     <Content Include="Content\mp3\BeatIt.mp3" />
     <Content Include="Content\mp3\Michael Jackson - Billie Jean.mp3" />
     <Content Include="Content\mp3\Michael Jackson - Thriller .mp3" />
+    <Content Include="Content\mp3\Steven Wilson - 12 THINGS I FORGOT %28Official Audio%29.mp3" />
+    <Content Include="Content\mp3\The Weeknd - After Hours %28Audio%29.mp3" />
+    <Content Include="Content\mp3\The Weeknd - Blinding Lights %28Official Audio%29.mp3" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
