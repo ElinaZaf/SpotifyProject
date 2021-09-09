@@ -55,29 +55,32 @@ function random_bg_color1() {
 }
 
 function loadTrack(track_index1) {
+    console.log("load track dashboard");
     clearInterval(updateTimer1);
     resetValues();
     curr_track1.src = track_list1[track_index1].path;
     curr_track1.load();
 
-    if (track_art1) {
-        track_art1.style.backgroundImage = "url(" + track_list1[track_index1].image + ")";
-    }
-    if (track_name1) {
-        track_name1.textContent = track_list1[track_index1].name;
-    }
+    console.log(curr_track1);
 
-    if (track_artist1) {
-        track_artist1.textContent = track_list1[track_index1].artist;
-    }
-    if (now_playing1) {
-        now_playing1.textContent = "PLAYING " + (track_index1 + 1) + " OF " + track_list1.length;
-    }
+    //if (track_art1) {
+    //    track_art1.style.backgroundImage = "url(" + track_list1[track_index1].image + ")";
+    //}
+    //if (track_name1) {
+    //    track_name1.textContent = track_list1[track_index1].name;
+    //}
+
+    //if (track_artist1) {
+    //    track_artist1.textContent = track_list1[track_index1].artist;
+    //}
+    //if (now_playing1) {
+    //    now_playing1.textContent = "PLAYING " + (track_index1 + 1) + " OF " + track_list1.length;
+    //}
 
 
 
     updateTimer1 = setInterval(seekUpdate, 1000);
-    curr_track1.addEventListener("ended", nextTrack);
+   // curr_track1.addEventListener("ended", nextTrack);
     random_bg_color1();
 }
 
@@ -88,7 +91,7 @@ function resetValues1() {
 }
 
 // Load the first track in the tracklist
-loadTrack(track_index1);
+//loadTrack(track_index1);
 
 function playpauseTrack1() {
     if (!isPlaying1) playTrack1();

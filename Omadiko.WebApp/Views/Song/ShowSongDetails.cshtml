@@ -35,7 +35,7 @@
                                                 <text>Duration: @Model.ConvertTime()</text>
                                             </div>
                                             <div class="d-flex align-items-center" style="margin-bottom: 10px">
-                                                <a href="javascript:void(0);" class="btn btn-primary iq-play mr-2">Play Music</a>
+                                                <a  class="btn btn-primary iq-play mr-2 playBtn">Play Music</a>
                                             </div>
                                             <p class="mb-0">389382k Likes</p>
                                         </div>
@@ -73,7 +73,7 @@
                                                     <text>Duration: @Model.Duration</text>
                                                 </div>
                                                 <div class="d-flex align-items-center" style="margin-bottom: 10px">
-                                                    <a href="javascript:void(0);" class="btn btn-primary iq-play mr-2">Play Music</a>
+                                                    <a class="btn btn-primary iq-play mr-2  playBtn">Play Music</a>
                                                 </div>
                                                 <p class="mb-0">389382k Likes</p>
                                             </div>
@@ -121,4 +121,40 @@
              })
         };
     </script>
+
+    <script>
+
+        //loadTrack();
+
+        var settings = {
+            "url": "https://localhost:44399/api/Songs/GetSong/2",
+            "method": "GET",
+            "timeout": 0,
+        };
+
+        $.ajax(settings).done(function (response) {
+            
+            loadTrack(0);
+           
+        });
+
+
+
+        $(".playBtn").click(function (e) {
+            
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

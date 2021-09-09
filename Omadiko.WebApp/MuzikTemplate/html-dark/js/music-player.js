@@ -55,8 +55,9 @@ function random_bg_color() {
 
 }
 
-function loadTrack(track_index) {
-    clearInterval(updateTimer);
+function loadTrack(track_index,foo) {
+    console.log("eftasa");
+    clearInterval(track_index);
     resetValues();
     curr_track.src = track_list[track_index].path;
     console.log(curr_track.src);
@@ -70,6 +71,7 @@ function loadTrack(track_index) {
     updateTimer = setInterval(seekUpdate, 1000);
     curr_track.addEventListener("ended", nextTrack);
     random_bg_color();
+    
 }
 
 function resetValues() {
@@ -79,9 +81,10 @@ function resetValues() {
 }
 
 // Load the first track in the tracklist
-loadTrack(track_index);
+//loadTrack(track_index);
 
 function playpauseTrack() {
+   
     if (!isPlaying) playTrack();
     else pauseTrack();
 }
