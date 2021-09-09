@@ -17,7 +17,7 @@
                             <h4 class="card-title">Genres Lists</h4>
                         </div>
                         <div class="iq-card-header-toolbar d-flex align-items-center">
-                            <a href="~/Genres/Create" class="btn btn-primary">Add New Category</a>
+                            <a href="~/Genres/Create" class="btn btn-primary">Add New Genre</a>
                         </div>
                     </div>
 
@@ -28,7 +28,7 @@
                                 <div style="padding-left: 10px">
                                     <b>Search by:</b>
                                     <span style="margin: 0px 10px">
-                                        @Html.RadioButton("searchBy", "Kind", true) <text>Genre Kind</text>
+                                        @Html.RadioButton("searchBy", "Kind", true) <text>Genre</text>
                                     </span>
                                 </div>
                                 @Html.TextBox("search", null, new { @class = "text search-input", style = "width:80%; padding-left:10px; margin-right: 0px; border-top-right-radius: 0px", placeholder = "Search Here...", type = "search" })
@@ -43,11 +43,8 @@
                             <table class="data-tables table table-striped table-bordered text-center" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th width="5%">
-                                            No.
-                                        </th>
                                         <th style="width: 15%;">
-                                            @Html.ActionLink("Kind", "Index", new { sortBy = ViewBag.SortNameParameter, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] })
+                                            @Html.ActionLink("Genre", "Index", new { sortBy = ViewBag.SortNameParameter, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] })
                                         </th>
                                         <th width="10%">Action</th>
                                     </tr>
@@ -64,10 +61,7 @@
                                         foreach (var genre in Model) 
                                         {
                                             <tr>
-                                                <td>
-                                                    1
-                                                </td>
-                                                <td>
+                                               <td>
                                                     @genre.Kind
                                                 </td>
                                                 <td>

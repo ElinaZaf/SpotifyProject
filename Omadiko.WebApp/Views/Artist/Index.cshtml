@@ -45,7 +45,6 @@
                             <table class="data-tables table table-striped table-bordered text-center" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th style="width: 5%;">No</th>
                                         <th style="width: 5%;">Profile</th>
                                         <th style="width: 10%;">
                                             @Html.ActionLink("FirstName", "Index", new { sortBy = ViewBag.SortFNameParameter, searchBy = Request.QueryString["searchBy"], search = Request.QueryString["search"] })
@@ -74,7 +73,6 @@
                                         foreach (var artist in Model)
                                         {
                                             <tr>
-                                                <td>1</td>
                                                 <td>
                                                     @if (!(artist.PhotoUrl is null))
                                                     {
