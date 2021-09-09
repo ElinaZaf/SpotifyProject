@@ -133,8 +133,6 @@
         };
     </script>
     <script>
-           //loadTrack();
-
         var albumId = @Model.AlbumId;
         console.log("albmum :" + albumId);
        var settings = {
@@ -145,12 +143,9 @@
 
         $.ajax(settings).done(function (songlist) {
             track_list = songlist;
-            //console.log(track_list);
             loadTrack(0);
 
         });
-
-
 
         $(".playBtn").click(function (e) {
             playpauseTrack();
@@ -164,7 +159,6 @@
         });
 
         $(".kiklos").click(function (e) {
-
          
             var ele = $(this).children().first();
 
@@ -176,8 +170,8 @@
                 ele.removeClass("la-play-circle")
                 ele.addClass("la-pause-circle")
 
-               //style = "background-color:yellow"
 
+               //style = "background-color:yellow"
                 $(this).parent().css("background-color", "yellow");
             }
             //Pause
@@ -190,20 +184,5 @@
             }
 
         });
-
-
-
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
 }

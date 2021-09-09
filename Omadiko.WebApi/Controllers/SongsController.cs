@@ -10,103 +10,30 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Omadiko.Database;
 using Omadiko.Entities;
+using Omadiko.RepositoryServices;
 
 namespace Omadiko.WebApi.Controllers
 {
     public class SongsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private SongRepository songRepository;
 
-        // GET: api/Songs
-        public IQueryable<Song> GetSongs()
+        public SongsController()
         {
-            return db.Songs;
+            this.songRepository = new SongRepository(db);
         }
 
-        // GET: api/Songs/5
         [ResponseType(typeof(Song))]
         public IHttpActionResult GetSong(int id)
         {
-            Song song = db.Songs.Find(id);
+            Song song = songRepository.GetById(id);
             if (song == null)
             {
                 return NotFound();
             }
-
-            //id song
-            //Title
-            //Artist f l
-            //eikona album
-
-
 
             return Ok(new { id = song.SongId, name = song.Title, artist = string.Format($"{song.Albums.First().Artist.Name} {song.Albums.First().Artist.LastName}"), image=song.Albums.First().PhotoUrl.TrimStart('~'), path = song.AudioUrl });
-        }
-
-        // PUT: api/Songs/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutSong(int id, Song song)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != song.SongId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(song).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SongExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Songs
-        [ResponseType(typeof(Song))]
-        public IHttpActionResult PostSong(Song song)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Songs.Add(song);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = song.SongId }, song);
-        }
-
-        // DELETE: api/Songs/5
-        [ResponseType(typeof(Song))]
-        public IHttpActionResult DeleteSong(int id)
-        {
-            Song song = db.Songs.Find(id);
-            if (song == null)
-            {
-                return NotFound();
-            }
-
-            db.Songs.Remove(song);
-            db.SaveChanges();
-
-            return Ok(song);
         }
 
         protected override void Dispose(bool disposing)
