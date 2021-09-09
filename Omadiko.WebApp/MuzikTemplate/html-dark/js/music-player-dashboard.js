@@ -22,22 +22,23 @@ let curr_track1 = document.createElement('audio');
 // Define the tracks that have to be played
 let track_list1 = [
     {
-        name: "Beat It",
-        artist: "Michael Jackson",
-        image: "https://localhost:44363/Content/images/AlbumImages/afterhours400x410.jpg",
-        path: "https://localhost:44363/Content/mp3/BeatIt.mp3"
+        name: "BeatIt",
+        artist: "Cascada",
+        image: "images/dashboard/audio/01.png",
+        //path: "images/dashboard/audio/audio.mp3"
+        path: "/Content/mp3/BeatIt.mp3"
     },
     {
-        name: "Beat It",
-        artist: "Michael Jackson",
-        image: "https://localhost:44363/Content/images/AlbumImages/afterhours400x410.jpg",
-        path: "https://localhost:44363/Content/mp3/BeatIt.mp3"
+        name: "Billi Jean",
+        artist: "Emeli Sande",
+        image: "images/dashboard/audio/01.png",
+        path: "/Content/mp3/Michael Jackson - Billie Jean.mp3"
     },
     {
-        name: "Beat It",
-        artist: "Michael Jackson",
-        image: "https://localhost:44363/Content/images/AlbumImages/afterhours400x410.jpg",
-        path: "https://localhost:44363/Content/mp3/BeatIt.mp3"
+        name: "Thriller",
+        artist: "Jessie J",
+        image: "images/dashboard/audio/01.png",
+        path: "/Content/mp3/Michael Jackson - Thriller .mp3"
     },
 ];
 

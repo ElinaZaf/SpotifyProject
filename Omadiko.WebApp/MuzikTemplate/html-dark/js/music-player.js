@@ -21,24 +21,25 @@ let curr_track = document.createElement('audio');
 console.log(curr_track);
 
 // Define the tracks that have to be played
-let track_list1 = [
+let track_list = [
     {
-        name: "Beat It",
-        artist: "Michael Jackson",
-        image: "https://localhost:44363/Content/images/AlbumImages/afterhours400x410.jpg",
-        path: "https://localhost:44363/Content/"
+        name: "BeatIt",
+        artist: "Cascada",
+        image: "images/dashboard/audio/01.png",
+        //path: "images/dashboard/audio/audio.mp3"
+        path: "/Content/mp3/BeatIt.mp3"
     },
     {
-        name: "Beat It",
-        artist: "Michael Jackson",
-        image: "https://localhost:44363/Content/images/AlbumImages/afterhours400x410.jpg",
-        path: "https://localhost:44363/Content/mp3/BeatIt.mp3"
+        name: "Billi Jean",
+        artist: "Emeli Sande",
+        image: "images/dashboard/audio/01.png",
+        path: "/Content/mp3/Michael Jackson - Billie Jean.mp3"
     },
     {
-        name: "Beat It",
-        artist: "Michael Jackson",
-        image: "https://localhost:44363/Content/images/AlbumImages/afterhours400x410.jpg",
-        path: "https://localhost:44363/Content/mp3/BeatIt.mp3"
+        name: "Thriller",
+        artist: "Jessie J",
+        image: "images/dashboard/audio/01.png",
+        path: "/Content/mp3/Michael Jackson - Thriller .mp3"
     },
 ];
 
@@ -58,6 +59,7 @@ function loadTrack(track_index) {
     clearInterval(updateTimer);
     resetValues();
     curr_track.src = track_list[track_index].path;
+    console.log(curr_track.src);
     curr_track.load();
 
     track_art.style.backgroundImage = "url(" + track_list[track_index].image + ")";
