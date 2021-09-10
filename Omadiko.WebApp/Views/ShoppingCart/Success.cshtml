@@ -1,9 +1,7 @@
 ﻿@using Omadiko.Entities.Models
 @using Microsoft.AspNet.Identity
 
-@{
-    Layout = "~/Views/Shared/_MainLayoutPage.cshtml";
-}
+@{ Layout = "~/Views/Shared/_MainLayoutPage.cshtml"; }
 
 <div id="content-page" class="content-page fit-image" style="margin:auto; background-image: url('/Content/images/testimage.jpg'); background-attachment:fixed; background-size:cover">
     <div class="container-fluid">
@@ -11,7 +9,7 @@
             <div class="iq-card text-center" style="margin-top:100px">
                 <div class="iq-card-body border text-center rounded">
                     <div class="col-lg-12" style="justify-content:center">
-                        <img src="~/MuzikTemplate/html-dark/images/logo.png" class="img-fluid avatar-100" style="display:block; margin-left:auto; margin-right:auto" alt="" >
+                        <img src="~/MuzikTemplate/html-dark/images/logo.png" class="img-fluid avatar-100" style="display:block; margin-left:auto; margin-right:auto" alt="">
                     </div>
                     <div class="col-sm-12" style="text-align:center">
                         <hr class="mt-3">
@@ -26,8 +24,28 @@
                 </div>
             </div>
         </div>
-       
-       
+
+
     </div>
 </div>
 
+
+@*@section scripts{
+
+    <script>
+        $(document).ready(function () {
+             $.ajax({
+                 url: "@Url.Action("ChangeUserRole", "ApplicationUser", new { id = User.Identity.GetUserId()})",
+                 success: function (result) {
+                     if (result) {
+                         console.log("you are a subscriber");
+                     }
+                     else {
+                         console.log("not yet");
+                     }
+                 }
+             })
+        });
+
+    </script>
+}*@

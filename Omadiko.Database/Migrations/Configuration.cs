@@ -21,12 +21,6 @@
         {
 
              
-             /* Seeding Songs:
-             *                 - add AudioUrl links
-             *                 - add VideoUrl links (just a few)
-             * 
-             */
-
             #region SEEDING SONGS   
             Song s1 = new Song() { Title = "Billie Jean", Duration = 273, AudioUrl = "/Content/mp3/MichaelJacksonBillieJean.mp3" };
             Song s2 = new Song() { Title = "Beat It", Duration = 251, AudioUrl = "/Content/mp3/MichaelJacksonBeatIt.mp3" };
@@ -533,6 +527,7 @@
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "Subscriber");
             }
+
 
             var store = new UserStore<ApplicationUser>(context);
             var manager = new UserManager<ApplicationUser>(store);

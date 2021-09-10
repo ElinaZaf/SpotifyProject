@@ -12,6 +12,7 @@ using AutoMapper;
 using Omadiko.Entities.Models;
 using System.Web.Http.Description;
 using System.Data.Entity.Infrastructure;
+using Omadiko.Entities;
 
 namespace Omadiko.WebApi.Controllers
 {

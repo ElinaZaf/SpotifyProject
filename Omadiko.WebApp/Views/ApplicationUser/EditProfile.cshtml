@@ -53,9 +53,29 @@
                                 <div class="iq-card-body">
                                     <div class="form-group row align-items-center">
                                         <div class="col-md-12">
+
                                             <div class="profile-img-edit">
-                                                <img class="profile-pic" src="@Model.PhotoUrl" alt="profile-pic">
+                                                @if (!(Model.PhotoUrl is null))
+                                                {
+                                                    <img src="@Url.Content(Model.PhotoUrl)" alt="profile-pic" class="profile-pic"> 
+                                                }
+                                                else
+                                                {
+                                                    if (Model.Gender == Gender.Male)
+                                                    {
+                                                        <img style="background-color:lightgrey" src="~/Content/images/UserImages/male.png" alt="profile-pic" class="profile-pic"> 
+                                                    }
+                                                    else if (Model.Gender == Gender.Female)
+                                                    {
+                                                        <img style="background-color:lightgrey" src="~/Content/images/UserImages/female.png" alt="profile-pic" class="profile-pic"> 
+                                                    }
+                                                    else
+                                                    {
+                                                        <img style="background-color:lightgrey" src="~/Content/images/UserImages/nonbinary.png" alt="profile-pic" class="profile-pic">
+                                                    }
+                                                }
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class=" row align-items-center">

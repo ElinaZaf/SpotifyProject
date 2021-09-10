@@ -41,6 +41,26 @@ namespace Omadiko.WebApp.Controllers
             return View(applicationUser);
         }
 
+        //public EmptyResult ChangeUserRole(string id)
+        //{
+        //    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+
+        //    ApplicationUser applicationUser = userRepository.GetById(id);
+        //    if (!(applicationUser.Subscriptions.Count == 0))
+        //    {
+        //        userManager.AddToRole(applicationUser.Id, "Subscriber");
+        //    }
+
+        //    return new EmptyResult();
+        //}
+
+
+
+
+
+
+
+
         public ActionResult EditProfile(string id)
         {
             if (id == null)
