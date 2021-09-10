@@ -22,6 +22,11 @@ namespace Omadiko.WebApp.Controllers
             ViewBag.TotalAlbums = db.Albums.Count();
             ViewBag.TotalSongs = db.Songs.Count();
 
+            //ViewBag.LastArtist = db.Artists.Last<Artist>();
+            //ViewBag.LastlUser = db.Users.Last<ApplicationUser>();
+            //ViewBag.LastaddedAlbum = db.Albums.Select(x => x.Title).LastOrDefault();
+            //ViewBag.LastlSong = db.Songs.Last<Song>();
+
             return View();
         }
         
