@@ -440,9 +440,9 @@
 
             #region SEEDING MEMBERSHIPS
             Membership m1 = new Membership() { Type = "Individual Monthly", SignUpFee = 6, DurationInMonths = 1, DiscountRate = 0 }; 
-            Membership m2 = new Membership() { Type = "Individual Quarterly", SignUpFee = 19, DurationInMonths = 3, DiscountRate = 5 }; 
-            Membership m3 = new Membership() { Type = "Individual Semi-Annual", SignUpFee = 39, DurationInMonths = 6, DiscountRate = 10 }; 
-            Membership m4 = new Membership() { Type = "Individual Annual", SignUpFee = 78, DurationInMonths = 12, DiscountRate = 15 };
+            Membership m2 = new Membership() { Type = "Individual Quarterly", SignUpFee = 16, DurationInMonths = 3, DiscountRate = 5 }; 
+            Membership m3 = new Membership() { Type = "Individual Semi-Annual", SignUpFee = 30, DurationInMonths = 6, DiscountRate = 10 }; 
+            Membership m4 = new Membership() { Type = "Individual Annual", SignUpFee = 55, DurationInMonths = 12, DiscountRate = 15 };
             #endregion
 
 
