@@ -41,25 +41,19 @@ namespace Omadiko.WebApp.Controllers
             return View(applicationUser);
         }
 
-        //public EmptyResult ChangeUserRole(string id)
-        //{
-        //    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+        public ActionResult UpdateRole(string id)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
 
-        //    ApplicationUser applicationUser = userRepository.GetById(id);
-        //    if (!(applicationUser.Subscriptions.Count == 0))
-        //    {
-        //        userManager.AddToRole(applicationUser.Id, "Subscriber");
-        //    }
+            ApplicationUser applicationUser = userRepository.GetById(id);
+            if (!(applicationUser.Subscriptions.Count == 0))
+            {
+                var result = userManager.AddToRole(applicationUser.Id, Role.Subscriber);
+                return Json(result.Succeeded, JsonRequestBehavior.AllowGet);
+            }
 
-        //    return new EmptyResult();
-        //}
-
-
-
-
-
-
-
+            return new EmptyResult();
+        }
 
         public ActionResult EditProfile(string id)
         {
@@ -89,7 +83,7 @@ namespace Omadiko.WebApp.Controllers
             return View(applicationUser);
         }
 
-        [Authorize(Roles = Role.Subscriber)]
+        [Authorize(Roles = Role.Admin + "," + Role.Subscriber)]
         public ActionResult FavouriteAlbums(string id)
         {
             if (id == null)
@@ -105,7 +99,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
 
-        [Authorize(Roles = Role.Subscriber)]
+        [Authorize(Roles = Role.Admin + "," + Role.Subscriber)]
         public ActionResult FavouriteArtists(string id)
         {
             if (id == null)
@@ -121,7 +115,7 @@ namespace Omadiko.WebApp.Controllers
         }
 
 
-        [Authorize(Roles = Role.Subscriber)]
+        [Authorize(Roles = Role.Admin + "," + Role.Subscriber)]
         public ActionResult FavouriteSongs(string id)
         {
             if (id == null)

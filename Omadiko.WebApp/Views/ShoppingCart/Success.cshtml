@@ -30,22 +30,19 @@
 </div>
 
 
-@*@section scripts{
+@section scripts{
 
     <script>
         $(document).ready(function () {
              $.ajax({
-                 url: "@Url.Action("ChangeUserRole", "ApplicationUser", new { id = User.Identity.GetUserId()})",
+                 url: "@Url.Action("UpdateRole", "ApplicationUser", new { id = User.Identity.GetUserId()})",
                  success: function (result) {
                      if (result) {
-                         console.log("you are a subscriber");
-                     }
-                     else {
-                         console.log("not yet");
+                         alert("You have successfully subscribed to Muzik.");
                      }
                  }
              })
         });
 
     </script>
-}*@
+}
