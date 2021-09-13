@@ -30,9 +30,14 @@ namespace Omadiko.WebApp.Controllers
             this.membershipRepository = new MembershipRepository(db);
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            return View();
+            ApplicationUser applicationUser = userRepository.GetById(id);
+            if (applicationUser == null)
+            {
+                return HttpNotFound();
+            }
+            return View(applicationUser);
         }
 
         public ActionResult OrderNow(int? id)
@@ -52,8 +57,8 @@ namespace Omadiko.WebApp.Controllers
                 Session[strCart] = null;
                 OrderNow(id);
             }
-            
-            return View("Index");
+
+            return RedirectToAction("Index", "ShoppingCart", new { id = User.Identity.GetUserId() });
         }
 
         public ActionResult CheckOut(FormCollection frc)
