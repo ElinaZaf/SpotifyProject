@@ -76,9 +76,10 @@ namespace Omadiko.WebApp.Controllers
             {
                 db.Genres.Add(genre);
                 db.SaveChanges();
+                TempData["Successfull Create"] = true;
+                TempData["Status"] = "You have Successfully Created this Genre: " + genre.Kind;
                 return RedirectToAction("Index");
             }
-
             return View(genre);
         }
 
@@ -108,6 +109,8 @@ namespace Omadiko.WebApp.Controllers
             {
                 db.Entry(genre).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["Successfull Edit"] = true;
+                TempData["Status"] = "You have Successfully Edited this Genre: " + genre.Kind;
                 return RedirectToAction("Index");
             }
             return View(genre);
@@ -136,6 +139,8 @@ namespace Omadiko.WebApp.Controllers
             Genre genre = db.Genres.Find(id);
             db.Genres.Remove(genre);
             db.SaveChanges();
+            TempData["Successfull Delete"] = true;
+            TempData["Status"] = "You have Successfully Deleted this Genre: " + genre.Kind;
             return RedirectToAction("Index");
         }
 

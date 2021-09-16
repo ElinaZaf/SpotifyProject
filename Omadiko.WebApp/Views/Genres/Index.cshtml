@@ -14,6 +14,29 @@
                 <div class="iq-card">
                     <div class="iq-card-header d-flex justify-content-between">
                         <div class="iq-header-title">
+                            @{
+                                bool condition = false;
+                                if (TempData.ContainsKey("Successfull Delete"))
+                                {
+                                    condition = (bool)TempData["Successfull Delete"];
+                                }
+                                else if (TempData.ContainsKey("Successfull Create"))
+                                {
+                                    condition = (bool)TempData["Successfull Create"];
+                                }
+                                else if (TempData.ContainsKey("Successfull Edit"))
+                                {
+                                    condition = (bool)TempData["Successfull Edit"];
+                                }
+                            }
+
+                            @if (condition)
+                            {
+                                <div class="alert alert-success alert-dismissible">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close"></a>
+                                    <strong>Success!</strong> @TempData["Status"]
+                                </div>
+                            }
                             <h4 class="card-title">Genres Lists</h4>
                         </div>
                         <div class="iq-card-header-toolbar d-flex align-items-center">
@@ -58,10 +81,10 @@
                                     }
                                     else
                                     {
-                                        foreach (var genre in Model) 
+                                        foreach (var genre in Model)
                                         {
                                             <tr>
-                                               <td>
+                                                <td>
                                                     @genre.Kind
                                                 </td>
                                                 <td>
@@ -73,15 +96,20 @@
                                             </tr>
                                         }
                                     }
-                                    </tbody>
+                                </tbody>
                             </table>
                             <div class="pagination" style="justify-content:center">
                                 <p>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</p>
                             </div>
                             <div class="pagination" style="justify-content:center">
                                 @Html.PagedListPager(Model, page => Url.Action("Index",
-                            new{page,searchBy = Request.QueryString["searchBy"],search = Request.QueryString["search"],
-                            sortBy = Request.QueryString["sortBy"]}), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
+                            new
+                                 {
+                                     page,
+                                     searchBy = Request.QueryString["searchBy"],
+                                     search = Request.QueryString["search"],
+                            sortBy = Request.QueryString["sortBy"]
+                                 }), new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded })
                             </div>
                         </div>
                     </div>
